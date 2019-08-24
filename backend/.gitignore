@@ -1,0 +1,6 @@
+.g8/
+.idea/
+logs/application.log
+project/target/
+project/project/
+target/

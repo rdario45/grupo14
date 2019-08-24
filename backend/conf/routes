@@ -1,0 +1,10 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET           /empresas            controllers.EmpresaController.findAll
+GET           /empresas/:id        controllers.EmpresaController.find(id: Integer)
+POST          /empresas            controllers.EmpresaController.save
+PATCH         /empresas            controllers.EmpresaController.update
+DELETE        /empresas/:id        controllers.EmpresaController.delete(id: Integer)
