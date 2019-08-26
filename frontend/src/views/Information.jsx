@@ -12,7 +12,7 @@ class Information extends Component {
                         <Col md={12}>
                             <Card
                                 title="Información del sitio web"
-                                category="Información"
+                                category="Este sitio web ofrece las siguientes funcionalidades."
                                 content={
                                     <div>
 

@@ -12,15 +12,16 @@ import Button from "components/CustomButton/CustomButton.jsx";
 class LoginEnterprise extends Component {
     render() {
         return (
-            <div className="content">  <Grid fluid>
+            <div className="content">
+            <Grid fluid>
                 <Row>
-                    <Col md={12}>
+                    <Col md={4}>
                         <Card
                             title="Iniciar Sesión"
                             content={
                                 <form>
                                     <FormInputs
-                                        ncols={["col-md-6", "col-md-6"]}
+                                        ncols={["col-md-12"]}
                                         properties={[
                                             {
                                                 label: "Correo",
@@ -28,6 +29,11 @@ class LoginEnterprise extends Component {
                                                 bsClass: "form-control",
                                                 placeholder: "Correo de la empresa",
                                             },
+                                        ]}
+                                    />
+                                    <FormInputs
+                                        ncols={["col-md-12"]}
+                                        properties={[
                                             {
                                                 label: "Contraseña",
                                                 type: "password",
@@ -36,7 +42,7 @@ class LoginEnterprise extends Component {
                                             },
                                         ]}
                                     />
-                                    <Button bsStyle="success" pullLeft fill type="submit">
+                                    <Button bsStyle="success" pullRight fill type="submit">
                                         Iniciar Sesión
                                     </Button>
                                     <div className="clearfix" />

@@ -53,7 +53,7 @@ class CreateEnterprise extends Component {
                                             },
                                         ]}
                                     />
-                                    <Button bsStyle="success" pullLeft fill type="submit">
+                                    <Button bsStyle="success" pullRight fill type="submit">
                                         Crear
                                     </Button>
                                     <div className="clearfix" />
