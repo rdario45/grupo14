@@ -9,7 +9,7 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
 import { style } from "variables/Variables.jsx";
 
-import routes from "routes/main/routes.js";
+import routes from "routes/admin/routes.js";
 
 import image from "assets/img/sidebar-4.jpg";
 
@@ -26,7 +26,7 @@ class Main extends Component {
     }
     getRoutes = routes => {
         return routes.map((prop, key) => {
-            if (prop.layout === "/main") {
+            if (prop.layout === "/admin") {
                 return (
                     <Route
                         path={prop.layout + prop.path}

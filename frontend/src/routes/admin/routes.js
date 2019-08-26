@@ -1,70 +1,30 @@
-import Dashboard from "views/Dashboard.jsx";
-import UserProfile from "views/UserProfile.jsx";
-import TableList from "views/TableList.jsx";
-import Typography from "views/Typography.jsx";
-import Icons from "views/Icons.jsx";
-import Maps from "views/Maps.jsx";
-import Notifications from "views/Notifications.jsx";
-import Upgrade from "views/Upgrade.jsx";
+import CreateProject from "views/CreateProject";
+import Logout from "views/Logout";
+import ListProjects from "views/ListProjects";
 
 const adminRoutes = [
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "pe-7s-graph",
-    component: Dashboard,
-    layout: "/admin"
-  },
-  {
-    path: "/user",
-    name: "User Profile",
-    icon: "pe-7s-user",
-    component: UserProfile,
-    layout: "/admin"
-  },
-  {
-    path: "/table",
-    name: "Table List",
+    path: "/create-project",
+    name: "Crear Proyectos",
     icon: "pe-7s-note2",
-    component: TableList,
+    component: CreateProject,
     layout: "/admin"
   },
   {
-    path: "/typography",
-    name: "Typography",
+    path: "/list-projects",
+    name: "Listado de Proyectos",
     icon: "pe-7s-news-paper",
-    component: Typography,
+    component: ListProjects,
     layout: "/admin"
   },
   {
-    path: "/icons",
-    name: "Icons",
-    icon: "pe-7s-science",
-    component: Icons,
+    path: "/close-session",
+    name: "Cerrar Sesión",
+    icon: "pe-7s-user",
+    component: Logout,
     layout: "/admin"
   },
-  {
-    path: "/maps",
-    name: "Maps",
-    icon: "pe-7s-map-marker",
-    component: Maps,
-    layout: "/admin"
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "pe-7s-bell",
-    component: Notifications,
-    layout: "/admin"
-  },
-  {
-    upgrade: true,
-    path: "/upgrade",
-    name: "Upgrade to PRO",
-    icon: "pe-7s-rocket",
-    component: Upgrade,
-    layout: "/admin"
-  }
+  
 ];
 
 export default adminRoutes;

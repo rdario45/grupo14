@@ -20,10 +20,7 @@ class Information extends Component {
                                             <p className="category">Característica 1</p>
                                             <blockquote>
                                                 <p>
-                                                    Lorem ipsum dolor sit amet, consectetuer adipiscing
-                                                    elit, sed diam nonummy nibh euismod tincidunt ut
-                                                    laoreet dolore magna aliquam erat volutpat. Ut wisi
-                                                    enim ad minim veniam.
+                                                    Visitar el home y crear una cuenta.
                                             </p>
                                             </blockquote>
                                         </div>
@@ -31,14 +28,59 @@ class Information extends Component {
                                             <p className="category">Característica 2</p>
                                             <blockquote>
                                                 <p>
-                                                    Lorem ipsum dolor sit amet, consectetuer adipiscing
-                                                    elit, sed diam nonummy nibh euismod tincidunt ut
-                                                    laoreet dolore magna aliquam erat volutpat. Ut wisi
-                                                    enim ad minim veniam.
+                                                    Crear, actualizar, corrar y consultar un proyecto.
                                             </p>
                                             </blockquote>
                                         </div>
-
+                                        <div className="typo-line">
+                                            <p className="category">Característica 3</p>
+                                            <blockquote>
+                                                <p>
+                                                    Consultar lista de diseños por proyecto.
+                                            </p>
+                                            </blockquote>
+                                        </div>
+                                        <div className="typo-line">
+                                            <p className="category">Característica 4</p>
+                                            <blockquote>
+                                                <p>
+                                                    Consultar diseño.
+                                            </p>
+                                            </blockquote>
+                                        </div>
+                                        <div className="typo-line">
+                                            <p className="category">Característica 5</p>
+                                            <blockquote>
+                                                <p>
+                                                    Consultar proyecto, pre-visualizar diseño.
+                                            </p>
+                                            </blockquote>
+                                        </div>
+                                        <div className="typo-line">
+                                            <p className="category">Característica 6</p>
+                                            <blockquote>
+                                                <p>
+                                                    Almacenar diseños.
+                                            </p>
+                                            </blockquote>
+                                        </div>
+                                        <div className="typo-line">
+                                            <p className="category">Característica 7</p>
+                                            <blockquote>
+                                                <p>
+                                                    Procesar diseños.
+                                            </p>
+                                            </blockquote>
+                                        </div>
+                                        <div className="typo-line">
+                                            <p className="category">Característica 8</p>
+                                            <blockquote>
+                                                <p>
+                                                    Enviar mensaje al procesar archivo.
+                                            </p>
+                                            </blockquote>
+                                        </div>
+                                        
 
                                     </div>
                                 }

@@ -3,13 +3,16 @@ import {
     Grid,
     Row,
     Col,
+    FormGroup,
+    ControlLabel,
+    FormControl
 } from "react-bootstrap";
 
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
-class CreateEnterprise extends Component {
+class CreateProject extends Component {
     render() {
         return (
             <div className="content">  <Grid fluid>
@@ -23,36 +26,33 @@ class CreateEnterprise extends Component {
                                         ncols={["col-md-6", "col-md-6"]}
                                         properties={[
                                             {
-                                                label: "Nombre de la empresa",
+                                                label: "Nombre",
                                                 type: "text",
                                                 bsClass: "form-control",
-                                                placeholder: "Empresa",
+                                                placeholder: "Nombre del proyecto",
                                             },
                                             {
-                                                label: "Correo",
-                                                type: "email",
+                                                label: "Valor",
+                                                type: "number",
                                                 bsClass: "form-control",
-                                                placeholder: "Correo de la empresa",
+                                                placeholder: "Valor estimado a pagar",
+                                                step: "1"
                                             },
                                         ]}
                                     />
-                                    <FormInputs
-                                        ncols={["col-md-6", "col-md-6"]}
-                                        properties={[
-                                            {
-                                                label: "Contraseña",
-                                                type: "password",
-                                                bsClass: "form-control",
-                                                placeholder: "Contraseña de cuenta",
-                                            },
-                                            {
-                                                label: "Confirmación de contraseña",
-                                                type: "password",
-                                                bsClass: "form-control",
-                                                placeholder: "Confirmar Contraseña de cuenta",
-                                            },
-                                        ]}
-                                    />
+                                    <Row>
+                                        <Col md={12}>
+                                            <FormGroup controlId="textAreaDescripcion">
+                                                <ControlLabel>Descripción</ControlLabel>
+                                                <FormControl
+                                                    rows="5"
+                                                    componentClass="textarea"
+                                                    bsClass="form-control"
+                                                    placeholder="Descripción del proyecto"
+                                                />
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
                                     <Button bsStyle="success" pullLeft fill type="submit">
                                         Crear
                                     </Button>
@@ -68,4 +68,4 @@ class CreateEnterprise extends Component {
     }
 }
 
-export default CreateEnterprise;
+export default CreateProject;

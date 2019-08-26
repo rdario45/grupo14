@@ -1,5 +1,6 @@
-import Information from "views/Information.jsx";
-import CreateEnterprise from "views/CreateEnterprise.jsx";
+import Information from "views/Information";
+import CreateEnterprise from "views/CreateEnterprise";
+import LoginEnterprise from "views/LoginEnterprise";
 
 const mainRoutes = [
     {
@@ -14,6 +15,13 @@ const mainRoutes = [
         name: "Crear Empresa",
         icon: "pe-7s-culture",
         component: CreateEnterprise,
+        layout: "/main"
+    },
+    {
+        path: "/login-enterprise",
+        name: "Iniciar Sesión",
+        icon: "pe-7s-users",
+        component: LoginEnterprise,
         layout: "/main"
     },
 ];

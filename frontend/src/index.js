@@ -18,7 +18,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { BrowserRouter, Route, Switch, Redirect, HashRouter as Router } from "react-router-dom";
+import { Route, Switch, Redirect, HashRouter as Router } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/animate.min.css";
@@ -30,13 +30,14 @@ import history from "helper/history";
 
 import AdminLayout from "layouts/Admin.jsx";
 import MainLayout from "layouts/main/Main.jsx";
-//import AdminEnterpriseLayout from "layouts/admin/";
+import AdminEnterpriseLayout from "layouts/admin/Admin";
 
 ReactDOM.render(
   <Router history={history}>
     <Switch>
-      <Route path="/admin" render={props => <AdminLayout {...props} />} />
+      <Route path="/admon" render={props => <AdminLayout {...props} />} />
       <Route path="/main" render={props => <MainLayout {...props} />} />
+      <Route path="/admin" render={props => <AdminEnterpriseLayout {...props} />} />
       <Redirect from="/" to="/main/information" />
       <Route render={() => <h1>404 Error</h1>} />
     </Switch>
