@@ -17,9 +17,9 @@ El modelo de Entidad Relacion de la aplciacion es el siguiente:
 
 #### Lenguajes de programacion utilizados.
 
-| Backend                           | Frontend                             |
-|-----------------------------------|--------------------------------------|
-|![java](images/java-logo.png)      | ![web](images/css-html-js.jpeg) |
+| Backend                      | Frontend                       | Database                              |
+|------------------------------|--------------------------------|---------------------------------------|
+|![java](images/java-logo.png) |![web](images/css-html-js.jpeg) |![database](images/postgresql-logo.png)|
 
 #### Frameworks.
 
