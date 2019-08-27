@@ -1,4 +1,4 @@
-# Grupo14 - Proyecto base backend.
+# Grupo14 - DesignMatch.
 
 Proyecto hecho en [Play](https://www.playframework.com/documentation/2.7.x/Introduction) 
 usa [sbt](https://www.scala-sbt.org/1.x/docs/index.html)  como build tool, por lo que se debe tener 
@@ -35,15 +35,15 @@ Creando un archivo zip en el folder `target/universal/` que incluye todos los ja
 
     Luego de descomprimir el archivo se puede proceder a ejecutar el binario:
     ```
-    unzip target/universal/proyecto1-1.0.0.zip
+    unzip target/universal/designmatch-1.0.0.zip
     
-    bash proyecto1-1.0.0/bin/proyecto1
+    bash designmatch-1.0.0/bin/designmatch
     ```
     
     Adicional se pueden enviar parametros de configuracion:
     
     ```
-    bash proyecto1-1.0.0/bin/proyecto1 -Dhttp.port=1234 -Ddb.default.password=moresecret -Dpidfile.path=other/RUNNING_PID
+    bash designmatch-1.0.0/bin/designmatch -Dhttp.port=1234 -Ddb.default.password=moresecret -Dpidfile.path=other/RUNNING_PID
     ```
 
 #### Herramientas adicionales

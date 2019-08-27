@@ -1,4 +1,4 @@
-name := "proyecto1"
+name := "designmatch"
 organization := "com.grupo14.uniandes"
 version := "1.0.0"
 
