@@ -2,6 +2,7 @@
 
 ### Guias:
 - Documento especificacion del [Backend](backend/README.md).
+- Documento especificacion del [Frontend](frontend/README.md).
 - Documentos de [infraestructura y arquitectura](infraestructura/README.md).
 
 
