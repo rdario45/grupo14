@@ -1,6 +1,6 @@
-package infraestructure.repository.proyecto;
+package infraestructure.repository.project;
 
-import infraestructure.repository.proyecto.records.ProyectoRecord;
+import infraestructure.repository.project.records.ProjectRecord;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
@@ -8,14 +8,14 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 import java.util.List;
 
-@RegisterMapper(ProyectoMapperDAO.class)
-public interface ProyectoDAO {
+@RegisterMapper(ProjectoMapperDAO.class)
+public interface ProjectoDAO {
 
     @SqlQuery("SELECT * FROM proyectos")
-    List<ProyectoRecord> findAll();
+    List<ProjectRecord> findAll();
 
     @SqlQuery("SELECT * FROM proyectos WHERE id = :id")
-    ProyectoRecord find(@Bind("id") int id);
+    ProjectRecord find(@Bind("id") int id);
 
     @SqlQuery("INSERT INTO proyectos ( " +
       " nombre, " +
@@ -26,15 +26,15 @@ public interface ProyectoDAO {
       " :r.descripcion," +
       " :r.valorEstimado " +
       " ) RETURNING * ")
-    ProyectoRecord insert(@BindBean("r") ProyectoRecord record);
+    ProjectRecord insert(@BindBean("r") ProjectRecord record);
 
     @SqlQuery("UPDATE proyectos SET" +
       " nombre = :r.nombre," +
       " descripcion = :r.descripcion, " +
       " valor_estimado = :r.valorEstimado " +
       " WHERE id = :r.id RETURNING * ")
-    ProyectoRecord update(@BindBean("r") ProyectoRecord record);
+    ProjectRecord update(@BindBean("r") ProjectRecord record);
 
     @SqlQuery("DELETE FROM proyectos WHERE id = :id  RETURNING *")
-    ProyectoRecord delete(@Bind("id") int id);
+    ProjectRecord delete(@Bind("id") int id);
 }

@@ -1,7 +1,7 @@
-package infraestructure.acl.proyecto;
+package infraestructure.acl.project;
 
-import controllers.dto.ProyectoDTO;
-import domain.Proyecto;
+import controllers.dto.ProjectDTO;
+import domain.Project;
 import io.vavr.collection.List;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
@@ -11,15 +11,15 @@ import play.Logger;
 
 import java.math.BigDecimal;
 
-public class ProyectoValidator {
+public class ProjectValidator {
 
-    public static Either<List<String>, Proyecto> validate(ProyectoDTO dto) {
+    public static Either<List<String>, Project> validate(ProjectDTO dto) {
         return Validation.combine(
           Validation.valid(dto.getId()),
-          validateNombre(dto.getNombre()),
-          validateDescripcion(dto.getDescripcion()),
-          validateValorEstimado(dto.getValorEstimado())
-        ).ap(Proyecto::new)
+          validateNombre(dto.getName()),
+          validateDescripcion(dto.getDescription()),
+          validateValorEstimado(dto.getCost())
+        ).ap(Project::new)
           .toEither()
           .mapLeft(List::ofAll);
     }

@@ -1,17 +1,15 @@
-package controllers.dto;
+package infraestructure.repository.project.records;
 
-public class ProyectoDTO {
+import java.math.BigDecimal;
+
+public class ProjectRecord {
 
     private int id;
     private String nombre;
     private String descripcion;
-    private String valorEstimado;
+    private BigDecimal valorEstimado;
 
-    public ProyectoDTO() {
-        // to json mapper
-    }
-
-    public ProyectoDTO(int id, String nombre, String descripcion, String valorEstimado) {
+    public ProjectRecord(int id, String nombre, String descripcion, BigDecimal valorEstimado) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -42,11 +40,11 @@ public class ProyectoDTO {
         this.descripcion = descripcion;
     }
 
-    public String getValorEstimado() {
+    public BigDecimal getValorEstimado() {
         return valorEstimado;
     }
 
-    public void setValorEstimado(String valorEstimado) {
+    public void setValorEstimado(BigDecimal valorEstimado) {
         this.valorEstimado = valorEstimado;
     }
 }
