@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "3.3.7",
     "chartist": "0.10.1",
+    "env-cmd": "^9.0.3",
     "node-sass": "4.12.0",
     "react": "16.8.6",
     "react-bootstrap": "0.32.4",
@@ -15,6 +16,7 @@
     "react-router": "5.0.0",
     "react-router-dom": "5.0.0",
     "react-scripts": "3.0.0",
+    "react-toasts": "^3.0.3",
     "react-toggle": "4.0.2"
   },
   "devDependencies": {
@@ -24,9 +26,9 @@
     "typescript": "3.4.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "env-cmd -f .env.development react-scripts start",
+    "build": "env-cmd -f .env.production react-scripts build",
+    "test": "env-cmd -f .env.development react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "compile-sass": "node-sass src/assets/sass/light-bootstrap-dashboard-react.scss src/assets/css/light-bootstrap-dashboard-react.css",

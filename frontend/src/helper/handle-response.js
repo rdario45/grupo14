@@ -3,7 +3,7 @@ export function handleResponse(response) {
         const data = text && JSON.parse(text);
         if (!response.ok) {
             if ([401, 403].indexOf(response.status) !== -1) {
-                this.context.router.history.push("/login");
+                this.context.router.history.push("/main/login");
                 return null;
             }
         }

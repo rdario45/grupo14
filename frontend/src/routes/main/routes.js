@@ -24,6 +24,14 @@ const mainRoutes = [
         component: LoginEnterprise,
         layout: "/main"
     },
+    {
+        path: "/enterprise/:urlEnterprise",
+        name: "Empresa",
+        icon: "pe-7s-users",
+        component: LoginEnterprise,
+        layout: "/design",
+        isHidden: true
+    },
 ];
 
 export default mainRoutes;

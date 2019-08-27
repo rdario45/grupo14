@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import { Route, Switch, HashRouter as Router } from "react-router-dom";
-import NotificationSystem from "react-notification-system";
+import { Route, Switch } from "react-router-dom";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
-import { style } from "variables/Variables.jsx";
+import { ToastsContainer, ToastsStore } from 'react-toasts';
 
 import routes from "routes/main/routes.js";
 
@@ -17,13 +16,20 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            _notificationSystem: null,
             image: image,
             color: "black",
             hasImage: true,
             fixedClasses: "dropdown"
         };
     }
+    handleNotificationClick(message, level) {
+        if (level === 'success')
+            ToastsStore.success(message);
+        else if (level === 'error')
+            ToastsStore.error(message);
+        else if (level === 'warning')
+            ToastsStore.warning(message);
+    };
     getRoutes = routes => {
         return routes.map((prop, key) => {
             if (prop.layout === "/main") {
@@ -33,6 +39,7 @@ class Main extends Component {
                         render={props => (
                             <prop.component
                                 {...props}
+                                handleClick={this.handleNotificationClick}
                             />
                         )}
                         key={key}
@@ -72,9 +79,6 @@ class Main extends Component {
             this.setState({ fixedClasses: "dropdown" });
         }
     };
-    componentDidMount() {
-        this.setState({ _notificationSystem: this.refs.notificationSystem });
-    }
     componentDidUpdate(e) {
         if (
             window.innerWidth < 993 &&
@@ -92,10 +96,10 @@ class Main extends Component {
     render() {
         return (
             <div className="wrapper">
+                <ToastsContainer store={ToastsStore} />
                 <Sidebar {...this.props} routes={routes} image={this.state.image}
                     color={this.state.color}
                     hasImage={this.state.hasImage} />
-                <NotificationSystem ref="notificationSystem" style={style} />
                 <div id="main-panel" className="main-panel" ref="mainPanel">
                     <AdminNavbar
                         {...this.props}

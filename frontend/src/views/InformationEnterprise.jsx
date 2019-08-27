@@ -4,7 +4,7 @@ import { Grid, Row, Col } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 
-class Information extends Component {
+class InformationEnterprise extends Component {
     render() {
         return (
             <div className="content">
@@ -105,4 +105,4 @@ class Information extends Component {
     }
 }
 
-export default Information;
+export default InformationEnterprise;
