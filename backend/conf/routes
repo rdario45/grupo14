@@ -3,13 +3,21 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET           /empresas             controllers.EmpresaController.findAll
-GET           /empresas/:id         controllers.EmpresaController.find(id: Integer)
-POST          /empresas             controllers.EmpresaController.save
-PATCH         /empresas             controllers.EmpresaController.update
-DELETE        /empresas/:id         controllers.EmpresaController.delete(id: Integer)
-GET           /proyectos            controllers.ProyectoController.findAll
-GET           /proyectos/:id        controllers.ProyectoController.find(id: Integer)
-POST          /proyectos            controllers.ProyectoController.save
-PATCH         /proyectos            controllers.ProyectoController.update
-DELETE        /proyectos/:id        controllers.ProyectoController.delete(id: Integer)
+# An example controller showing a sample home page
+
+# Account
+POST          /create-account               controllers.AccountController.createAccount
+GET           /exists-account/:email        controllers.AccountController.existsAccount(email: String)
+# Auth
+POST          /login                        controllers.AuthController.login
+POST          /logout                       controllers.AuthController.logout
+# Project
+GET           /projects                     controllers.ProjectController.findAllProjects
+GET           /projects/:id                 controllers.ProjectController.findProject(id: Integer)
+POST          /projects                     controllers.ProjectController.createProject
+PUT           /projects/:id                 controllers.ProjectController.updateProject(id: Integer)
+DELETE        /projects/:id                 controllers.ProjectController.deleteProject(id: Integer)
+# Design
+GET           /designs                      controllers.DesignController.findAllDesigns
+GET           /designs/:id                  controllers.DesignController.findDesign(id: Integer)
+POST          /designs                      controllers.DesignController.createDesign
