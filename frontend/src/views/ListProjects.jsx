@@ -43,7 +43,7 @@ class ListProjects extends Component {
 
     render() {
         const { labels, projects } = this.state;
-        if (!projects || projects === 0) {
+        if (!projects || projects.length === 0) {
             return (
                 <Card style={{ marginLeft: '10%', marginRight: '10%', marginTop: '5%' }}>
                     <Card.Header style={{ fontWeight: 'bold' }}>Proyectos.</Card.Header>

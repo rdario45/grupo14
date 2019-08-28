@@ -31,6 +31,7 @@ import history from "helper/history";
 import AdminLayout from "layouts/Admin.jsx";
 import MainLayout from "layouts/main/Main.jsx";
 import AdminEnterpriseLayout from "layouts/admin/Admin";
+import DesignLayout from "./layouts/design/Design";
 
 ReactDOM.render(
   <Router history={history}>
@@ -38,6 +39,7 @@ ReactDOM.render(
       <Route path="/admon" render={props => <AdminLayout {...props} />} />
       <Route path="/main" render={props => <MainLayout {...props} />} />
       <Route path="/admin" render={props => <AdminEnterpriseLayout {...props} />} />
+      <Route path="/design" render={props => <DesignLayout {...props} />} />
       <Redirect from="/" to="/main/information" />
       <Route render={() => <h1>404 Error</h1>} />
     </Switch>
