@@ -2,20 +2,20 @@
 
 # --- !Ups
 
-CREATE TABLE users (
+CREATE TABLE accounts (
 	email varchar(100) NOT NULL,
 	"password" varchar(200) NOT NULL,
-	state varchar(100) NULL,
-	CONSTRAINT users_pkey PRIMARY KEY (email)
+	status varchar(10) NULL,
+	CONSTRAINT accounts_pkey PRIMARY KEY (email)
 );
 
 CREATE TABLE sessions (
 	id serial NOT NULL,
-	"user" varchar(100) NOT NULL,
-	token varchar(200) NOT NULL,
-	timestamp numeric(12,2) NOT NULL,
+	account varchar(100) NOT NULL,
+	token TEXT NOT NULL,
+	timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT sessions_pkey PRIMARY KEY (id),
-	CONSTRAINT sessions_user_fkey FOREIGN KEY ("user") REFERENCES users(email)
+	CONSTRAINT sessions_user_fkey FOREIGN KEY (account) REFERENCES accounts(email)
 );
 
 CREATE TABLE companies (
@@ -23,7 +23,7 @@ CREATE TABLE companies (
 	name varchar(100) NOT NULL,
 	admin varchar(100) NOT NULL,
 	CONSTRAINT companies_pkey PRIMARY KEY (id),
-	CONSTRAINT companies_admin_fkey FOREIGN KEY (admin) REFERENCES users(email)
+	CONSTRAINT companies_admin_fkey FOREIGN KEY (admin) REFERENCES accounts(email)
 );
 
 CREATE TABLE projects (
@@ -31,11 +31,10 @@ CREATE TABLE projects (
 	name varchar(100) NOT NULL,
 	description varchar(200) NOT NULL,
 	cost numeric(12,2) NOT NULL,
-	company int4 NOT NULL,
+	company_id int4 NOT NULL,
 	CONSTRAINT projects_pkey PRIMARY KEY (id),
-	CONSTRAINT projects_company_fkey FOREIGN KEY (company) REFERENCES companies(id)
+	CONSTRAINT projects_company_fkey FOREIGN KEY (company_id) REFERENCES companies(id)
 );
-
 
 # --- !Downs
 DROP TABLE public.projects;

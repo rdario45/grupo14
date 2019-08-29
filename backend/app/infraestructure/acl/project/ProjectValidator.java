@@ -19,7 +19,7 @@ public class ProjectValidator {
           validateName(dto.getName()),
           validateDescription(dto.getDescription()),
           validateCost(dto.getCost()),
-          Validation.valid(dto.getCompany())
+          Validation.valid(dto.getCompanyId())
         ).ap(Project::new)
           .toEither()
           .mapLeft(List::ofAll);

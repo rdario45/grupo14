@@ -21,12 +21,12 @@ public interface ProjectoDAO {
       " name, " +
       " description, " +
       " cost, " +
-      " company " +
+      " company_id " +
       " ) VALUES ( " +
       " :r.name," +
       " :r.description," +
       " :r.cost," +
-      " :r.company " +
+      " :r.companyId " +
       " ) RETURNING * ")
     ProjectRecord insert(@BindBean("r") ProjectRecord record);
 
@@ -34,7 +34,7 @@ public interface ProjectoDAO {
       " name = :r.name," +
       " description = :r.description, " +
       " cost = :r.cost," +
-      " company = :r.company " +
+      " company_id = :r.companyId " +
       " WHERE id = :id RETURNING * ")
     ProjectRecord update(@BindBean("r") ProjectRecord record, @Bind("id") int id);
 

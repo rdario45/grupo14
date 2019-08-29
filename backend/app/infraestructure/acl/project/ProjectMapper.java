@@ -18,7 +18,7 @@ public class ProjectMapper {
           project.getName(),
           project.getDescription(),
           project.getCost().toString(),
-          project.getCompany());
+          project.getCompanyId());
     }
 
     public static ProjectRecord fromProjectToRecord(Project project, int id) {
@@ -27,7 +27,7 @@ public class ProjectMapper {
           project.getName(),
           project.getDescription(),
           project.getCost(),
-          project.getCompany());
+          project.getCompanyId());
     }
 
     public static ProjectRecord fromProjectToRecord(Project project) {
@@ -36,7 +36,7 @@ public class ProjectMapper {
           project.getName(),
           project.getDescription(),
           project.getCost(),
-          project.getCompany());
+          project.getCompanyId());
     }
 
     public static Project fromRecordToProject(ProjectRecord record) {
@@ -45,6 +45,6 @@ public class ProjectMapper {
           record.getName(),
           record.getDescription(),
           record.getCost(),
-          record.getCompany());
+          record.getCompanyId());
     }
 }

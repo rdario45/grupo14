@@ -16,7 +16,7 @@ public class ProjectoMapperDAO implements ResultSetMapper<ProjectRecord> {
           r.getString("name"),
           r.getString("description"),
           r.getBigDecimal("cost"),
-          r.getInt("company")
+          r.getInt("company_id")
       	);
     }
 }

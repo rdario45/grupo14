@@ -8,14 +8,14 @@ public class Project {
     private String name;
     private String description;
     private BigDecimal cost;
-    private int company;
+    private int companyId;
 
-    public Project(int id, String name, String description, BigDecimal cost, int company) {
+    public Project(int id, String name, String description, BigDecimal cost, int companyId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.cost = cost;
-        this.company = company;
+        this.companyId = companyId;
     }
 
     public int getId() {
@@ -50,11 +50,11 @@ public class Project {
         this.cost = cost;
     }
 
-    public int getCompany() {
-        return company;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setCompany(int company) {
-        this.company = company;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 }
