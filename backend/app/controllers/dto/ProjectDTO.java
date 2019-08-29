@@ -6,16 +6,18 @@ public class ProjectDTO {
     private String name;
     private String description;
     private String cost;
+    private int company;
 
     public ProjectDTO() {
         // to json mapper
     }
 
-    public ProjectDTO(int id, String name, String description, String cost) {
+    public ProjectDTO(int id, String name, String description, String cost, int company) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.cost = cost;
+        this.company = company;
     }
 
     public int getId() {
@@ -48,5 +50,13 @@ public class ProjectDTO {
 
     public void setCost(String cost) {
         this.cost = cost;
+    }
+
+    public int getCompany() {
+        return company;
+    }
+
+    public void setCompany(int company) {
+        this.company = company;
     }
 }

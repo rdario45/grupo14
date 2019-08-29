@@ -9,16 +9,25 @@ import play.libs.Json;
 public class ProjectMapper {
 
     public static JsonNode toJsonDTO(Project project) {
-        return Json.toJson(ProjectMapper.fromProyectoToDTO(project));
+        return Json.toJson(ProjectMapper.fromProjectToDTO(project));
     }
 
-    public static ProjectDTO fromProyectoToDTO(Project project) {
+    public static ProjectDTO fromProjectToDTO(Project project) {
         return new ProjectDTO(
           project.getId(),
           project.getName(),
           project.getDescription(),
-          project.getPrice().toString()
-        );
+          project.getCost().toString(),
+          project.getCompany());
+    }
+
+    public static ProjectRecord fromProjectToRecord(Project project, int id) {
+        return new ProjectRecord(
+          id,
+          project.getName(),
+          project.getDescription(),
+          project.getCost(),
+          project.getCompany());
     }
 
     public static ProjectRecord fromProjectToRecord(Project project) {
@@ -26,16 +35,16 @@ public class ProjectMapper {
           project.getId(),
           project.getName(),
           project.getDescription(),
-          project.getPrice()
-        );
+          project.getCost(),
+          project.getCompany());
     }
 
     public static Project fromRecordToProject(ProjectRecord record) {
         return new Project(
           record.getId(),
-          record.getNombre(),
-          record.getDescripcion(),
-          record.getValorEstimado()
-        );
+          record.getName(),
+          record.getDescription(),
+          record.getCost(),
+          record.getCompany());
     }
 }

@@ -13,9 +13,10 @@ public class ProjectoMapperDAO implements ResultSetMapper<ProjectRecord> {
     public ProjectRecord map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new ProjectRecord(
           r.getInt("id"),
-          r.getString("nombre"),
-          r.getString("descripcion"),
-          r.getBigDecimal("valor_estimado")
-        );
+          r.getString("name"),
+          r.getString("description"),
+          r.getBigDecimal("cost"),
+          r.getInt("company")
+      	);
     }
 }

@@ -30,19 +30,10 @@ public class ProjectController {
         this.repository = repository;
     }
 
-    /**
-     * GET
-     * @return
-     */
     public Result findAllProjects() {
-        return ok(Json.toJson(repository.findAll().map(ProjectMapper::fromProyectoToDTO)));
+        return ok(Json.toJson(repository.findAll().map(ProjectMapper::fromProjectToDTO)));
     }
 
-    /**
-     * GET
-     * @param id
-     * @return
-     */
     public Result findProject(int id) {
         return repository.find(id)
           .map(ProjectMapper::toJsonDTO)
@@ -50,15 +41,11 @@ public class ProjectController {
           .fold(Results::notFound, Results::ok);
     }
 
-    /**
-     * POST
-     * @return
-     */
     public Result createProject() {
         JsonNode json = request().body().asJson();
-        Logger.info("POST /save body:" + json.toString());
+        Logger.info("/create body:" + json.toString());
 
-        return getProyecto(json)
+        return getProject(json)
           .map(project -> repository.save(project))
           .flatMap(future ->
             future.onFailure(throwable -> Logger.error("Error guardando proyecto!", throwable))
@@ -69,10 +56,10 @@ public class ProjectController {
 
     public Result updateProject(int id) {
         JsonNode json = request().body().asJson();
-        Logger.info("PATCH /update body:" + json.toString());
+        Logger.info("/update body:" + json.toString());
 
-        return getProyecto(json)
-          .map(project -> repository.update(project))
+        return getProject(json)
+          .map(project -> repository.update(project, id))
           .flatMap(future ->
             future.map(option -> option.toEither(notFound(getJsonMessage("Not Found"))))
               .onFailure(throwable -> Logger.error("Error actualizando Proyecto!", throwable))
@@ -82,10 +69,6 @@ public class ProjectController {
           .fold(errorHttp -> errorHttp, Results::ok);
     }
 
-
-    /**
-     * DELETE
-     */
     public Result deleteProject(int id) {
         return repository.delete(id)
           .map(option -> option.toEither(notFound(getJsonMessage("Not Found"))))
@@ -96,18 +79,18 @@ public class ProjectController {
           .fold(errorHttp -> errorHttp, Results::ok);
     }
 
-    private Either<Result, Project> getProyecto(JsonNode json) {
-        return getProyectoDTO(json)
-          .flatMap(ProjectValidator::validate)
-          .mapLeft(this::getValidationErrorMessage)
-          .mapLeft(Results::badRequest);
-    }
-
-    private Either<List<String>, ProjectDTO> getProyectoDTO(JsonNode json) {
+    private Either<List<String>, ProjectDTO> getProjectDTO(JsonNode json) {
         Logger.info(json.toString());
         return Try.of(() -> Json.fromJson(json, ProjectDTO.class))
           .onFailure(throwable -> Logger.error("Error en el JSON.", throwable))
           .toEither(List.of("Invalid json"));
+    }
+
+    private Either<Result, Project> getProject(JsonNode json) {
+        return getProjectDTO(json)
+          .flatMap(ProjectValidator::validate)
+          .mapLeft(this::getValidationErrorMessage)
+          .mapLeft(Results::badRequest);
     }
 
     private ObjectNode getValidationErrorMessage(List<String> errors) {

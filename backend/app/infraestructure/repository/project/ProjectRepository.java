@@ -35,9 +35,9 @@ public class ProjectRepository {
           .map(ProjectMapper::fromRecordToProject);
     }
 
-    public Future<Option<Project>> update(Project project) {
-        ProjectRecord record = ProjectMapper.fromProjectToRecord(project);
-        return Future.of(() -> Option.of(db.onDemand(ProjectoDAO.class).update(record))
+    public Future<Option<Project>> update(Project project, int id) {
+        ProjectRecord record = ProjectMapper.fromProjectToRecord(project, id);
+        return Future.of(() -> Option.of(db.onDemand(ProjectoDAO.class).update(record, id))
           .map(ProjectMapper::fromRecordToProject));
     }
 

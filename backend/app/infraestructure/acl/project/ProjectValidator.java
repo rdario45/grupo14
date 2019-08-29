@@ -16,30 +16,31 @@ public class ProjectValidator {
     public static Either<List<String>, Project> validate(ProjectDTO dto) {
         return Validation.combine(
           Validation.valid(dto.getId()),
-          validateNombre(dto.getName()),
-          validateDescripcion(dto.getDescription()),
-          validateValorEstimado(dto.getCost())
+          validateName(dto.getName()),
+          validateDescription(dto.getDescription()),
+          validateCost(dto.getCost()),
+          Validation.valid(dto.getCompany())
         ).ap(Project::new)
           .toEither()
           .mapLeft(List::ofAll);
     }
 
-    static Validation<String, String> validateNombre(String nombre) {
-        return StringUtils.isNotEmpty(nombre) && nombre.length() <= 100 ?
-          Validation.valid(nombre) :
-          Validation.invalid("nombre");
+    static Validation<String, String> validateName(String name) {
+        return StringUtils.isNotEmpty(name) && name.length() <= 100 ?
+          Validation.valid(name) :
+          Validation.invalid("name");
     }
 
-    static Validation<String, String> validateDescripcion(String descripcion) {
-        return StringUtils.isNotEmpty(descripcion) && descripcion.length() <= 200 ?
-          Validation.valid(descripcion) :
-          Validation.invalid("descripcion");
+    static Validation<String, String> validateDescription(String description) {
+        return StringUtils.isNotEmpty(description) && description.length() <= 200 ?
+          Validation.valid(description) :
+          Validation.invalid("description");
     }
 
-    static Validation<String, BigDecimal> validateValorEstimado(String valor) {
-        Logger.info(valor);
-        return Try.of(() -> new BigDecimal(valor))
-          .toEither("valor")
+    static Validation<String, BigDecimal> validateCost(String cost) {
+        Logger.info(cost);
+        return Try.of(() -> new BigDecimal(cost))
+          .toEither("cost")
           .toValidation();
     }
 

@@ -5,15 +5,17 @@ import java.math.BigDecimal;
 public class ProjectRecord {
 
     private int id;
-    private String nombre;
-    private String descripcion;
-    private BigDecimal valorEstimado;
+    private String name;
+    private String description;
+    private BigDecimal cost;
+    private int company;
 
-    public ProjectRecord(int id, String nombre, String descripcion, BigDecimal valorEstimado) {
+    public ProjectRecord(int id, String name, String description, BigDecimal cost, int company) {
         this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.valorEstimado = valorEstimado;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.company = company;
     }
 
     public int getId() {
@@ -24,27 +26,35 @@ public class ProjectRecord {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public BigDecimal getValorEstimado() {
-        return valorEstimado;
+    public BigDecimal getCost() {
+        return cost;
     }
 
-    public void setValorEstimado(BigDecimal valorEstimado) {
-        this.valorEstimado = valorEstimado;
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public int getCompany() {
+        return company;
+    }
+
+    public void setCompany(int company) {
+        this.company = company;
     }
 }

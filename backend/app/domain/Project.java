@@ -7,13 +7,15 @@ public class Project {
     private int id;
     private String name;
     private String description;
-    private BigDecimal price;
+    private BigDecimal cost;
+    private int company;
 
-    public Project(int id, String name, String description, BigDecimal price) {
+    public Project(int id, String name, String description, BigDecimal cost, int company) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.price = price;
+        this.cost = cost;
+        this.company = company;
     }
 
     public int getId() {
@@ -40,11 +42,19 @@ public class Project {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getCost() {
+        return cost;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public int getCompany() {
+        return company;
+    }
+
+    public void setCompany(int company) {
+        this.company = company;
     }
 }
