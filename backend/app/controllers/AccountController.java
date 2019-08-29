@@ -1,26 +1,27 @@
 package controllers;
 
-import play.Logger;
+import infraestructure.repository.account.AccountRepository;
 import play.mvc.Result;
 
+import javax.inject.Inject;
+
+import static play.mvc.Results.notFound;
 import static play.mvc.Results.ok;
 
 public class AccountController {
 
-    /**
-     * POST
-     * @return
-     */
+    AccountRepository repository;
+
+    @Inject
+    public AccountController(AccountRepository repository) {
+        this.repository = repository;
+    }
+
     public Result createAccount() {
         return ok();
     }
 
-    /**
-     * GET
-     * @return
-     */
     public Result existsAccount(String email) {
-        Logger.debug(email);
-        return ok();
+        return repository.exists(email).isDefined() ? ok() : notFound();
     }
 }
