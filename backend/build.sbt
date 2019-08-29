@@ -8,7 +8,6 @@ scalaVersion := "2.13.0"
 
 PlayKeys.devSettings := Seq("play.server.http.port" -> "9000")
 
-
 libraryDependencies ++= Seq(
   jdbc,
   evolutions,
