@@ -1,4 +1,4 @@
-name := "proyecto1"
+name := "designmatch"
 organization := "com.grupo14.uniandes"
 version := "1.0.0"
 
@@ -7,7 +7,6 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava)
 scalaVersion := "2.13.0"
 
 PlayKeys.devSettings := Seq("play.server.http.port" -> "9000")
-
 
 libraryDependencies ++= Seq(
   jdbc,

@@ -29,16 +29,9 @@ El modelo de Entidad Relacion de la aplciacion es el siguiente:
 
 #### Librerias y Herramientas.
 
-- Docker
+| Docker                           | JWT                        | Trello                           |
+|----------------------------------|----------------------------|----------------------------------|
+|![Docker](images/docker-logo.jpg) |![jwt](images/jwt-logo.png) |![trello](images/trello-logo.png) |
 
-  ![Docker](images/docker-logo.jpg)
-
-- JWT
-
-  ![jwt](images/jwt-logo.png)
-
-- Trello
-
-  ![trello](images/trello-logo.png)
 
 \<\< [volver](../README.md)

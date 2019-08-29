@@ -24,7 +24,7 @@ public class ChronProcesarArchivos {
         actorSystem.scheduler().schedule(
           Duration.create(10, TimeUnit.SECONDS), // inital delay
           Duration.create(30, TimeUnit.SECONDS), // interval
-          () -> JobProcesarArchivos.execute(),
+          JobProcesarArchivos::execute,
           executionContext
         );
     }
