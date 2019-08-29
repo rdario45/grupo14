@@ -6,8 +6,8 @@
 # An example controller showing a sample home page
 
 # Account
-POST          /create-account               controllers.AccountController.createAccount
 GET           /exists-account/:email        controllers.AccountController.existsAccount(email: String)
+POST          /create-account               controllers.AccountController.createAccount
 # Auth
 POST          /login                        controllers.AuthController.login
 POST          /logout                       controllers.AuthController.logout

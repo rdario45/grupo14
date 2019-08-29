@@ -8,7 +8,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 @RegisterMapper(AccountMapperDAO.class)
 public interface AccountDAO {
 
-    @SqlQuery("SELECT email FROM accounts WHERE email = :email")
+    @SqlQuery("SELECT email, status FROM accounts WHERE email = :email")
     AccountRecord find(@Bind("email") String email);
 
 }

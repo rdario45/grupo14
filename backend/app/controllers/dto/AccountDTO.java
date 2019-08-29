@@ -1,12 +1,15 @@
-package infraestructure.repository.account.records;
+package controllers.dto;
 
-public class AccountRecord {
+public class AccountDTO {
 
     private String email;
     private String status;
 
+    public AccountDTO() {
+        // json
+    }
 
-    public AccountRecord(String email, String status) {
+    public AccountDTO(String email, String status) {
         this.email = email;
         this.status = status;
     }

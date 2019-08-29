@@ -1,13 +1,14 @@
-package infraestructure.repository.account.records;
+package domain;
 
-public class AccountRecord {
+public class Account {
 
     private String email;
+    private String password;
     private String status;
 
-
-    public AccountRecord(String email, String status) {
+    public Account(String email, String password, String status) {
         this.email = email;
+        this.password = password;
         this.status = status;
     }
 
@@ -17,6 +18,14 @@ public class AccountRecord {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getStatus() {
