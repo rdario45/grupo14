@@ -10,5 +10,4 @@ public interface AccountDAO {
 
     @SqlQuery("SELECT email, status FROM accounts WHERE email = :email")
     AccountRecord find(@Bind("email") String email);
-
 }
