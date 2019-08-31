@@ -11,7 +11,9 @@ public class AccountMapperDAO implements ResultSetMapper<AccountRecord> {
     @Override
     public AccountRecord map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new AccountRecord(
-          r.getString("email")
+          r.getString("email"),
+          r.getString("password"),
+          r.getString("status")
         );
     }
 }

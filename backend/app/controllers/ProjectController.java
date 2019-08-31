@@ -16,8 +16,6 @@ import play.libs.Json;
 import play.mvc.Result;
 import play.mvc.Results;
 
-import java.util.function.Function;
-
 import static play.mvc.Http.Context.Implicit.request;
 import static play.mvc.Results.*;
 
@@ -31,76 +29,80 @@ public class ProjectController {
     }
 
     public Result findAllProjects() {
-        return ok(Json.toJson(repository.findAll().map(ProjectMapper::fromProjectToDTO)));
+        return ok(Json.toJson(repository.findAll().map(ProjectMapper::fromAccountToDTO)));
     }
 
     public Result findProject(int id) {
-        return repository.find(id)
+        Either<Result, Result> either = repository.find(id)
+          .toEither(getNotFound(""+id))
           .map(ProjectMapper::toJsonDTO)
-          .toEither(getNotFoundMessage(id))
-          .fold(Results::notFound, Results::ok);
+          .map(Results::ok);
+
+        return either.isRight() ? either.get() : either.getLeft();
     }
 
     public Result createProject() {
         JsonNode json = request().body().asJson();
-        Logger.info("/create body:" + json.toString());
 
-        return getProject(json)
+        Either<Result, Result> either = getProject(json)
           .map(project -> repository.save(project))
           .flatMap(future ->
             future.onFailure(throwable -> Logger.error("Error guardando proyecto!", throwable))
-              .toEither(internalServerError(getJsonMessage("Error guardando proyecto!")))
-          ).map(ProjectMapper::toJsonDTO)
-          .fold(errorHttp -> errorHttp, Results::ok);
+              .toEither(getInternalServerError("Error guardando proyecto!"))
+              .map(ProjectMapper::toJsonDTO)
+              .map(Results::ok)
+          );
+
+        return either.isRight() ? either.get() : either.getLeft();
     }
 
     public Result updateProject(int id) {
         JsonNode json = request().body().asJson();
-        Logger.info("/update body:" + json.toString());
 
-        return getProject(json)
+        Either<Result, Result> either = getProject(json)
           .map(project -> repository.update(project, id))
           .flatMap(future ->
-            future.map(option -> option.toEither(notFound(getJsonMessage("Not Found"))))
-              .onFailure(throwable -> Logger.error("Error actualizando Proyecto!", throwable))
-              .toEither(internalServerError(getJsonMessage("Error actualizando Proyecto!")))
-              .flatMap(Function.identity())
-          ).map(ProjectMapper::toJsonDTO)
-          .fold(errorHttp -> errorHttp, Results::ok);
+            future.onFailure(throwable -> Logger.error("Error actualizando Proyecto!", throwable))
+              .toEither(getInternalServerError("Error actualizando Proyecto!"))
+              .flatMap(option -> option.toEither(getNotFound("Not Found")))
+              .map(ProjectMapper::toJsonDTO)
+              .map(Results::ok)
+          );
+
+        return either.isRight() ? either.get() : either.getLeft();
     }
 
     public Result deleteProject(int id) {
-        return repository.delete(id)
-          .map(option -> option.toEither(notFound(getJsonMessage("Not Found"))))
+        Either<Result, Result> either = repository.delete(id)
           .onFailure(throwable -> Logger.error("Error eliminando proyecto!", throwable))
-          .toEither(internalServerError(getJsonMessage("Error eliminando proyecto!")))
-          .flatMap(Function.identity())
+          .toEither(getInternalServerError("Error eliminando proyecto!"))
+          .flatMap(option -> option.toEither(getNotFound("Not Found")))
           .map(ProjectMapper::toJsonDTO)
-          .fold(errorHttp -> errorHttp, Results::ok);
-    }
+          .map(Results::ok);
 
-    private Either<List<String>, ProjectDTO> getProjectDTO(JsonNode json) {
-        Logger.info(json.toString());
-        return Try.of(() -> Json.fromJson(json, ProjectDTO.class))
-          .onFailure(throwable -> Logger.error("Error en el JSON.", throwable))
-          .toEither(List.of("Invalid json"));
+        return either.isRight() ? either.get() : either.getLeft();
     }
 
     private Either<Result, Project> getProject(JsonNode json) {
-        return getProjectDTO(json)
+        return Try.of(() -> Json.fromJson(json, ProjectDTO.class))
+          .onFailure(throwable -> Logger.error("Error en el JSON.", throwable))
+          .toEither(List.of("Invalid json"))
           .flatMap(ProjectValidator::validate)
-          .mapLeft(this::getValidationErrorMessage)
-          .mapLeft(Results::badRequest);
+          .mapLeft(this::getBadRequest);
     }
 
-    private ObjectNode getValidationErrorMessage(List<String> errors) {
-        return Json.newObject()
+    private Result getBadRequest(List<String> errors) {
+        return badRequest(Json.newObject()
           .put("message", "Validation errors!")
-          .put("fields", String.join(", ", errors));
+          .put("fields", String.join(", ", errors)));
     }
 
-    private ObjectNode getNotFoundMessage(int index) {
-        return Json.newObject().put("message", "id " + index + " not found");
+    private Result getNotFound(String message) {
+        return notFound(this.getJsonMessage(message));
+    }
+
+    private Result getInternalServerError(String message) {
+        return internalServerError(this.getJsonMessage(message));
     }
 
     private ObjectNode getJsonMessage(String message) {

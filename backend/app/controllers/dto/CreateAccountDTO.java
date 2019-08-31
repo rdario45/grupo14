@@ -1,15 +1,27 @@
-package infraestructure.repository.account.records;
+package controllers.dto;
 
-public class AccountRecord {
+public class CreateAccountDTO {
 
+    private String name;
     private String email;
     private String password;
-    private String status;
 
-    public AccountRecord(String email, String password, String status) {
+    public CreateAccountDTO() {
+        // Json
+    }
+
+    public CreateAccountDTO(String name, String email, String password) {
+        this.name = name;
         this.email = email;
         this.password = password;
-        this.status = status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -26,13 +38,5 @@ public class AccountRecord {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }
