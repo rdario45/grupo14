@@ -18,8 +18,6 @@
 import React, { Component } from "react";
 import { Navbar } from "react-bootstrap";
 
-import AdminNavbarLinks from "./AdminNavbarLinks.jsx";
-
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -54,7 +52,7 @@ class Header extends Component {
           <Navbar.Toggle onClick={this.mobileSidebarToggle} />
         </Navbar.Header>
         <Navbar.Collapse>
-          <AdminNavbarLinks />
+          {/* <AdminNavbarLinks /> */}
         </Navbar.Collapse>
       </Navbar>
     );
