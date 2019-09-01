@@ -23,7 +23,7 @@ class CreateDesign extends Component {
         };
     }
     assignFile(file) {
-        this.state.file = file;
+       this.state.file = file;
     }
     validateForm() {
         return this.state.firstName.length > 0
@@ -44,12 +44,19 @@ class CreateDesign extends Component {
             this.props.handleClick("Debes adjuntar un archivo.", 'error');
             return;
         }
-        const extension = file.name.split('.').pop();
+        const extension = file.name.split('.').pop().toLowerCase();
         if (!this.extensionsAllowed.includes(extension)) {
             this.props.handleClick("El archivo no tiene una extensión válida.", 'error');
             return;
         }
         this.props.handleClick("Se ha creado el diseño.", 'success');
+        this.setState({
+            firstName: "",
+            lastName: "",
+            email: "",
+            price: 0,
+            file: null,
+        });
     }
     render() {
         return (

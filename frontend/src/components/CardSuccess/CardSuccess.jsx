@@ -5,7 +5,7 @@ export class SuccessCard extends Component {
     render() {
         return (
             <div className="card card-success" style={{
-                background: 'rgba(117,189,209,1)',
+                background: 'rgba(117,189,209,1);',
                 background: '-moz-linear-gradient(left, rgba(117,189,209,1) 0%, rgba(73,165,191,1) 59%, rgba(147,206,222,1) 92%, rgba(147,206,222,1) 100%)',
                 background: '-webkit-gradient(left top, right top, color-stop(0%, rgba(117,189,209,1)), color-stop(59%, rgba(73,165,191,1)), color-stop(92%, rgba(147,206,222,1)), color-stop(100%, rgba(147,206,222,1)))',
                 background: '-webkit-linear-gradient(left, rgba(117,189,209,1) 0%, rgba(73,165,191,1) 59%, rgba(147,206,222,1) 92%, rgba(147,206,222,1) 100%)',

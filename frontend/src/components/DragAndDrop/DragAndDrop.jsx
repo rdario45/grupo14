@@ -15,7 +15,6 @@ const baseStyle = {
     color: '#bdbdbd',
     outline: 'none',
     transition: 'border .24s ease-in-out',
-    width: '85%'
 };
 
 export class DragNDrop extends Component {
@@ -43,7 +42,7 @@ export class DragNDrop extends Component {
             <Dropzone multiple={false}
                 onDrop={this.onDrop}>
                 {({ getRootProps, getInputProps }) => (
-                    <section className="container">
+                    <section>
                         <div style={baseStyle} {...getRootProps({ className: 'dropzone' })}>
                             <input {...getInputProps()} />
                             <p>Arrastra un archivo o haz click para seleccionarlo.</p>

@@ -48,7 +48,7 @@ class CreateEnterprise extends Component {
 
         this.props.handleClick("Se ha creado la cuenta de la empresa.", 'success');
         const partURLEnterprise = 'miempresa-10';
-        this.setState({ urlEnterprise: `${window.location.origin.toString()}/enterprise/${partURLEnterprise}/design/list` })
+        this.setState({ urlEnterprise: `${window.location.origin.toString()}/#/design/enterprise/${partURLEnterprise}/design/list` })
     }
     render() {
         return (
