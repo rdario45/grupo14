@@ -2,11 +2,25 @@
 
 # --- !Ups
 
-insert into designs (id, email, originalPath)
-values
-(1,'diegoatorres@gmail.com','/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-39-35.png'),
-(2,'da.torres58@uniandes.edu.co','/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-40-26.png'),
-(3,'ruben@uniandes.edu.co','/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-40-27.png'),
-(4,'camilo@uniandes.edu.co','/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-40-36.png');
+INSERT INTO dev.accounts
+(email, status)
+VALUES('admin.nutresa@yopmail.com', 'ACTIVE');
+
+INSERT INTO dev.companies
+(id, name, admin)
+VALUES(1, 'Nutresa SAS', 'admin.nutresa@yopmail.com');
+
+INSERT INTO dev.projects
+(id, name, description, cost, company_id)
+VALUES(1, 'Naturaeza', 'lorem ipsum.', 50000, 1);
+
+
+INSERT INTO dev.designs
+(id, email, originalPath, project_id)
+VALUES(1, 'admin.nutresa@yopmail.com', 'tmp/imagen1.png', 1);
 
 # --- !Downs
+delete from dev.designs where id = 1;
+delete from dev.projects where id = 1;
+delete from dev.companies where id = 1;
+delete from dev.accounts where email = 'admin.nutresa@yopmail.com'
