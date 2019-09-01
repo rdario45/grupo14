@@ -46,6 +46,6 @@ public class DesignMapper {
                 record.getEmail(),
                 DesignStatus.of(record.getDesignStatus()),
                 record.getOriginalPath(),
-                record.getStretchedPath());
+                record.getResizedPath());
     }
 }

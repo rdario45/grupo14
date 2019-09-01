@@ -22,7 +22,7 @@ public class JobProcesarArchivos {
             resizer.processImage(design.getOriginalPath(), destinyFile,
                     800,600,true,design.getEmail() + new Date());
             design.setStretchedPath(destinyFile);
-            design.setStretched(true);
+//            design.setStretched(true);
             sendEmailSSL.send(design.getEmail(),
                     "Su diseño ha sido aprobado",
                     "Su diseño se encuentra aprobado y ya puede ser visualizado en la plataforma.");

@@ -13,35 +13,35 @@ import java.util.List;
 public interface DesignDAO {
 
 
-    @SqlQuery("SELECT * FROM Design where designStatus = 'PROCESSING'")
+    @SqlQuery("SELECT * FROM designs where designStatus = 'PROCESSING'")
     List<DesignRecord> findPendingDesigns();
 
-    @SqlQuery("SELECT * FROM Design")
+    @SqlQuery("SELECT * FROM designs ")
     List<ProjectRecord> findAll();
 
-    @SqlQuery("SELECT * FROM Design WHERE id = :id")
+    @SqlQuery("SELECT * FROM designs WHERE id = :id")
     DesignRecord find(@Bind("id") int id);
 
-    @SqlQuery("INSERT INTO Design ( " +
+    @SqlQuery("INSERT INTO designs ( " +
             " id, " +
-            " mail, " +
-            " stretched, " +
+            " email, " +
+            " designStatus, " +
             " originalPath, " +
-            " stretchedPath, " +
+            " resizedPath, " +
             " ) VALUES ( " +
             " :r.id," +
             " :r.mail," +
             " :r.stretched," +
             " :r.originalPath " +
-            " :r.stretchedPath " +
+            " :r.resizedPath " +
             " ) RETURNING * ")
     DesignRecord insert(@BindBean("r") DesignRecord record);
 
-    @SqlQuery("UPDATE design SET" +
-            " mail = :r.mail," +
-            " stretched = :r.stretched, " +
+    @SqlQuery("UPDATE designs SET" +
+            " email = :r.email," +
+            " designStatus = :r.designStatus, " +
             " originalPath = :r.originalPath," +
-            " stretchedPath = :r.stretchedPath " +
+            " resizedPath = :r.resizedPath " +
             " WHERE id = :id RETURNING * ")
     DesignRecord update(@BindBean("r") DesignRecord record, @Bind("id") int id);
 

@@ -32,18 +32,18 @@ CREATE TABLE projects (
 
 );
 
-CREATE TABLE design (
+CREATE TABLE designs (
   id serial PRIMARY KEY,
-  `email` varchar(45) DEFAULT NULL,
-  `designStatus` varchar(10) DEFAULT 'PROCESSING',
-  `originalPath` varchar(250) DEFAULT NULL,
-  `resizedPath` varchar(250) DEFAULT NULL
+  email varchar(45) DEFAULT NULL,
+  designStatus varchar(10) DEFAULT 'PROCESSING',
+  originalPath varchar(250) NOT NULL,
+  resizedPath varchar(250) DEFAULT NULL
 ) ;
 
 
 
 
-insert into design (id, email, resized, originalPath)
+insert into designs (id, email, originalPath)
 values
 (1,'diegoatorres@gmail.com','/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-39-35.png'),
 (2,'da.torres58@uniandes.edu.co','/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-40-26.png'),
