@@ -12,7 +12,7 @@
 
 El modelo de Entidad Relacion de la aplciacion es el siguiente:
 
-![diagrama ER](images/diagram-ER.png)
+![diagrama ER](images/diagrama-ER.png)
 
 
 #### Lenguajes de programacion utilizados.
