@@ -104,6 +104,9 @@ class DetailsProject extends Component {
                                             </FormGroup>
                                         </Col>
                                     </Row>
+                                    <Button bsStyle="default"
+                                                fill
+                                                onClick={this.props.history.goBack}>Atrás</Button>
                                     {!isReadonly && (
                                         <Button
                                             bsStyle="success"

@@ -67,7 +67,7 @@ class ListProjects extends Component {
                                                 {labels.map((prop, key) => {
                                                     return <th key={key}>{prop}</th>;
                                                 })}
-                                                <th colSpan={3}>Acciones</th>
+                                                <th colSpan={4}>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -82,6 +82,9 @@ class ListProjects extends Component {
                                                         <td>{name}</td>
                                                         <td>{description}</td>
                                                         <td>{cost}</td>
+                                                        <td>
+                                                            <Link to={`/admin/project/design/list/${projectId}`}><i className="pe-7s-photo text-success"></i></Link>
+                                                        </td>
                                                         <td>
                                                             <Link to={`/admin/project/details/${projectId}/1`}><i className="pe-7s-search text-info"></i></Link>
                                                         </td>

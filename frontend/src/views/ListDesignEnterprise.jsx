@@ -5,18 +5,17 @@ import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
-class ListDesign extends Component {
+Modal.setAppElement('#root');
+class ListDesignEnterprise extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            labels: ["Id", "Fechan de publicación", "Ver diseño original", "Ver diseño procesado"],
+            labels: ["Id", "Fechan de publicación", 'Correo', 'Nombres', 'Apellidos', 'Precio', 'Estado', "Ver diseño original", "Ver diseño procesado"],
             designs: [],
             modals: {
                 isOpen: false,
                 urlImage: null
-            },
-            enterpriseId: props.match.params.urlEnterprise.split('-')[1],
-            projectId: props.match.params.projectId
+            }
         };
         this.handleToggleImage = this.handleToggleImage.bind(this);
     }
@@ -34,19 +33,34 @@ class ListDesign extends Component {
             {
                 designId: 3,
                 creationDate: "2019-08-27 23:11",
+                email: '2222@dasdsa.dadas',
+                firstName: 'dasd',
+                lastName: 'dasd',
+                price: 100000000,
+                state: 'En Proceso',
                 picture: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
                 pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
             },
             {
                 designId: 2,
                 creationDate: "2019-08-27 15:55",
-                picture: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
+                email: '1111@dasdsa.dadas',
+                firstName: 'dasd',
+                lastName: 'dasd',
+                price: 100000000,
+                state: 'En Proceso',
+                picture: "https://public-media.interaction-design.org/images/ux-daily/5628f8c6cdb9d.jpg",
                 pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
             },
             {
                 designId: 1,
                 creationDate: "2019-08-27 07:15",
-                picture: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
+                email: '2222@dasdsa.dadas',
+                firstName: 'dasd',
+                lastName: 'dasd',
+                price: 100000000,
+                state: 'En Proceso',
+                picture: "https://blog.intercomassets.com/blog/wp-content/uploads/2018/05/Design-leadership-as-a-subversive-activity-.png",
                 pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
             },
         ];
@@ -65,25 +79,9 @@ class ListDesign extends Component {
             <div className="content">
                 <Grid fluid>
                     <Row>
-                        <Col md={1}>
-                            <Button bsStyle="success"
-                                fill
-                                onClick={() => {
-                                    const urlEnterprise = this.props.match.params.urlEnterprise;
-                                    const projectId = this.state.projectId;
-                                    this.props.history.push(`/design/enterprise/${urlEnterprise}/design/create/${projectId}`);
-                                }}>Crear diseño</Button>
-                        </Col>
-                        <Col md={5}></Col>
-                        <Col md={6}></Col>
-                    </Row>
-                    <Row>
-                        <br />
-                    </Row>
-                    <Row>
                         <Col md={12}>
                             <Card
-                                title="Listado de diseños"
+                                title="Listado de diseños de proyecto"
                                 ctTableFullWidth
                                 ctTableResponsive
                                 content={
@@ -100,6 +98,11 @@ class ListDesign extends Component {
                                                 const {
                                                     designId,
                                                     creationDate,
+                                                    email,
+                                                    firstName,
+                                                    lastName,
+                                                    price,
+                                                    state,
                                                     picture,
                                                     pictureProcessed
                                                 } = design
@@ -107,6 +110,11 @@ class ListDesign extends Component {
                                                     <tr key={designId}>
                                                         <td>{designId}</td>
                                                         <td>{creationDate}</td>
+                                                        <td>{email}</td>
+                                                        <td>{firstName}</td>
+                                                        <td>{lastName}</td>
+                                                        <td>{price}</td>
+                                                        <td>{state}</td>
                                                         <td>
                                                             <span style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
                                                                 onClick={() => { this.handleToggleImage(picture); }}>
@@ -145,13 +153,13 @@ class ListDesign extends Component {
                     <Row>
                         <Col md={2}></Col>
                         <Col md={10}>
-                            <img src={this.state.modals.urlImage}
-                                style={{ width: '100%', height: '100%' }} />
+                            <img src={this.state.modals.urlImage} 
+                                style={{width: '100%', height: '100%'}} />
                         </Col>
                     </Row>
                     <Row>
-                        <br />
-                        <br />
+                        <br/>
+                        <br/>
                     </Row>
                     <Row>
                         <Col md={5}></Col>
@@ -167,5 +175,4 @@ class ListDesign extends Component {
         );
     }
 }
-
-export default ListDesign;
+export default ListDesignEnterprise;

@@ -8,43 +8,48 @@ import {
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
+import DragAndDrop from "components/DragAndDrop/DragAndDrop.jsx";
 
 class CreateDesign extends Component {
+    extensionsAllowed = ["jpg", "jpeg", "bmp", "png"];
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
+            firstName: "",
+            lastName: "",
             email: "",
-            password: "",
-            passwordConfirmation: "",
+            price: "",
+            file: null,
         };
     }
+    assignFile(file) {
+        this.state.file = file;
+    }
     validateForm() {
-        return this.state.name.length > 0
+        return this.state.firstName.length > 0
+            && this.state.lastName.length > 0
             && this.state.email.length > 0
-            && this.state.password.length > 0
-            && this.state.passwordConfirmation.length > 0;
+            && this.state.price > 0;
     }
     handleChange = event => {
         const newState = this.state;
         newState[event.target.id] = event.target.value;
         this.setState(newState);
     }
-
     handleSubmit = event => {
         event.preventDefault();
-        const { name, email, password, passwordConfirmation } = this.state;
-        if (password !== passwordConfirmation) {
-            this.props.handleClick("Las contraseñas deben ser iguales.", 'error');
+        const { file } = this.state;
+        debugger
+        if (!file) {
+            this.props.handleClick("Debes adjuntar un archivo.", 'error');
             return;
         }
-        if (!email) {
-            this.props.handleClick("El email debe ser único.", 'error');
+        const extension = file.name.split('.').pop();
+        if (!this.extensionsAllowed.includes(extension)) {
+            this.props.handleClick("El archivo no tiene una extensión válida.", 'error');
             return;
         }
-
-        this.props.handleClick("Se ha creado la cuenta de la empresa.", 'success');
-        this.props.history.push('/main/login-enterprise');
+        this.props.handleClick("Se ha creado el diseño.", 'success');
     }
     render() {
         return (
@@ -53,28 +58,28 @@ class CreateDesign extends Component {
                     <Row>
                         <Col md={12}>
                             <Card
-                                title="Crear Cuenta de Empresa"
+                                title="Crear Diseño"
                                 content={
                                     <form onSubmit={this.handleSubmit}>
                                         <FormInputs
                                             ncols={["col-md-6", "col-md-6"]}
                                             properties={[
                                                 {
-                                                    id: "name",
-                                                    label: "Nombre de la empresa",
+                                                    id: "firstName",
+                                                    label: "Nombres",
                                                     type: "text",
                                                     bsClass: "form-control",
-                                                    placeholder: "Empresa",
-                                                    value: this.state.name,
+                                                    placeholder: "Nombre del diseñador",
+                                                    value: this.state.firstName,
                                                     onChange: this.handleChange
                                                 },
                                                 {
-                                                    id: "email",
-                                                    label: "Correo",
-                                                    type: "email",
+                                                    id: "lastName",
+                                                    label: "Apellidos",
+                                                    type: "text",
                                                     bsClass: "form-control",
-                                                    placeholder: "Correo de la empresa",
-                                                    value: this.state.email,
+                                                    placeholder: "Apellido del diseñador",
+                                                    value: this.state.lastName,
                                                     onChange: this.handleChange
                                                 },
                                             ]}
@@ -83,25 +88,35 @@ class CreateDesign extends Component {
                                             ncols={["col-md-6", "col-md-6"]}
                                             properties={[
                                                 {
-                                                    id: "password",
-                                                    label: "Contraseña",
-                                                    type: "password",
+                                                    id: "email",
+                                                    label: "Correo",
+                                                    type: "email",
                                                     bsClass: "form-control",
-                                                    placeholder: "Contraseña de cuenta",
-                                                    value: this.state.password,
+                                                    placeholder: "Correo del diseñador",
+                                                    value: this.state.email,
                                                     onChange: this.handleChange
                                                 },
                                                 {
-                                                    id: "passwordConfirmation",
-                                                    label: "Confirmación de contraseña",
-                                                    type: "password",
+                                                    id: "price",
+                                                    label: "Precio solicitado",
+                                                    type: "number",
                                                     bsClass: "form-control",
-                                                    placeholder: "Confirmar Contraseña de cuenta",
-                                                    value: this.state.passwordConfirmation,
+                                                    placeholder: "Precio solicitado del diseño",
+                                                    step: "0.01",
+                                                    min: "1",
+                                                    value: this.state.cost,
                                                     onChange: this.handleChange
                                                 },
                                             ]}
                                         />
+                                        <Row>
+                                            <Col md={12}>
+                                                <DragAndDrop assignFile={(file) => { this.assignFile(file) }} />
+                                            </Col>
+                                        </Row>
+                                        <Button bsStyle="default"
+                                            fill
+                                            onClick={this.props.history.goBack}>Atrás</Button>
                                         <Button
                                             bsStyle="success"
                                             fill

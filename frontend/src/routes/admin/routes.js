@@ -2,6 +2,7 @@ import CreateProject from "views/CreateProject";
 import DetailsProject from "views/DetailsProject";
 import Logout from "views/Logout";
 import ListProjects from "views/ListProjects";
+import ListDesignEnterprise from "views/ListDesignEnterprise";
 
 const adminRoutes = [
   {
@@ -14,7 +15,6 @@ const adminRoutes = [
   {
     path: "/project/details/:projectId/:isReadonly",
     name: "Editar Proyectos",
-    icon: "pe-7s-note2",
     component: DetailsProject,
     layout: "/admin",
     isHidden: true
@@ -25,6 +25,13 @@ const adminRoutes = [
     icon: "pe-7s-news-paper",
     component: ListProjects,
     layout: "/admin"
+  },
+  {
+    path: "/project/design/list/:projectId",
+    name: "Listado de Proyectos",
+    component: ListDesignEnterprise,
+    layout: "/admin",
+    isHidden: true
   },
   {
     path: "/user/logout",
