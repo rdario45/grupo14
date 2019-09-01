@@ -5,15 +5,15 @@ public class Design {
 
     private int id;
     private String email;
-    private Boolean stretched;
+    private DesignStatus designStatus;
     private String originalPath;
     private String stretchedPath;
 
 
-    public Design(int id, String email, Boolean stretched, String originalPath, String stretchedPath) {
+    public Design(int id, String email, DesignStatus designStatus, String originalPath, String stretchedPath) {
         this.id = id;
         this.email = email;
-        this.stretched = stretched;
+        this.designStatus = designStatus;
         this.originalPath = originalPath;
         this.stretchedPath = stretchedPath;
     }
@@ -26,8 +26,8 @@ public class Design {
         this.email = email;
     }
 
-    public void setStretched(Boolean stretched) {
-        this.stretched = stretched;
+    public void setDesignStatus(DesignStatus designStatus) {
+        this.designStatus = designStatus;
     }
 
     public void setOriginalPath(String originalPath) {
@@ -46,8 +46,8 @@ public class Design {
         return email;
     }
 
-    public Boolean getStretched() {
-        return stretched;
+    public DesignStatus getDesignStatus() {
+        return designStatus;
     }
 
     public String getOriginalPath() {

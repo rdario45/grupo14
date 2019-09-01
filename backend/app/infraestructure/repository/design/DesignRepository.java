@@ -2,7 +2,7 @@ package infraestructure.repository.design;
 
 import com.google.inject.Inject;
 import domain.Design;
-import infraestructure.acl.project.DesignMapper;
+import infraestructure.acl.design.DesignMapper;
 import io.vavr.collection.List;
 import org.skife.jdbi.v2.DBI;
 import play.api.db.Database;

@@ -4,7 +4,7 @@ public class DesignDTO {
 
     private int id;
     private String email;
-    private Boolean stretched;
+    private String designStatus;
     private String originalPath;
     private String stretchedPath;
 
@@ -14,10 +14,10 @@ public class DesignDTO {
     }
 
 
-    public DesignDTO(int id, String email, Boolean stretched, String originalPath, String stretchedPath) {
+    public DesignDTO(int id, String email, String designStatus, String originalPath, String stretchedPath) {
         this.id = id;
         this.email = email;
-        this.stretched = stretched;
+        this.designStatus = designStatus;
         this.originalPath = originalPath;
         this.stretchedPath = stretchedPath;
     }
@@ -30,8 +30,8 @@ public class DesignDTO {
         this.email = email;
     }
 
-    public void setStretched(Boolean stretched) {
-        this.stretched = stretched;
+    public void setStretched(String designStatus) {
+        this.designStatus = designStatus;
     }
 
     public void setOriginalPath(String originalPath) {
@@ -50,8 +50,8 @@ public class DesignDTO {
         return email;
     }
 
-    public Boolean getStretched() {
-        return stretched;
+    public String getDesignStatus() {
+        return designStatus;
     }
 
     public String getOriginalPath() {

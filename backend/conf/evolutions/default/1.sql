@@ -35,7 +35,7 @@ CREATE TABLE projects (
 CREATE TABLE design (
   id serial PRIMARY KEY,
   `email` varchar(45) DEFAULT NULL,
-  `resized` boolean DEFAULT false,
+  `designStatus` varchar(10) DEFAULT 'PROCESSING',
   `originalPath` varchar(250) DEFAULT NULL,
   `resizedPath` varchar(250) DEFAULT NULL
 ) ;
@@ -45,10 +45,10 @@ CREATE TABLE design (
 
 insert into design (id, email, resized, originalPath)
 values
-(1,'diegoatorres@gmail.com',false,'/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-39-35.png'),
-(2,'da.torres58@uniandes.edu.co',false,'/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-40-26.png'),
-(3,'ruben@uniandes.edu.co',false,'/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-40-27.png'),
-(4,'camilo@uniandes.edu.co',true,'/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-40-36.png');
+(1,'diegoatorres@gmail.com','/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-39-35.png'),
+(2,'da.torres58@uniandes.edu.co','/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-40-26.png'),
+(3,'ruben@uniandes.edu.co','/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-40-27.png'),
+(4,'camilo@uniandes.edu.co','/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-40-36.png');
 
 # --- !Downs
 DROP TABLE projects;

@@ -1,8 +1,9 @@
-package infraestructure.acl.project;
+package infraestructure.acl.design;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import controllers.dto.DesignDTO;
 import domain.Design;
+import domain.DesignStatus;
 import infraestructure.repository.design.records.DesignRecord;
 import play.libs.Json;
 
@@ -12,20 +13,20 @@ public class DesignMapper {
         return Json.toJson(DesignMapper.fromDesignToDTO(design));
     }
 
-    public static DesignDTO fromDesignToDTO(Design project) {
+    public static DesignDTO fromDesignToDTO(Design design) {
         return new controllers.dto.DesignDTO(
-                project.getId(),
-                project.getEmail(),
-                project.getStretched(),
-                project.getOriginalPath(),
-                project.getStretchedPath());
+                design.getId(),
+                design.getEmail(),
+                design.getDesignStatus().name(),
+                design.getOriginalPath(),
+                design.getStretchedPath());
     }
 
     public static DesignRecord fromDesignToRecord(Design design, int id) {
         return new DesignRecord(
                 design.getId(),
                 design.getEmail(),
-                design.getStretched(),
+                design.getDesignStatus().name(),
                 design.getOriginalPath(),
                 design.getStretchedPath());
     }
@@ -34,7 +35,7 @@ public class DesignMapper {
         return new DesignRecord(
                 design.getId(),
                 design.getEmail(),
-                design.getStretched(),
+                design.getDesignStatus().name(),
                 design.getOriginalPath(),
                 design.getStretchedPath());
     }
@@ -43,7 +44,7 @@ public class DesignMapper {
         return new Design(
                 record.getId(),
                 record.getEmail(),
-                record.getStretched(),
+                DesignStatus.of(record.getDesignStatus()),
                 record.getOriginalPath(),
                 record.getStretchedPath());
     }

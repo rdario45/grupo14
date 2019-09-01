@@ -13,7 +13,7 @@ import java.util.List;
 public interface DesignDAO {
 
 
-    @SqlQuery("SELECT * FROM Design where stretched = false")
+    @SqlQuery("SELECT * FROM Design where designStatus = 'PROCESSING'")
     List<DesignRecord> findPendingDesigns();
 
     @SqlQuery("SELECT * FROM Design")
