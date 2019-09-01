@@ -1,6 +1,4 @@
-import Information from "views/Information";
-import CreateEnterprise from "views/CreateEnterprise";
-import ListProjectsEnterprise from "views/ListProjectsEnterprise"
+import ListProjectsEnterprise from  "views/ListProjectsEnterprise"
 import CreateDesign from "views/CreateDesign";
 import ListDesign from 'views/ListDesign';
 

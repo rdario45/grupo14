@@ -8,6 +8,7 @@ import {
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
+import { SuccessCard } from "components/CardSuccess/CardSuccess.jsx";
 
 class CreateEnterprise extends Component {
     constructor(props) {
@@ -17,13 +18,15 @@ class CreateEnterprise extends Component {
             email: "",
             password: "",
             passwordConfirmation: "",
+            urlEnterprise: null,
         };
     }
     validateForm() {
         return this.state.name.length > 0
             && this.state.email.length > 0
             && this.state.password.length > 0
-            && this.state.passwordConfirmation.length > 0;
+            && this.state.passwordConfirmation.length > 0
+            && this.state.urlEnterprise === null;
     }
     handleChange = event => {
         const newState = this.state;
@@ -44,7 +47,8 @@ class CreateEnterprise extends Component {
         }
 
         this.props.handleClick("Se ha creado la cuenta de la empresa.", 'success');
-        this.props.history.push('/main/login-enterprise');
+        const partURLEnterprise = 'miempresa-10';
+        this.setState({ urlEnterprise: `${window.location.origin.toString()}/enterprise/${partURLEnterprise}/design/list` })
     }
     render() {
         return (
@@ -56,6 +60,12 @@ class CreateEnterprise extends Component {
                                 title="Crear Cuenta de Empresa"
                                 content={
                                     <form onSubmit={this.handleSubmit}>
+                                        {this.state.urlEnterprise !== null && (<SuccessCard
+                                            title="URL pública de empresa"
+                                            category="Comparte esta URL a tus diseñadores para que puedan publicar sus diseños."
+                                            statsIcon={<i className="fa fa-check" />}
+                                            statsIconText={this.state.urlEnterprise}
+                                        />)}
                                         <FormInputs
                                             ncols={["col-md-6", "col-md-6"]}
                                             properties={[
