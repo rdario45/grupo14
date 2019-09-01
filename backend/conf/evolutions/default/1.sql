@@ -20,7 +20,6 @@ CREATE TABLE companies (
 	id serial PRIMARY KEY,
 	name varchar(100) NOT NULL,
 	admin varchar(100) NOT NULL
-
 );
 
 CREATE TABLE projects (
@@ -29,7 +28,6 @@ CREATE TABLE projects (
 	description varchar(200) NOT NULL,
 	cost numeric(12,2) NOT NULL,
 	company_id int4 NOT NULL
-
 );
 
 CREATE TABLE designs (
