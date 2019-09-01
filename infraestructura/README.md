@@ -19,7 +19,7 @@ El modelo de Entidad Relacion de la aplciacion es el siguiente:
 
 | Backend                      | Frontend                       | Database                              |
 |------------------------------|--------------------------------|---------------------------------------|
-|![java](images/java-logo.png) |![web](images/css-html-js.jpeg) |![database](images/postgresql-logo.png)|
+|![java](images/java-logo.png) |![web](images/css-html-js.jpeg) |![database](images/mysql-logo.png)|
 
 #### Frameworks.
 
