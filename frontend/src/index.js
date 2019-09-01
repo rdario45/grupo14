@@ -18,7 +18,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, HashRouter as Router } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/animate.min.css";
@@ -26,14 +26,23 @@ import "./assets/sass/light-bootstrap-dashboard-react.scss?v=1.3.0";
 import "./assets/css/demo.css";
 import "./assets/css/pe-icon-7-stroke.css";
 
+import history from "helper/history";
+
 import AdminLayout from "layouts/Admin.jsx";
+import MainLayout from "layouts/main/Main.jsx";
+import AdminEnterpriseLayout from "layouts/admin/Admin";
+import DesignLayout from "./layouts/design/Design";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router history={history}>
     <Switch>
-      <Route path="/admin" render={props => <AdminLayout {...props} />} />
-      <Redirect from="/" to="/admin/dashboard" />
+      <Route path="/admon" render={props => <AdminLayout {...props} />} />
+      <Route path="/main" render={props => <MainLayout {...props} />} />
+      <Route path="/admin" render={props => <AdminEnterpriseLayout {...props} />} />
+      <Route path="/design" render={props => <DesignLayout {...props} />} />
+      <Redirect from="/" to="/main/information" />
+      <Route render={() => <h1>404 Error</h1>} />
     </Switch>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById("root")
 );

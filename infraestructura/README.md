@@ -4,34 +4,29 @@
 - Generalidades de Arquitectura.
 - Generalidades de Infraestructura.
 - Modelo ER.
-- Lenguajes de programacion.
-- Frameworks.
-- Librerias y Herramientas.
+- Tecnologias base.
+- Frameworks, librerias y herramientas.
 
 #### Modelo ER.
 
-El modelo de Entidad Relacion de la aplciacion es el siguiente:
+El modelo Entidad Relacion de la aplicacion es el siguiente:
 
-![diagrama ER](images/diagram-ER.png)
+![diagrama ER](images/diagrama-ER.png)
 
 
-#### Lenguajes de programacion utilizados.
+#### Tecnologias base.
 
-| Backend                      | Frontend                       | Database                              |
-|------------------------------|--------------------------------|---------------------------------------|
-|![java](images/java-logo.png) |![web](images/css-html-js.jpeg) |![database](images/postgresql-logo.png)|
+| Backend                      | Frontend                       | Database                          |
+|------------------------------|--------------------------------|-----------------------------------|
+|![java](images/java-logo.png) |![web](images/css-html-js.jpeg) |![database](images/mysql-logo.png) |
 
-#### Frameworks.
+#### Frameworks, librerias y herramientas.
 
-| PlayJava                          | ReactJs                              |
-|-----------------------------------|--------------------------------------|
-|![play](images/play-logo.png)      | ![react](images/react-logo.png)      |
+| PlayJava                     | ReactJs                        | Docker                           | JWT                        | Trello                           |
+|------------------------------|--------------------------------|----------------------------------|----------------------------|----------------------------------|
+|![play](images/play-logo.png) |![react](images/react-logo.png) |![Docker](images/docker-logo.jpg) |![jwt](images/jwt-logo.png) |![trello](images/trello-logo.png) |
 
-#### Librerias y Herramientas.
 
-| Docker                           | JWT                        | Trello                           |
-|----------------------------------|----------------------------|----------------------------------|
-|![Docker](images/docker-logo.jpg) |![jwt](images/jwt-logo.png) |![trello](images/trello-logo.png) |
 
 
 \<\< [volver](../README.md)

@@ -1,21 +1,22 @@
 # Grupo14 - DesignMatch.
 
-Proyecto hecho en [Play](https://www.playframework.com/documentation/2.7.x/Introduction) 
-usa [sbt](https://www.scala-sbt.org/1.x/docs/index.html)  como build tool, por lo que se debe tener 
+Proyecto elaborado con [PlayJava](https://www.playframework.com/documentation/2.7.x/Introduction) 
+usa [sbt](https://www.scala-sbt.org/1.x/docs/index.html) como build-tool, por lo que se debe tener 
 instalado para poder compilar y ejecutar la aplicacion. 
+
 Para generacion del proyecto se uso: `sbt new playframework/play-java-seed.g8`.
 
 ### Contenido
 
-- Conexion a base de datos.
+- Configuracion previa.
 - Ejecucion local.
 - Despliegue.
 - Herramientas adicionales.
 
-### Conexion a base de datos
+### Configuracion previa
 
-- Se debe crear un servicio de base de datos accesible desde la maquita y actualizar el archivo
-    `conf/application.conf ` con las credenciales correctas.
+- Conexion a base de datos: <br>
+    Se debe crear un servicio de base de datos accesible desde la maquita y actualizar el archivo `conf/application.conf ` con las credenciales correctas.
 
 ### Ejecucion local
 
@@ -30,13 +31,11 @@ Para generacion del proyecto se uso: `sbt new playframework/play-java-seed.g8`.
     para ver el API disponible, visible tambien en el archivo `conf/routes`.
 
 #### Distribucion.
-- El comando `sbt dist` construye una version binaria que puede ser desplegada en un servidor.
-Creando un archivo zip en el folder `target/universal/` que incluye todos los jars necesarios para ejecutar la aplicacion.
-
+- El comando `sbt dist` construye una version binaria que puede ser desplegada en un servidor, creando un archivo zip en el folder `target/universal/`.
+ 
     Luego de descomprimir el archivo se puede proceder a ejecutar el binario:
     ```
-    unzip target/universal/designmatch-1.0.0.zip
-    
+    unzip target/universal/designmatch-1.0.0.zip \  
     bash designmatch-1.0.0/bin/designmatch
     ```
     
@@ -48,13 +47,14 @@ Creando un archivo zip en el folder `target/universal/` que incluye todos los ja
 
 #### Herramientas adicionales
 
-- Servicio de base de datos local utilizando Docker: 
-    > Si se desea utilizar postgresql para la base de datos y docker para su despliegue local debe
-  [instalar docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) y ejecutar el comando:
+- Servicio de base de datos MySql con Docker: 
+    > Si se desea utilizar MySql para la base de datos con docker para el despliegue local debe tener [inatalado docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) y ejecutar el comando:
 
     ```shell script
-    docker run --name postgres-db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=123 -e POSTGRES_DB=db -p 5432:5432 -d postgres
+    docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=dev  -p 3306:3306 -d mysql
     ``` 
+    Esto creará una instancia de la base de datos mysql corriendo por el puerto 3306. 
+    
 
 - Documentacion del API en Postman:
   > Se debe tener instalado [postman] y acceder al siguiente enlace. 
