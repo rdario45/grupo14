@@ -31,7 +31,7 @@ public class JobProcesarArchivos {
         for (Design design: designs ){
             String destinyFile = "/home/diego/Imágenes/resized/res"+ i++ + ".png";
             resizeImg.processImage(design.getOriginalPath(), destinyFile,
-                    800,600,true,design.getEmail() + new Date());
+                    800,600,true,design.getEmail() + design.getUploadDate());
             design.setStretchedPath(destinyFile);
             design.setDesignStatus(DesignStatus.AVAILABLE);
             //sendEmailSSL.send(design.getEmail(),

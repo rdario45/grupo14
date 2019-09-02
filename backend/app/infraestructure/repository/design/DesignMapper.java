@@ -14,6 +14,7 @@ public class DesignMapper {
                 design.getDesignStatus().name(),
                 design.getOriginalPath(),
                 design.getResizedPath(),
+                design.getUploadDate(),
                 design.getProjectId());
     }
 
@@ -25,6 +26,7 @@ public class DesignMapper {
           DesignStatus.of(record.getDesignStatus()),
           record.getOriginalPath(),
           record.getResizedPath(),
+          record.getUploadDate(),
           record.getProjectId());
     }
 
@@ -35,7 +37,8 @@ public class DesignMapper {
             design.getDesignStatus().name(),
             design.getOriginalPath(),
             design.getResizedPath(),
-            design.getProjectId()
+            design.getProjectId(),
+            design.getUploadDate()
         );
     }
 }

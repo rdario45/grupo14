@@ -1,5 +1,7 @@
 package controllers.dto;
 
+import java.util.Date;
+
 public class DesignDTO {
 
     private int id;
@@ -8,6 +10,7 @@ public class DesignDTO {
     private String originalPath;
     private String stretchedPath;
     private int  projectId;
+    private Date uploadDate;
 
 
 
@@ -15,13 +18,14 @@ public class DesignDTO {
 
     }
 
-    public DesignDTO(int id, String email, String designStatus, String originalPath, String stretchedPath, int projectId) {
+    public DesignDTO(int id, String email, String designStatus, String originalPath, String stretchedPath, int projectId, Date uploadDate) {
         this.id = id;
         this.email = email;
         this.designStatus = designStatus;
         this.originalPath = originalPath;
         this.stretchedPath = stretchedPath;
         this.projectId = projectId;
+        this.uploadDate = uploadDate;
     }
 
     public void setId(int id) {
@@ -74,6 +78,14 @@ public class DesignDTO {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+
+    public Date getUploadDate() {
+        return uploadDate;
+    }
+
+    public void setUploadDate(Date uploadDate) {
+        this.uploadDate = uploadDate;
     }
 }
 

@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Date;
+
 public class Design {
 
 
@@ -8,15 +10,17 @@ public class Design {
     private DesignStatus designStatus;
     private String originalPath;
     private String resizedPath;
+    private Date uploadDate;
     private int projectId;
 
 
-    public Design(int id, String email, DesignStatus designStatus, String originalPath, String resizedPath, int projectId) {
+    public Design(int id, String email, DesignStatus designStatus, String originalPath, String resizedPath, Date uploadDate, int projectId) {
         this.id = id;
         this.email = email;
         this.designStatus = designStatus;
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
+        this.uploadDate = uploadDate;
         this.projectId = projectId;
     }
 
@@ -62,6 +66,14 @@ public class Design {
 
     public int getProjectId() {
         return projectId;
+    }
+
+    public Date getUploadDate() {
+        return uploadDate;
+    }
+
+    public void setUploadDate(Date uploadDate) {
+        this.uploadDate = uploadDate;
     }
 
     public void setResizedPath(String resizedPath) {
