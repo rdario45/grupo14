@@ -20,7 +20,8 @@ public class DesignMapper {
                 design.getDesignStatus().name(),
                 design.getOriginalPath(),
                 design.getResizedPath(),
-                design.getProjectId());
+                design.getProjectId(),
+                design.getUploadDate());
     }
 
     public static DesignRecord fromDesignToRecord(Design design, int id) {
@@ -30,7 +31,9 @@ public class DesignMapper {
                 design.getDesignStatus().name(),
                 design.getOriginalPath(),
                 design.getResizedPath(),
-                design.getProjectId());
+                design.getUploadDate(),
+                design.getProjectId()
+                );
     }
 
     public static DesignRecord fromDesignToRecord(Design design) {
@@ -40,6 +43,7 @@ public class DesignMapper {
                 design.getDesignStatus().name(),
                 design.getOriginalPath(),
                 design.getResizedPath(),
+                design.getUploadDate(),
                 design.getProjectId());
     }
 
@@ -50,6 +54,8 @@ public class DesignMapper {
                 DesignStatus.of(record.getDesignStatus()),
                 record.getOriginalPath(),
                 record.getResizedPath(),
-                record.getProjectId());
+                record.getUploadDate(),
+                record.getProjectId()
+                );
     }
 }

@@ -7,7 +7,7 @@ import infraestructure.repository.design.records.DesignRecord;
 
 public class DesignMapper {
 
-    public static DesignRecord fromCompanyToRecord(Design design) {
+    public static DesignRecord fromDesigToRecord(Design design) {
         return new DesignRecord(
                 design.getId(),
                 design.getEmail(),
@@ -19,7 +19,7 @@ public class DesignMapper {
     }
 
 
-    public static Design fromRecordToCompany(DesignRecord record) {
+    public static Design fromRecordToDesign(DesignRecord record) {
         return new Design(
           record.getId(),
           record.getEmail(),
@@ -30,7 +30,7 @@ public class DesignMapper {
           record.getProjectId());
     }
 
-    public static DesignDTO fromCompanyToDTO(Design design) {
+    public static DesignDTO fromDesignToDTO(Design design) {
         return new DesignDTO(
             design.getId(),
             design.getEmail(),

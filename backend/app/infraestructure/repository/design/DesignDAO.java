@@ -38,13 +38,13 @@ public interface DesignDAO {
             " ) ")
     int insert(@BindBean("r") DesignRecord record);
 
-    @SqlQuery("UPDATE designs SET" +
+    @SqlUpdate("UPDATE designs SET" +
             " email = :r.email," +
             " designStatus = :r.designStatus, " +
             " originalPath = :r.originalPath," +
             " resizedPath = :r.resizedPath " +
-            " WHERE id = :id ")
-    int update(@BindBean("r") DesignRecord record, @Bind("id") int id);
+            " WHERE id = :r.id ")
+    int update(@BindBean("r") DesignRecord record);
 
     @SqlUpdate("DELETE FROM Design WHERE id = :id ")
     int delete(@Bind("id") int id);
