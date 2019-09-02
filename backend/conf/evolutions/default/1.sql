@@ -1,6 +1,7 @@
 # --- Creation of events table
-use db;
+
 # --- !Ups
+
 
 CREATE TABLE accounts (
 	email varchar(100) NOT NULL,
@@ -9,7 +10,7 @@ CREATE TABLE accounts (
 );
 
 CREATE TABLE sessions (
-	id INT NOT NULL AUTO_INCREMENT,
+	id int(11) NOT NULL AUTO_INCREMENT,
 	account varchar(100) NOT NULL,
 	token TEXT NOT NULL,
 	timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -44,8 +45,8 @@ CREATE TABLE designs (
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   project_id int(11) NOT NULL,
   CONSTRAINT designs_pkey PRIMARY KEY(id),
-  CONSTRAINT designs_project_fkey FOREIGN KEY (project_id) REFERENCES projects(id)
-) ;
+  CONSTRAINT designs_project_fkey FOREIGN KEY (project_id) REFERENCES companies(id)
+);
 
 # --- !Downs
 DROP TABLE designs;
