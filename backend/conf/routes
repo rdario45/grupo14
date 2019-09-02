@@ -14,10 +14,12 @@ POST          /logout                       controllers.AuthController.logout
 # Project
 GET           /projects                     controllers.ProjectController.findAllProjects
 GET           /projects/:id                 controllers.ProjectController.findProject(id: Integer)
+GET           /projects/company/:id         controllers.ProjectController.findProjectsByCompany(id: Integer)
 POST          /projects                     controllers.ProjectController.createProject
 PUT           /projects/:id                 controllers.ProjectController.updateProject(id: Integer)
 DELETE        /projects/:id                 controllers.ProjectController.deleteProject(id: Integer)
 # Design
 GET           /designs                      controllers.DesignController.findAllDesigns
 GET           /designs/:id                  controllers.DesignController.findDesign(id: Integer)
+GET           /designs/project/:id          controllers.DesignController.findDesignsByPoject(id: Integer)
 POST          /designs                      controllers.DesignController.createDesign
