@@ -23,7 +23,10 @@ public class DesignRepository {
                 .map(DesignMapper::fromRecordToDesign);
     }
 
-
+    public List<Design> findAll() {
+        return List.ofAll(db.onDemand(DesignDAO.class).findAll())
+                .map(DesignMapper::fromRecordToDesign);
+    }
 
     public Option<Design> find(int id) {
         return Option.of(db.onDemand(DesignDAO.class).find(id))
