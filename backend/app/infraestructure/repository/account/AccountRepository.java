@@ -39,13 +39,13 @@ public class AccountRepository {
 
     private Company createCompany(Company company, CreateCompanyAccountDAO dao) {
         CompanyRecord companyRecord = CompanyMapper.fromCompanyToRecord(company);
-        CompanyRecord savedCompany = dao.createCompany(companyRecord);
-        return CompanyMapper.fromRecordToCompany(savedCompany);
+        dao.createCompany(companyRecord);
+        return company;
     }
 
     private Account createAccount(Account account, CreateCompanyAccountDAO dao) {
         AccountRecord record = AccountMapper.fromAccountToRecord(account);
-        AccountRecord savedAccount = dao.createAccount(record);
-        return AccountMapper.fromRecordToAccount(savedAccount);
+        dao.createAccount(record);
+        return account;
     }
 }
