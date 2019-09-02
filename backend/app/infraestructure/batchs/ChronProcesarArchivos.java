@@ -1,6 +1,7 @@
 package infraestructure.batchs;
 
 import akka.actor.ActorSystem;
+import infraestructure.services.DesignService;
 import scala.concurrent.ExecutionContext;
 import scala.concurrent.duration.Duration;
 
@@ -11,12 +12,15 @@ public class ChronProcesarArchivos {
 
     private final ActorSystem actorSystem;
     private final ExecutionContext executionContext;
+    private final DesignService designService;
 
     @Inject
     public ChronProcesarArchivos(ActorSystem actorSystem,
-                                 ExecutionContext executionContext) {
+                                 ExecutionContext executionContext,
+                                 DesignService designService) {
         this.actorSystem = actorSystem;
         this.executionContext = executionContext;
+        this.designService = designService;
         this.initialize();
     }
 
@@ -24,7 +28,7 @@ public class ChronProcesarArchivos {
         actorSystem.scheduler().schedule(
           Duration.create(10, TimeUnit.SECONDS), // inital delay
           Duration.create(30, TimeUnit.SECONDS), // interval
-          JobProcesarArchivos::execute,
+          () -> JobProcesarArchivos.execute(designService),
           executionContext
         );
     }

@@ -7,19 +7,21 @@ public class DesignDTO {
     private String designStatus;
     private String originalPath;
     private String stretchedPath;
+    private int  projectId;
+
 
 
     public DesignDTO(){
 
     }
 
-
-    public DesignDTO(int id, String email, String designStatus, String originalPath, String stretchedPath) {
+    public DesignDTO(int id, String email, String designStatus, String originalPath, String stretchedPath, int projectId) {
         this.id = id;
         this.email = email;
         this.designStatus = designStatus;
         this.originalPath = originalPath;
         this.stretchedPath = stretchedPath;
+        this.projectId = projectId;
     }
 
     public void setId(int id) {
@@ -60,6 +62,18 @@ public class DesignDTO {
 
     public String getStretchedPath() {
         return stretchedPath;
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setDesignStatus(String designStatus) {
+        this.designStatus = designStatus;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 }
 

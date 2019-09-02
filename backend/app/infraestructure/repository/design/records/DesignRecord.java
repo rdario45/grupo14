@@ -7,13 +7,16 @@ public class DesignRecord {
     private String designStatus;
     private String originalPath;
     private String resizedPath;
+    private int projectId;
 
-    public DesignRecord(int id, String email, String designStatus, String originalPath, String resizedPath) {
+
+    public DesignRecord(int id, String email, String designStatus, String originalPath, String resizedPath, int projectId) {
         this.id = id;
         this.email = email;
         this.designStatus = designStatus;
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
+        this.projectId = projectId;
     }
 
     public int getId() {
@@ -52,7 +55,11 @@ public class DesignRecord {
         return resizedPath;
     }
 
-    public void setResizedPath(String resizedPath) {
-        this.resizedPath = resizedPath;
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 }
