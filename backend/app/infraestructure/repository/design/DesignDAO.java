@@ -5,6 +5,7 @@ import infraestructure.repository.project.records.ProjectRecord;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
+import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 import java.util.List;
@@ -37,13 +38,13 @@ public interface DesignDAO {
             " ) RETURNING * ")
     DesignRecord insert(@BindBean("r") DesignRecord record);
 
-    @SqlQuery("UPDATE designs SET" +
+    @SqlUpdate("UPDATE designs SET" +
             " email = :r.email," +
             " designStatus = :r.designStatus, " +
             " originalPath = :r.originalPath," +
             " resizedPath = :r.resizedPath " +
-            " WHERE id = :id RETURNING * ")
-    DesignRecord update(@BindBean("r") DesignRecord record, @Bind("id") int id);
+            " WHERE id = :r.id  ")
+    void update(@BindBean("r") DesignRecord record);
 
     @SqlQuery("DELETE FROM Design WHERE id = :id  RETURNING *")
     DesignRecord delete(@Bind("id") int id);
