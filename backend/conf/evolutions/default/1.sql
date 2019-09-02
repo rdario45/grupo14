@@ -1,5 +1,5 @@
 # --- Creation of events table
-
+use db;
 # --- !Ups
 
 CREATE TABLE accounts (
@@ -43,7 +43,8 @@ CREATE TABLE designs (
   resizedPath varchar(250) DEFAULT NULL,
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   project_id int(11) NOT NULL,
-  CONSTRAINT designs_project_fkey FOREIGN KEY (company_id) REFERENCES companies(id)
+  CONSTRAINT designs_pkey PRIMARY KEY(id),
+  CONSTRAINT designs_project_fkey FOREIGN KEY (project_id) REFERENCES projects(id)
 ) ;
 
 # --- !Downs
