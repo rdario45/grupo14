@@ -21,30 +21,37 @@ public class ProjectRepository {
 
     public List<Project> findAll() {
         return List.ofAll(db.onDemand(ProjectoDAO.class).findAll())
-          .map(ProjectMapper::fromRecordToProject);
+                .map(ProjectMapper::fromRecordToProject);
     }
 
     public Option<Project> find(int id) {
         return Option.of(db.onDemand(ProjectoDAO.class).find(id))
-          .map(ProjectMapper::fromRecordToProject);
+                .map(ProjectMapper::fromRecordToProject);
     }
 
     public Future<Project> save(Project project) {
         ProjectRecord record = ProjectMapper.fromProjectToRecord(project);
-        return Future.of(() -> db.onDemand(ProjectoDAO.class).insert(record))
-          .map(ProjectMapper::fromRecordToProject);
+        return Future.of(() -> {
+            db.onDemand(ProjectoDAO.class).insert(record);
+            return record;
+        }).map(ProjectMapper::fromRecordToProject);
     }
 
     public Future<Option<Project>> update(Project project, int id) {
         ProjectRecord record = ProjectMapper.fromProjectToRecord(project, id);
-        return Future.of(() -> Option.of(db.onDemand(ProjectoDAO.class).update(record, id))
-          .map(ProjectMapper::fromRecordToProject));
+
+        return Future.of(() -> {
+            int rows = db.onDemand(ProjectoDAO.class).update(record, id);
+            return rows > 0 ? Option.some(record).map(ProjectMapper::fromRecordToProject) : Option.none();
+        });
 
     }
 
-    public Future<Option<Project>> delete(int id) {
-        return Future.of(() -> Option.of(db.onDemand(ProjectoDAO.class).delete(id))
-          .map(ProjectMapper::fromRecordToProject));
+    public Future<Option<Integer>> delete(int id) {
+        return Future.of(() -> {
+            int rows = db.onDemand(ProjectoDAO.class).delete(id);
+            return rows > 0 ? Option.some(id) : Option.none();
+        });
     }
 
 }

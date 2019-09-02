@@ -77,7 +77,7 @@ public class ProjectController {
           .onFailure(throwable -> Logger.error("Error eliminando proyecto!", throwable))
           .toEither(getInternalServerError("Error eliminando proyecto!"))
           .flatMap(option -> option.toEither(getNotFound("Not Found")))
-          .map(ProjectMapper::toJsonDTO)
+          .map(Json::toJson)
           .map(Results::ok);
 
         return either.isRight() ? either.get() : either.getLeft();

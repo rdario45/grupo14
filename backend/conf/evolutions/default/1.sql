@@ -5,6 +5,7 @@
 
 CREATE TABLE accounts (
 	email varchar(100) NOT NULL,
+	password varchar(200) NOT NULL,
 	status varchar(10) NULL,
 	CONSTRAINT accounts_pkey PRIMARY KEY (email)
 );
