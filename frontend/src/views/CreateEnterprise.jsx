@@ -10,6 +10,10 @@ import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 import { SuccessCard } from "components/CardSuccess/CardSuccess.jsx";
 
+import { EnterpriseService } from 'services/Enterprise'
+
+const service = new EnterpriseService();
+
 class CreateEnterprise extends Component {
     constructor(props) {
         super(props);
@@ -45,10 +49,16 @@ class CreateEnterprise extends Component {
             this.props.handleClick("El email debe ser único.", 'error');
             return;
         }
-
-        this.props.handleClick("Se ha creado la cuenta de la empresa.", 'success');
-        const partURLEnterprise = 'miempresa-10';
-        this.setState({ urlEnterprise: `${window.location.origin.toString()}/#/design/enterprise/${partURLEnterprise}/design/list` })
+        service.create({ name, email, password }).
+            then(response => {
+                if (response.ok) {
+                    const partURLEnterprise = 'miempresa-10';
+                    this.setState({ urlEnterprise: `${window.location.origin.toString()}/#/design/enterprise/${partURLEnterprise}/design/list` })
+                    this.props.handleClick("Se ha creado la cuenta de la empresa.", 'success');
+                }
+                else
+                    this.props.handleClick("Ha ocurrido un error creando la cuenta de la empresa.", 'error');
+            });
     }
     render() {
         return (

@@ -41,6 +41,10 @@ public class ProjectController {
         return either.isRight() ? either.get() : either.getLeft();
     }
 
+    public Result findProjectsByCompany(int id) {
+        return ok();
+    }
+
     public Result createProject() {
         JsonNode json = request().body().asJson();
 

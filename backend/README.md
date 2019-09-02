@@ -58,7 +58,7 @@ Para generacion del proyecto se uso: `sbt new playframework/play-java-seed.g8`.
 
 - Documentacion del API en Postman:
   > Se debe tener instalado [postman] y acceder al siguiente enlace. 
-  [postman link](https://www.getpostman.com/collections/82ad30197a2da9e0fa74)
+  [postman link](https://www.getpostman.com/collections/c9ee43232c4b30f5109f)
 
 ---
 \<\< [volver](../README.md)

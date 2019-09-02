@@ -1,7 +1,6 @@
 package infraestructure.repository.design;
 
 import infraestructure.repository.design.records.DesignRecord;
-import infraestructure.repository.project.records.ProjectRecord;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
@@ -18,7 +17,7 @@ public interface DesignDAO {
     List<DesignRecord> findPendingDesigns();
 
     @SqlQuery("SELECT * FROM designs ")
-    List<ProjectRecord> findAll();
+    List<DesignRecord> findAll();
 
     @SqlQuery("SELECT * FROM designs WHERE id = :id")
     DesignRecord find(@Bind("id") int id);
