@@ -28,6 +28,7 @@ import static play.mvc.Results.*;
 
 public class DesignController {
 
+    private static final int PAGE_SIZE = 10;
     private DesignRepository repository;
     private DesignService designService;
 
@@ -46,12 +47,14 @@ public class DesignController {
         return either.isRight() ? either.get() : either.getLeft();
     }
 
-    public Result findDesignsByPoject(int projectId) {
-        return ok(Json.toJson(repository.findByProject(projectId).map(DesignMapper::fromDesignToDTO)));
+    public Result findDesignsByPojectPaginated(int projectId, int page) {
+        int offset = (page - 1) * PAGE_SIZE;
+        return ok(Json.toJson(repository.findByProjectPaginated(projectId, offset, PAGE_SIZE).map(DesignMapper::fromDesignToDTO)));
     }
 
-    public Result findDesignsByPojectAndStatus(int projectId, String status) {
-        return ok(Json.toJson(repository.findByProjectAndStatus(projectId, DesignStatus.of(status)).map(DesignMapper::fromDesignToDTO)));
+    public Result findDesignsByPojectAndStatusPaginated(int projectId, String status, int page) {
+        int offset = (page - 1) * PAGE_SIZE;
+        return ok(Json.toJson(repository.findByProjectAndStatus(projectId, DesignStatus.of(status), offset, PAGE_SIZE).map(DesignMapper::fromDesignToDTO)));
     }
 
     public Result createDesign() {

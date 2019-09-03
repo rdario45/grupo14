@@ -29,13 +29,13 @@ public class DesignRepository {
           .map(DesignMapper::fromRecordToDesign);
     }
 
-    public List<Design> findByProject(int projectId) {
-        return List.ofAll(db.onDemand(DesignDAO.class).findByProject(projectId))
+    public List<Design> findByProjectPaginated(int projectId, int offset, int limit) {
+        return List.ofAll(db.onDemand(DesignDAO.class).findByProject(projectId, offset, limit))
           .map(DesignMapper::fromRecordToDesign);
     }
 
-    public List<Design> findByProjectAndStatus(int projectId, DesignStatus status) {
-        return List.ofAll(db.onDemand(DesignDAO.class).findByProjectAndStatus(projectId, status))
+    public List<Design> findByProjectAndStatus(int projectId, DesignStatus status, int offset, int limit) {
+        return List.ofAll(db.onDemand(DesignDAO.class).findByProjectAndStatus(projectId, status, offset, limit))
           .map(DesignMapper::fromRecordToDesign);
     }
 

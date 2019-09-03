@@ -13,12 +13,12 @@ POST          /login                                controllers.AuthController.l
 POST          /logout                               controllers.AuthController.logout
 # Project
 GET           /projects/:id                         controllers.ProjectController.findProject(id: Integer)
-GET           /projects/company/:id                 controllers.ProjectController.findProjectsByCompany(id: Integer)
+GET           /projects/company/:id                 controllers.ProjectController.findProjectsByCompanyPaginated(id: Int, page: Int ?= 1)
 POST          /projects                             controllers.ProjectController.createProject
-PUT           /projects/:id                         controllers.ProjectController.updateProject(id: Integer)
-DELETE        /projects/:id                         controllers.ProjectController.deleteProject(id: Integer)
+PUT           /projects/:id                         controllers.ProjectController.updateProject(id: Int)
+DELETE        /projects/:id                         controllers.ProjectController.deleteProject(id: Int)
 # Design
 GET           /designs/:id                          controllers.DesignController.findDesign(id: Integer)
-GET           /designs/project/:id                  controllers.DesignController.findDesignsByPoject(id: Integer)
-GET           /designs/project/:id/status/:s        controllers.DesignController.findDesignsByPojectAndStatus(id: Integer, s: String)
+GET           /designs/project/:id                  controllers.DesignController.findDesignsByPojectPaginated(id: Int, page: Int ?= 1)
+GET           /designs/project/:id/status/:s        controllers.DesignController.findDesignsByPojectAndStatusPaginated(id: Int, s: String, page: Int ?= 1)
 POST          /designs                              controllers.DesignController.createDesign

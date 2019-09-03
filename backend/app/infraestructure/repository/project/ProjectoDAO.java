@@ -12,11 +12,11 @@ import java.util.List;
 @RegisterMapper(ProjectoMapperDAO.class)
 public interface ProjectoDAO {
 
-    @SqlQuery("SELECT * FROM projects WHERE company_id = :companyId ")
-    List<ProjectRecord> findByCompany(@Bind("companyId") int companyId);
-
     @SqlQuery("SELECT * FROM projects WHERE id = :id")
     ProjectRecord find(@Bind("id") int id);
+
+    @SqlQuery("SELECT * FROM projects WHERE company_id = :companyId ORDER BY timestamp DESC LIMIT :offset, :limit ")
+    List<ProjectRecord> findByCompany(@Bind("companyId") int companyId, @Bind("offset") int offset, @Bind("limit") int limit);
 
     @SqlUpdate("INSERT INTO projects ( " +
       " name, " +
