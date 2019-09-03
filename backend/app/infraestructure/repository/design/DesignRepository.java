@@ -2,6 +2,7 @@ package infraestructure.repository.design;
 
 import com.google.inject.Inject;
 import domain.Design;
+import domain.DesignStatus;
 import infraestructure.acl.design.DesignMapper;
 import infraestructure.repository.design.records.DesignRecord;
 import io.vavr.collection.List;
@@ -33,19 +34,22 @@ public class DesignRepository {
           .map(DesignMapper::fromRecordToDesign);
     }
 
+    public List<Design> findByProjectAndStatus(int projectId, DesignStatus status) {
+        return List.ofAll(db.onDemand(DesignDAO.class).findByProjectAndStatus(projectId, status))
+          .map(DesignMapper::fromRecordToDesign);
+    }
+
     public void update(Design design) {
         DesignRecord record = DesignMapper.fromDesignToRecord(design);
         db.onDemand(DesignDAO.class).update(record);
     }
 
-    public Future<Design> create(Design design){
+    public Future<Design> create(Design design) {
         return Future.of(() -> {
             DesignRecord record = DesignMapper.fromDesignToRecord(design);
             int id = db.onDemand(DesignDAO.class).create(record);
             return record.setId(id);
         }).map(DesignMapper::fromRecordToDesign);
     }
-
-
 
 }

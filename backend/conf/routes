@@ -6,18 +6,19 @@
 # An example controller showing a sample home page
 
 # Account
-GET           /exists-account/:email        controllers.AccountController.existsAccount(email: String)
-POST          /create-account               controllers.AccountController.createAccount
+GET           /exists-account/:email                controllers.AccountController.existsAccount(email: String)
+POST          /create-account                       controllers.AccountController.createAccount
 # Auth
-POST          /login                        controllers.AuthController.login
-POST          /logout                       controllers.AuthController.logout
+POST          /login                                controllers.AuthController.login
+POST          /logout                               controllers.AuthController.logout
 # Project
-GET           /projects/:id                 controllers.ProjectController.findProject(id: Integer)
-GET           /projects/company/:id         controllers.ProjectController.findProjectsByCompany(id: Integer)
-POST          /projects                     controllers.ProjectController.createProject
-PUT           /projects/:id                 controllers.ProjectController.updateProject(id: Integer)
-DELETE        /projects/:id                 controllers.ProjectController.deleteProject(id: Integer)
+GET           /projects/:id                         controllers.ProjectController.findProject(id: Integer)
+GET           /projects/company/:id                 controllers.ProjectController.findProjectsByCompany(id: Integer)
+POST          /projects                             controllers.ProjectController.createProject
+PUT           /projects/:id                         controllers.ProjectController.updateProject(id: Integer)
+DELETE        /projects/:id                         controllers.ProjectController.deleteProject(id: Integer)
 # Design
-GET           /designs/:id                  controllers.DesignController.findDesign(id: Integer)
-GET           /designs/project/:id          controllers.DesignController.findDesignsByPoject(id: Integer)
-POST          /designs                      controllers.DesignController.createDesign
+GET           /designs/:id                          controllers.DesignController.findDesign(id: Integer)
+GET           /designs/project/:id                  controllers.DesignController.findDesignsByPoject(id: Integer)
+GET           /designs/project/:id/status/:s        controllers.DesignController.findDesignsByPojectAndStatus(id: Integer, s: String)
+POST          /designs                              controllers.DesignController.createDesign

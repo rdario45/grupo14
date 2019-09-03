@@ -4,16 +4,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import controllers.dto.CreateDesignDTO;
 import domain.Design;
+import domain.DesignStatus;
 import infraestructure.acl.design.DesignMapper;
 import infraestructure.acl.design.DesignValidator;
 import infraestructure.repository.design.DesignRepository;
 import infraestructure.services.DesignService;
 import io.vavr.collection.List;
-import io.vavr.concurrent.Future;
 import io.vavr.control.Either;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
-import org.apache.commons.lang3.StringUtils;
 import play.Logger;
 import play.libs.Files;
 import play.libs.Json;
@@ -49,6 +48,10 @@ public class DesignController {
 
     public Result findDesignsByPoject(int projectId) {
         return ok(Json.toJson(repository.findByProject(projectId).map(DesignMapper::fromDesignToDTO)));
+    }
+
+    public Result findDesignsByPojectAndStatus(int projectId, String status) {
+        return ok(Json.toJson(repository.findByProjectAndStatus(projectId, DesignStatus.of(status)).map(DesignMapper::fromDesignToDTO)));
     }
 
     public Result createDesign() {

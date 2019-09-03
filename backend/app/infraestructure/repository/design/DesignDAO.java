@@ -1,5 +1,6 @@
 package infraestructure.repository.design;
 
+import domain.DesignStatus;
 import infraestructure.repository.design.records.DesignRecord;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
@@ -17,6 +18,9 @@ public interface DesignDAO {
 
     @SqlQuery("SELECT * FROM designs WHERE project_id = :projectId ")
     List<DesignRecord> findByProject(@Bind("projectId") int projectId);
+
+    @SqlQuery("SELECT * FROM designs WHERE project_id = :projectId AND designStatus = :status ")
+    List<DesignRecord> findByProjectAndStatus(@Bind("projectId") int projectId, @Bind("status")  DesignStatus status);
 
     @SqlQuery("SELECT * FROM designs WHERE id = :id")
     DesignRecord find(@Bind("id") int id);
@@ -58,4 +62,5 @@ public interface DesignDAO {
 
     @SqlUpdate("DELETE FROM Design WHERE id = :id ")
     int delete(@Bind("id") int id);
+
 }
