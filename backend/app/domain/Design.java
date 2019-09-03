@@ -9,25 +9,50 @@ public class Design {
     private String firstName;
     private String lastName;
     private DesignStatus designStatus;
+    private String fileName;
     private String originalPath;
     private String resizedPath;
     private DateTime uploadDate;
     private int projectId;
 
-    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String originalPath, String resizedPath, DateTime uploadDate, int projectId) {
+    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String fileName, String originalPath, String resizedPath, DateTime uploadDate, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.designStatus = designStatus;
+        this.fileName = fileName;
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
         this.uploadDate = uploadDate;
         this.projectId = projectId;
     }
 
+    public Design(String email, String firstName, String lastName, DesignStatus designStatus, String fileName, String originalPath, DateTime uploadDate, int projectId) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.designStatus = designStatus;
+        this.fileName = fileName;
+        this.originalPath = originalPath;
+        this.uploadDate = uploadDate;
+        this.projectId = projectId;
+    }
+
+    public Design() {
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
@@ -50,40 +75,36 @@ public class Design {
         this.lastName = lastName;
     }
 
+    public DesignStatus getDesignStatus() {
+        return designStatus;
+    }
+
     public void setDesignStatus(DesignStatus designStatus) {
         this.designStatus = designStatus;
     }
 
-    public void setOriginalPath(String originalPath) {
-        this.originalPath = originalPath;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setStretchedPath(String resizedPath) {
-        this.resizedPath = resizedPath;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public DesignStatus getDesignStatus() {
-        return designStatus;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getOriginalPath() {
         return originalPath;
     }
 
+    public void setOriginalPath(String originalPath) {
+        this.originalPath = originalPath;
+    }
+
     public String getResizedPath() {
         return resizedPath;
     }
 
-    public int getProjectId() {
-        return projectId;
+    public void setResizedPath(String resizedPath) {
+        this.resizedPath = resizedPath;
     }
 
     public DateTime getUploadDate() {
@@ -94,8 +115,8 @@ public class Design {
         this.uploadDate = uploadDate;
     }
 
-    public void setResizedPath(String resizedPath) {
-        this.resizedPath = resizedPath;
+    public int getProjectId() {
+        return projectId;
     }
 
     public void setProjectId(int projectId) {

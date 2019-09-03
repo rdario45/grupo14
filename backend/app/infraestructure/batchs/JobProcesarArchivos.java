@@ -3,14 +3,10 @@ package infraestructure.batchs;
 import domain.Design;
 import domain.DesignStatus;
 import infraestructure.services.DesignService;
-
 import org.joda.time.DateTime;
 import play.Logger;
 
-import javax.inject.Inject;
-import java.util.Date;
 import java.util.List;
-
 
 public class JobProcesarArchivos {
 
@@ -32,7 +28,7 @@ public class JobProcesarArchivos {
             String destinyFile = "/home/diego/Imágenes/resized/res"+ i++ + ".png";
             resizeImg.processImage(design.getOriginalPath(), destinyFile,
                     800,600,true,design.getEmail() + design.getUploadDate());
-            design.setStretchedPath(destinyFile);
+            design.setResizedPath(destinyFile);
             design.setDesignStatus(DesignStatus.AVAILABLE);
             //sendEmailSSL.send(design.getEmail(),
             //        "Su diseño ha sido aprobado",

@@ -9,17 +9,19 @@ public class DesignRecord {
     private String firstName;
     private String lastName;
     private String designStatus;
+    private String fileName;
     private String originalPath;
     private String resizedPath;
     private Timestamp uploadDate;
     private int projectId;
 
-    public DesignRecord(int id, String email, String firstName, String lastName, String designStatus, String originalPath, String resizedPath, Timestamp uploadDate, int projectId) {
+    public DesignRecord(int id, String email, String firstName, String lastName, String designStatus, String fileName, String originalPath, String resizedPath, Timestamp uploadDate, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.designStatus = designStatus;
+        this.fileName = fileName;
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
         this.uploadDate = uploadDate;
@@ -64,6 +66,14 @@ public class DesignRecord {
 
     public void setDesignStatus(String designStatus) {
         this.designStatus = designStatus;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getOriginalPath() {

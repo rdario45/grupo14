@@ -26,7 +26,8 @@ public interface DesignDAO {
       " email, " +
       " firstName," +
       " lastName," +
-      " designStatus, " +
+      " designStatus," +
+      " fileName, " +
       " originalPath, " +
       " resizedPath, " +
       " ) VALUES ( " +
@@ -42,7 +43,8 @@ public interface DesignDAO {
       " email = :r.email, " +
       " firstName = :r.firstName, " +
       " lastName = :r.lastName, " +
-      " designStatus = :r.designStatus, " +
+      " designStatus = :r.designStatus," +
+      " fileName = :r.fileName,  " +
       " originalPath = :r.originalPath, " +
       " resizedPath = :r.resizedPath " +
       " WHERE id = :r.id ")

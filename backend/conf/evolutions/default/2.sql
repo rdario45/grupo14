@@ -16,8 +16,8 @@ VALUES('Naturaeza', 'lorem ipsum.', 50000, 1);
 
 
 INSERT INTO dev.designs
-(email, firstName, lastName, originalPath, project_id)
-VALUES('admin.nutresa@yopmail.com', 'Admin', 'Nutresa','tmp/imagen1.png', 1);
+(email, firstName, lastName, fileName, originalPath, project_id)
+VALUES('admin.nutresa@yopmail.com', 'Admin', 'Nutresa', 'imagen1.png', 'tmp/imagen1.png', 1);
 
 # --- !Downs
 delete from dev.designs where id = 1;
