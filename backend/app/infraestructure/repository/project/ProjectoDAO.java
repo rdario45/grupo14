@@ -12,8 +12,8 @@ import java.util.List;
 @RegisterMapper(ProjectoMapperDAO.class)
 public interface ProjectoDAO {
 
-    @SqlQuery("SELECT * FROM projects")
-    List<ProjectRecord> findAll();
+    @SqlQuery("SELECT * FROM projects WHERE company_id = :companyId ")
+    List<ProjectRecord> findByCompany(@Bind("companyId") int companyId);
 
     @SqlQuery("SELECT * FROM projects WHERE id = :id")
     ProjectRecord find(@Bind("id") int id);

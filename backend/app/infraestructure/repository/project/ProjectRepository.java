@@ -19,8 +19,8 @@ public class ProjectRepository {
         this.db = new DBI(db.dataSource());
     }
 
-    public List<Project> findAll() {
-        return List.ofAll(db.onDemand(ProjectoDAO.class).findAll())
+    public List<Project> findByCompany(int id) {
+        return List.ofAll(db.onDemand(ProjectoDAO.class).findByCompany(id))
                 .map(ProjectMapper::fromRecordToProject);
     }
 

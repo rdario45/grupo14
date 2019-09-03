@@ -28,10 +28,6 @@ public class ProjectController {
         this.repository = repository;
     }
 
-    public Result findAllProjects() {
-        return ok(Json.toJson(repository.findAll().map(ProjectMapper::fromAccountToDTO)));
-    }
-
     public Result findProject(int id) {
         Either<Result, Result> either = repository.find(id)
           .toEither(getNotFound("Not Found"))
@@ -42,7 +38,7 @@ public class ProjectController {
     }
 
     public Result findProjectsByCompany(int id) {
-        return ok();
+        return ok(Json.toJson(repository.findByCompany(id).map(ProjectMapper::fromAccountToDTO)));
     }
 
     public Result createProject() {

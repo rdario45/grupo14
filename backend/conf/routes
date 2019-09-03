@@ -12,7 +12,6 @@ POST          /create-account               controllers.AccountController.create
 POST          /login                        controllers.AuthController.login
 POST          /logout                       controllers.AuthController.logout
 # Project
-GET           /projects                     controllers.ProjectController.findAllProjects
 GET           /projects/:id                 controllers.ProjectController.findProject(id: Integer)
 GET           /projects/company/:id         controllers.ProjectController.findProjectsByCompany(id: Integer)
 POST          /projects                     controllers.ProjectController.createProject
