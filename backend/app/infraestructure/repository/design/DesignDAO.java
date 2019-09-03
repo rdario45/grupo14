@@ -45,7 +45,7 @@ public interface DesignDAO {
       " lastName = :r.lastName, " +
       " designStatus = :r.designStatus, " +
       " originalPath = :r.originalPath, " +
-      " resizedPath = :r.resizedPath " +
+      " resizedPath = :r.resizedPath, " +
       " price = :r.price " +
       " WHERE id = :r.id ")
     int update(@BindBean("r") DesignRecord record);
