@@ -6,15 +6,19 @@ public class Design {
 
     private int id;
     private String email;
+    private String firstName;
+    private String lastName;
     private DesignStatus designStatus;
     private String originalPath;
     private String resizedPath;
     private DateTime uploadDate;
     private int projectId;
 
-    public Design(int id, String email, DesignStatus designStatus, String originalPath, String resizedPath, DateTime uploadDate, int projectId) {
+    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String originalPath, String resizedPath, DateTime uploadDate, int projectId) {
         this.id = id;
         this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.designStatus = designStatus;
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
@@ -28,6 +32,22 @@ public class Design {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setDesignStatus(DesignStatus designStatus) {

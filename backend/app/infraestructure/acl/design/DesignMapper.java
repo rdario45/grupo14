@@ -21,6 +21,8 @@ public class DesignMapper {
         return new DesignRecord(
           design.getId(),
           design.getEmail(),
+          design.getFirstName(),
+          design.getLastName(),
           design.getDesignStatus().name(),
           design.getOriginalPath(),
           design.getResizedPath(),
@@ -33,6 +35,8 @@ public class DesignMapper {
         return new Design(
           record.getId(),
           record.getEmail(),
+          record.getFirstName(),
+          record.getLastName(),
           DesignStatus.of(record.getDesignStatus()),
           record.getOriginalPath(),
           record.getResizedPath(),
@@ -44,6 +48,8 @@ public class DesignMapper {
         return new DesignDTO(
           design.getId(),
           design.getEmail(),
+          design.getFirstName(),
+          design.getLastName(),
           design.getDesignStatus().name(),
           design.getOriginalPath(),
           design.getResizedPath(),

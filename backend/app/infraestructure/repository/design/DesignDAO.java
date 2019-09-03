@@ -12,7 +12,6 @@ import java.util.List;
 @RegisterMapper(DesignMapperDAO.class)
 public interface DesignDAO {
 
-
     @SqlQuery("SELECT * FROM designs where designStatus = 'PROCESSING'")
     List<DesignRecord> findPendingDesigns();
 
@@ -23,26 +22,30 @@ public interface DesignDAO {
     DesignRecord find(@Bind("id") int id);
 
     @SqlUpdate("INSERT INTO designs ( " +
-            " id, " +
-            " email, " +
-            " designStatus, " +
-            " originalPath, " +
-            " resizedPath, " +
-            " ) VALUES ( " +
-            " :r.id," +
-            " :r.mail," +
-            " :r.stretched," +
-            " :r.originalPath " +
-            " :r.resizedPath " +
-            " ) ")
+      " id, " +
+      " email, " +
+      " firstName," +
+      " lastName," +
+      " designStatus, " +
+      " originalPath, " +
+      " resizedPath, " +
+      " ) VALUES ( " +
+      " :r.id," +
+      " :r.mail," +
+      " :r.stretched," +
+      " :r.originalPath " +
+      " :r.resizedPath " +
+      " ) ")
     int insert(@BindBean("r") DesignRecord record);
 
-    @SqlUpdate("UPDATE designs SET" +
-            " email = :r.email," +
-            " designStatus = :r.designStatus, " +
-            " originalPath = :r.originalPath," +
-            " resizedPath = :r.resizedPath " +
-            " WHERE id = :r.id ")
+    @SqlUpdate("UPDATE designs SET " +
+      " email = :r.email, " +
+      " firstName = :r.firstName, " +
+      " lastName = :r.lastName, " +
+      " designStatus = :r.designStatus, " +
+      " originalPath = :r.originalPath, " +
+      " resizedPath = :r.resizedPath " +
+      " WHERE id = :r.id ")
     int update(@BindBean("r") DesignRecord record);
 
     @SqlUpdate("DELETE FROM Design WHERE id = :id ")

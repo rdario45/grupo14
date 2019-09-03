@@ -40,6 +40,8 @@ CREATE TABLE projects (
 CREATE TABLE designs (
   id int(11) NOT NULL AUTO_INCREMENT,
   email varchar(45) DEFAULT NULL,
+  firstName varchar(100) DEFAULT NULL,
+  lastName varchar(100) DEFAULT NULL,
   designStatus varchar(10) DEFAULT 'PROCESSING',
   originalPath varchar(250) NOT NULL,
   resizedPath varchar(250) DEFAULT NULL,

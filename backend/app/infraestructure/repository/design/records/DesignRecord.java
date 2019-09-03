@@ -6,16 +6,19 @@ public class DesignRecord {
 
     private int id;
     private String email;
+    private String firstName;
+    private String lastName;
     private String designStatus;
     private String originalPath;
     private String resizedPath;
     private Timestamp uploadDate;
     private int projectId;
 
-
-    public DesignRecord(int id, String email, String designStatus, String originalPath, String resizedPath, Timestamp uploadDate, int projectId) {
+    public DesignRecord(int id, String email, String firstName, String lastName, String designStatus, String originalPath, String resizedPath, Timestamp uploadDate, int projectId) {
         this.id = id;
         this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.designStatus = designStatus;
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
@@ -37,6 +40,22 @@ public class DesignRecord {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getDesignStatus() {
