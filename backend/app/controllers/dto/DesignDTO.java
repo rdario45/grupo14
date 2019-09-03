@@ -1,5 +1,7 @@
 package controllers.dto;
 
+import java.math.BigDecimal;
+
 public class DesignDTO {
 
     private int id;
@@ -10,13 +12,14 @@ public class DesignDTO {
     private String originalPath;
     private String stretchedPath;
     private String uploadDate;
+    private BigDecimal price;
     private int  projectId;
 
     public DesignDTO() {
         // json
     }
 
-    public DesignDTO(int id, String email, String firstName, String lastName, String designStatus, String originalPath, String stretchedPath, String uploadDate, int projectId) {
+    public DesignDTO(int id, String email, String firstName, String lastName, String designStatus, String originalPath, String stretchedPath, String uploadDate, BigDecimal price, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -25,6 +28,7 @@ public class DesignDTO {
         this.originalPath = originalPath;
         this.stretchedPath = stretchedPath;
         this.uploadDate = uploadDate;
+        this.price = price;
         this.projectId = projectId;
     }
 
@@ -98,6 +102,14 @@ public class DesignDTO {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }
 

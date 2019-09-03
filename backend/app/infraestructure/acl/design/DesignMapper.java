@@ -27,6 +27,7 @@ public class DesignMapper {
           design.getOriginalPath(),
           design.getResizedPath(),
           new Timestamp(design.getUploadDate().getMillis()),
+          design.getPrice(),
           design.getProjectId());
     }
 
@@ -41,6 +42,7 @@ public class DesignMapper {
           record.getOriginalPath(),
           record.getResizedPath(),
           new DateTime(record.getUploadDate(), DateTimeZone.forID("America/Bogota")),
+          record.getPrice(),
           record.getProjectId());
     }
 
@@ -54,6 +56,7 @@ public class DesignMapper {
           design.getOriginalPath(),
           design.getResizedPath(),
           design.getUploadDate().toString(),
+          design.getPrice(),
           design.getProjectId()
         );
     }

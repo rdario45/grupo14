@@ -2,6 +2,8 @@ package domain;
 
 import org.joda.time.DateTime;
 
+import java.math.BigDecimal;
+
 public class Design {
 
     private int id;
@@ -12,9 +14,11 @@ public class Design {
     private String originalPath;
     private String resizedPath;
     private DateTime uploadDate;
+    private BigDecimal price;
     private int projectId;
 
-    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String originalPath, String resizedPath, DateTime uploadDate, int projectId) {
+
+    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String originalPath, String resizedPath, DateTime uploadDate, BigDecimal price, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -23,6 +27,7 @@ public class Design {
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
         this.uploadDate = uploadDate;
+        this.price = price;
         this.projectId = projectId;
     }
 
@@ -100,5 +105,13 @@ public class Design {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }
