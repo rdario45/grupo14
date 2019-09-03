@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Date;
+
 public class Design {
 
 
@@ -7,15 +9,19 @@ public class Design {
     private String email;
     private DesignStatus designStatus;
     private String originalPath;
-    private String stretchedPath;
+    private String resizedPath;
+    private Date uploadDate;
+    private int projectId;
 
 
-    public Design(int id, String email, DesignStatus designStatus, String originalPath, String stretchedPath) {
+    public Design(int id, String email, DesignStatus designStatus, String originalPath, String resizedPath, Date uploadDate, int projectId) {
         this.id = id;
         this.email = email;
         this.designStatus = designStatus;
         this.originalPath = originalPath;
-        this.stretchedPath = stretchedPath;
+        this.resizedPath = resizedPath;
+        this.uploadDate = uploadDate;
+        this.projectId = projectId;
     }
 
     public void setId(int id) {
@@ -34,8 +40,8 @@ public class Design {
         this.originalPath = originalPath;
     }
 
-    public void setStretchedPath(String stretchedPath) {
-        this.stretchedPath = stretchedPath;
+    public void setStretchedPath(String resizedPath) {
+        this.resizedPath = resizedPath;
     }
 
     public int getId() {
@@ -54,8 +60,27 @@ public class Design {
         return originalPath;
     }
 
-    public String getStretchedPath() {
-        return stretchedPath;
+    public String getResizedPath() {
+        return resizedPath;
     }
 
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public Date getUploadDate() {
+        return uploadDate;
+    }
+
+    public void setUploadDate(Date uploadDate) {
+        this.uploadDate = uploadDate;
+    }
+
+    public void setResizedPath(String resizedPath) {
+        this.resizedPath = resizedPath;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
 }

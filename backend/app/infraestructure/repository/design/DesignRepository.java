@@ -3,7 +3,9 @@ package infraestructure.repository.design;
 import com.google.inject.Inject;
 import domain.Design;
 import infraestructure.acl.design.DesignMapper;
+import infraestructure.repository.design.records.DesignRecord;
 import io.vavr.collection.List;
+import io.vavr.control.Option;
 import io.vavr.control.Option;
 import org.skife.jdbi.v2.DBI;
 import play.api.db.Database;
@@ -30,6 +32,13 @@ public class DesignRepository {
         return Option.of(db.onDemand(DesignDAO.class).find(id))
                 .map(DesignMapper::fromRecordToDesign);
     }
+
+
+    public void update(Design design) {
+        DesignRecord record = DesignMapper.fromDesignToRecord(design);
+        db.onDemand(DesignDAO.class).update(record);
+    }
+
 
 
 }
