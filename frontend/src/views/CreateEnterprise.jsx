@@ -43,16 +43,12 @@ class CreateEnterprise extends Component {
             this.props.handleClick("Las contraseñas deben ser iguales.", 'error');
             return;
         }
-        if (!email) {
-            this.props.handleClick("El email debe ser único.", 'error');
-            return;
-        }
         service.isUnique(email)
             .then(response => {
                 if (response.ok)
-                    this.createEnterprise(name, email, password);
-                else if (response.status === 404)
                     this.props.handleClick("El correo ya está en uso.", 'error');
+                else if (response.status === 404)
+                    this.createEnterprise(name, email, password);
                 else
                     this.props.handleClick("Ha ocurrido un error creando la cuenta de la empresa.", 'error');
             });
@@ -61,12 +57,16 @@ class CreateEnterprise extends Component {
         service.create({ name, email, password })
             .then(response => {
                 if (response.ok) {
-                    const partURLEnterprise = 'miempresa-10';
-                    this.setState({ urlEnterprise: `${window.location.origin.toString()}/#/design/enterprise/${partURLEnterprise}/design/list` });
                     this.props.handleClick("Se ha creado la cuenta de la empresa.", 'success');
+                    return response.json();
                 }
                 else
                     this.props.handleClick("Ha ocurrido un error creando la cuenta de la empresa.", 'error');
+            })
+            .then(register => {
+                const {id, name } = register.company;
+                const partURLEnterprise = `${name}-${id}`;
+                this.setState({ urlEnterprise: `${window.location.origin.toString()}/#/design/enterprise/${partURLEnterprise}/design/list` });
             });
     }
 

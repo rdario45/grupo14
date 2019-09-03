@@ -5,6 +5,9 @@ import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
+import { DesignService } from 'services/Design'
+const service = new DesignService();
+
 class ListDesign extends Component {
     constructor(props) {
         super(props);

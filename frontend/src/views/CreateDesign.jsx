@@ -49,7 +49,7 @@ class CreateDesign extends Component {
             this.props.handleClick("El archivo no tiene una extensión válida.", 'error');
             return;
         }
-        this.props.handleClick("Se ha creado el diseño.", 'success');
+        this.props.handleClick("Hemos recibido tu diseño y lo estamos procesado para que sea publicado. Tan pronto esto ocurra, te notificaremos por email.", 'success');
         this.setState({
             firstName: "",
             lastName: "",
@@ -128,7 +128,7 @@ class CreateDesign extends Component {
                                             bsStyle="success"
                                             fill
                                             type="submit"
-                                            disabled={!this.validateForm()}>Crear</Button>
+                                            disabled={!this.validateForm()}>Enviar diseño</Button>
                                         <div className="clearfix" />
                                     </form>
                                 }
