@@ -55,6 +55,7 @@ public class DesignMapper {
           design.getFirstName(),
           design.getLastName(),
           design.getDesignStatus().name(),
+          design.getFileName(),
           design.getOriginalPath(),
           design.getResizedPath(),
           design.getUploadDate().toString(),
