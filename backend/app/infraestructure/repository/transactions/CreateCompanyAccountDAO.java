@@ -5,6 +5,7 @@ import infraestructure.repository.account.records.AccountRecord;
 import infraestructure.repository.company.CompanyMapperDAO;
 import infraestructure.repository.company.records.CompanyRecord;
 import org.skife.jdbi.v2.sqlobject.BindBean;
+import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
@@ -26,8 +27,11 @@ public interface CreateCompanyAccountDAO {
       "admin " +
       ") VALUES ( " +
       ":r.name," +
-      ":r.admin ) ")
+      ":r.admin )")
     @RegisterMapper(CompanyMapperDAO.class)
-    void createCompany(@BindBean("r") CompanyRecord record);
+    int createCompany(@BindBean("r") CompanyRecord record);
 
+    @SqlQuery("SELECT LAST_INSERT_ID()")
+    int getLastInsertedId();
+    
 }
