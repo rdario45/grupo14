@@ -3,6 +3,15 @@ import { CustomHeader } from 'helper/set-headers'
 const header = new CustomHeader();
 
 export class EnterpriseService {
+    isUnique(email){
+        const requestOptions = {
+            method: 'GET',
+            headers: header.getWithoutAuthorization(),
+            cache: 'default',
+        };
+        return fetch(`${process.env.REACT_APP_BASE_API}/exists-account/${email}`, requestOptions);
+    }
+
     create(enterprise) {
         const requestOptions = {
             method: 'POST',
@@ -10,8 +19,7 @@ export class EnterpriseService {
             cache: 'default',
             body: JSON.stringify(enterprise)
         };
-        // fetch(`${process.env.BASE_API}/create-account`, requestOptions)
-        return fetch(`http://localhost:9000/create-account`, requestOptions);
+        return fetch(`${process.env.REACT_APP_BASE_API}/create-account`, requestOptions)
     }
 }
 
