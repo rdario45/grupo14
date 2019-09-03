@@ -37,7 +37,6 @@ class CreateEnterprise extends Component {
         newState[event.target.id] = event.target.value;
         this.setState(newState);
     }
-
     handleSubmit = event => {
         event.preventDefault();
         const { name, email, password, passwordConfirmation } = this.state;
@@ -49,17 +48,29 @@ class CreateEnterprise extends Component {
             this.props.handleClick("El email debe ser único.", 'error');
             return;
         }
-        service.create({ name, email, password }).
-            then(response => {
+        service.isUnique(email)
+            .then(response => {
+                if (response.ok)
+                    this.createEnterprise(name, email, password);
+                else if (response.status === 404)
+                    this.props.handleClick("El correo ya está en uso.", 'error');
+                else
+                    this.props.handleClick("Ha ocurrido un error creando la cuenta de la empresa.", 'error');
+            })
+    }
+    createEnterprise(name, email, password) {
+        service.create({ name, email, password })
+            .then(response => {
                 if (response.ok) {
                     const partURLEnterprise = 'miempresa-10';
-                    this.setState({ urlEnterprise: `${window.location.origin.toString()}/#/design/enterprise/${partURLEnterprise}/design/list` })
+                    this.setState({ urlEnterprise: `${window.location.origin.toString()}/#/design/enterprise/${partURLEnterprise}/design/list` });
                     this.props.handleClick("Se ha creado la cuenta de la empresa.", 'success');
                 }
                 else
                     this.props.handleClick("Ha ocurrido un error creando la cuenta de la empresa.", 'error');
             });
     }
+
     render() {
         return (
             <div className="content">
