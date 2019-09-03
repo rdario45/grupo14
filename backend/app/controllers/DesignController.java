@@ -30,10 +30,6 @@ public class DesignController {
         this.repository = repository;
     }
 
-    public Result findAllDesigns() {
-        return ok(Json.toJson(repository.findAll().map(DesignMapper::fromDesignToDTO)));
-    }
-
     public Result findDesign(int id) {
         Either<Result, Result> either = repository.find(id)
                 .toEither(getNotFound("Not Found"))
@@ -43,9 +39,8 @@ public class DesignController {
         return either.isRight() ? either.get() : either.getLeft();
     }
 
-    public Result findDesignsByPoject(int id) {
-        Logger.debug(String.valueOf(id));
-        return ok();
+    public Result findDesignsByPoject(int projectId) {
+        return ok(Json.toJson(repository.findByProject(projectId).map(DesignMapper::fromDesignToDTO)));
     }
 
     public Result createDesign() {

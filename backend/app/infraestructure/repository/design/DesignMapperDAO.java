@@ -17,8 +17,8 @@ public class DesignMapperDAO implements ResultSetMapper<DesignRecord> {
           r.getString("designStatus"),
           r.getString("originalPath"),
           r.getString("resizedPath"),
-          r.getDate("resizedPath"),
-          r.getInt("id")
+          r.getTimestamp("timestamp"),
+          r.getInt("project_id")
       	);
     }
 }

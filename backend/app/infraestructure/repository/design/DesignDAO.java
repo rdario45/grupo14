@@ -16,8 +16,8 @@ public interface DesignDAO {
     @SqlQuery("SELECT * FROM designs where designStatus = 'PROCESSING'")
     List<DesignRecord> findPendingDesigns();
 
-    @SqlQuery("SELECT * FROM designs ")
-    List<DesignRecord> findAll();
+    @SqlQuery("SELECT * FROM designs WHERE project_id = :projectId ")
+    List<DesignRecord> findByProject(@Bind("projectId") int projectId);
 
     @SqlQuery("SELECT * FROM designs WHERE id = :id")
     DesignRecord find(@Bind("id") int id);

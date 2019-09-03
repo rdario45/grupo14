@@ -18,7 +18,6 @@ POST          /projects                     controllers.ProjectController.create
 PUT           /projects/:id                 controllers.ProjectController.updateProject(id: Integer)
 DELETE        /projects/:id                 controllers.ProjectController.deleteProject(id: Integer)
 # Design
-GET           /designs                      controllers.DesignController.findAllDesigns
 GET           /designs/:id                  controllers.DesignController.findDesign(id: Integer)
 GET           /designs/project/:id          controllers.DesignController.findDesignsByPoject(id: Integer)
 POST          /designs                      controllers.DesignController.createDesign

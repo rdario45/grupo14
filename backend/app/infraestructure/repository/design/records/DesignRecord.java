@@ -1,6 +1,6 @@
 package infraestructure.repository.design.records;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class DesignRecord {
 
@@ -9,11 +9,11 @@ public class DesignRecord {
     private String designStatus;
     private String originalPath;
     private String resizedPath;
-    private Date uploadDate;
+    private Timestamp uploadDate;
     private int projectId;
 
 
-    public DesignRecord(int id, String email, String designStatus, String originalPath, String resizedPath, Date uploadDate, int projectId) {
+    public DesignRecord(int id, String email, String designStatus, String originalPath, String resizedPath, Timestamp uploadDate, int projectId) {
         this.id = id;
         this.email = email;
         this.designStatus = designStatus;
@@ -67,7 +67,7 @@ public class DesignRecord {
         this.projectId = projectId;
     }
 
-    public Date getUploadDate() {
+    public Timestamp getUploadDate() {
         return uploadDate;
     }
 
@@ -75,7 +75,7 @@ public class DesignRecord {
         this.resizedPath = resizedPath;
     }
 
-    public void setUploadDate(Date uploadDate) {
+    public void setUploadDate(Timestamp uploadDate) {
         this.uploadDate = uploadDate;
     }
 }

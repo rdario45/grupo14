@@ -1,20 +1,18 @@
 package domain;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class Design {
-
 
     private int id;
     private String email;
     private DesignStatus designStatus;
     private String originalPath;
     private String resizedPath;
-    private Date uploadDate;
+    private DateTime uploadDate;
     private int projectId;
 
-
-    public Design(int id, String email, DesignStatus designStatus, String originalPath, String resizedPath, Date uploadDate, int projectId) {
+    public Design(int id, String email, DesignStatus designStatus, String originalPath, String resizedPath, DateTime uploadDate, int projectId) {
         this.id = id;
         this.email = email;
         this.designStatus = designStatus;
@@ -68,11 +66,11 @@ public class Design {
         return projectId;
     }
 
-    public Date getUploadDate() {
+    public DateTime getUploadDate() {
         return uploadDate;
     }
 
-    public void setUploadDate(Date uploadDate) {
+    public void setUploadDate(DateTime uploadDate) {
         this.uploadDate = uploadDate;
     }
 
