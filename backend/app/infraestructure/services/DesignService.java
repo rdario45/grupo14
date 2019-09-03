@@ -1,23 +1,11 @@
 package infraestructure.services;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import controllers.dto.CreateAccountDTO;
 import domain.Design;
-import domain.Company;
-import infraestructure.acl.account.AccountBuilder;
-import infraestructure.acl.project.ProjectMapper;
 import infraestructure.repository.design.DesignRepository;
-import io.vavr.Tuple2;
 import io.vavr.concurrent.Future;
-import io.vavr.control.Either;
-import play.Logger;
-import play.mvc.Result;
-import play.mvc.Results;
 
 import javax.inject.Inject;
 import java.util.List;
-
-import static play.mvc.Http.Context.Implicit.request;
 
 public class DesignService {
 
@@ -36,5 +24,8 @@ public class DesignService {
         designRepository.update(design);
     }
 
+    public Future<Design> createDesign(Design design){
+        return designRepository.create(design);
+    }
 
 }

@@ -1,11 +1,19 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import controllers.dto.CreateDesignDTO;
+import domain.Design;
 import infraestructure.acl.design.DesignMapper;
+import infraestructure.acl.design.DesignValidator;
 import infraestructure.repository.design.DesignRepository;
+import infraestructure.services.DesignService;
 import io.vavr.collection.List;
+import io.vavr.concurrent.Future;
 import io.vavr.control.Either;
 import io.vavr.control.Option;
+import io.vavr.control.Try;
+import org.apache.commons.lang3.StringUtils;
 import play.Logger;
 import play.libs.Files;
 import play.libs.Json;
@@ -14,20 +22,20 @@ import play.mvc.Result;
 import play.mvc.Results;
 
 import javax.inject.Inject;
-
 import java.util.Map;
 
 import static play.mvc.Http.Context.Implicit.request;
 import static play.mvc.Results.*;
-import static play.mvc.Results.internalServerError;
 
 public class DesignController {
 
     private DesignRepository repository;
+    private DesignService designService;
 
     @Inject
-    public DesignController(DesignRepository repository) {
+    public DesignController(DesignRepository repository, DesignService designService) {
         this.repository = repository;
+        this.designService = designService;
     }
 
     public Result findDesign(int id) {
@@ -47,20 +55,39 @@ public class DesignController {
         Http.MultipartFormData<Files.TemporaryFile> body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart<Files.TemporaryFile> picture = body.getFile("picture");
         Map<String, String[]> stringMap = body.asFormUrlEncoded();
-
         Files.TemporaryFile file = picture.getRef();
-        String fileName = picture.getFilename();
-        String firstName = getFirst(stringMap.get("firstName"));
-        String lastName = getFirst(stringMap.get("lastName"));
-        String email = getFirst(stringMap.get("email"));
-        String price = getFirst(stringMap.get("price"));
 
-        Logger.debug(fileName + ", " + email );
-        return ok();
+        JsonNode json =  Json.newObject()
+          .put( "fileName",  picture.getFilename() )
+          .put( "filePath",  file.path().toAbsolutePath().toString())
+          .put( "email",  getFirst(stringMap.get("email")))
+          .put( "firstName",  getFirst(stringMap.get("firstName")))
+          .put( "lastName",  getFirst(stringMap.get("lastName")))
+          .put( "price",  getFirst(stringMap.get("price")))
+          .put( "projectId",  getFirst(stringMap.get("projectId")));
+
+        Either<Result, Result> either = getDesign(json)
+          .map(d -> designService.createDesign(d))
+          .flatMap(future -> future
+          .onFailure(throwable -> Logger.error("Error creando el diseño.", throwable))
+          .toEither(getInternalServerError("Error guardando proyecto!"))
+          .map(DesignMapper::toJsonDTO)
+          .map(Results::ok)
+        );
+        return either.isRight() ? either.get() : either.getLeft();
+
     }
 
     private String getFirst(String[] nombres) {
         return Option.of(nombres).map(List::of).map(List::peek).getOrNull();
+    }
+
+    private Either<Result, Design> getDesign(JsonNode json) {
+        return Try.of(() -> Json.fromJson(json, CreateDesignDTO.class))
+          .onFailure(throwable -> Logger.error("Error en el JSON.", throwable))
+          .toEither(List.of("Invalid json"))
+          .flatMap(DesignValidator::validate)
+          .mapLeft(this::getBadRequest);
     }
 
     private Result getBadRequest(List<String> errors) {

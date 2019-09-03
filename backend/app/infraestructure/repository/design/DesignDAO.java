@@ -22,37 +22,40 @@ public interface DesignDAO {
     DesignRecord find(@Bind("id") int id);
 
     @SqlUpdate("INSERT INTO designs ( " +
-      " id, " +
       " email, " +
-      " firstName," +
+      " firstName, " +
       " lastName," +
       " designStatus, " +
+      " fileName, " +
       " originalPath, " +
       " resizedPath, " +
-      " price " +
+      " price, " +
+      " project_id " +
       " ) VALUES ( " +
-      " :r.id," +
-      " :r.mail," +
-      " :r.stretched," +
-      " :r.originalPath " +
-      " :r.price " +
+      " :r.email, " +
+      " :r.firstName, " +
+      " :r.lastName, " +
+      " :r.designStatus, " +
+      " :r.fileName, " +
+      " :r.originalPath, " +
+      " :r.resizedPath, " +
+      " :r.price," +
+      " :r.projectId " +
       " ) ")
-    int insert(@BindBean("r") DesignRecord record);
+    int create(@BindBean("r") DesignRecord record);
 
     @SqlUpdate("UPDATE designs SET " +
       " email = :r.email, " +
       " firstName = :r.firstName, " +
       " lastName = :r.lastName, " +
-      " designStatus = :r.designStatus, " +
+      " designStatus = :r.designStatus," +
+      " fileName = :r.fileName,  " +
       " originalPath = :r.originalPath, " +
-      " resizedPath = :r.resizedPath " +
+      " resizedPath = :r.resizedPath, " +
       " price = :r.price " +
       " WHERE id = :r.id ")
     int update(@BindBean("r") DesignRecord record);
 
     @SqlUpdate("DELETE FROM Design WHERE id = :id ")
     int delete(@Bind("id") int id);
-
-
-
 }

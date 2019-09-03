@@ -30,7 +30,7 @@ public class JobProcesarArchivos {
             String targetFile = "/home/diego/Imágenes/resized/res"+ i++ + ".png";
             resizeImg.processImage(design.getOriginalPath(), targetFile,
                     800,600,true,design.getEmail() + design.getUploadDate());
-            design.setStretchedPath(targetFile);
+            design.setResizedPath(targetFile);
             design.setDesignStatus(DesignStatus.AVAILABLE);
             //sendEmailSSL.send(design.getEmail(),
             //        "Su diseño ha sido aprobado",
