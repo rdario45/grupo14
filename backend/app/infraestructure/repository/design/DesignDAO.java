@@ -30,12 +30,13 @@ public interface DesignDAO {
       " fileName, " +
       " originalPath, " +
       " resizedPath, " +
+      " price " +
       " ) VALUES ( " +
       " :r.id," +
       " :r.mail," +
       " :r.stretched," +
       " :r.originalPath " +
-      " :r.resizedPath " +
+      " :r.price " +
       " ) ")
     int insert(@BindBean("r") DesignRecord record);
 
@@ -46,7 +47,8 @@ public interface DesignDAO {
       " designStatus = :r.designStatus," +
       " fileName = :r.fileName,  " +
       " originalPath = :r.originalPath, " +
-      " resizedPath = :r.resizedPath " +
+      " resizedPath = :r.resizedPath, " +
+      " price = :r.price " +
       " WHERE id = :r.id ")
     int update(@BindBean("r") DesignRecord record);
 

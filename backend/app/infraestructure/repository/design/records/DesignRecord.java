@@ -1,5 +1,6 @@
 package infraestructure.repository.design.records;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class DesignRecord {
@@ -13,9 +14,10 @@ public class DesignRecord {
     private String originalPath;
     private String resizedPath;
     private Timestamp uploadDate;
+    private BigDecimal price;
     private int projectId;
 
-    public DesignRecord(int id, String email, String firstName, String lastName, String designStatus, String fileName, String originalPath, String resizedPath, Timestamp uploadDate, int projectId) {
+    public DesignRecord(int id, String email, String firstName, String lastName, String designStatus, String fileName, String originalPath, String resizedPath, Timestamp uploadDate, BigDecimal price, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -25,6 +27,7 @@ public class DesignRecord {
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
         this.uploadDate = uploadDate;
+        this.price = price;
         this.projectId = projectId;
     }
 
@@ -106,5 +109,13 @@ public class DesignRecord {
 
     public void setUploadDate(Timestamp uploadDate) {
         this.uploadDate = uploadDate;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

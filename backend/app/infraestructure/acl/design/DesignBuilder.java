@@ -17,6 +17,6 @@ public class DesignBuilder {
                                 BigDecimal price,
                                 int projectId) {
 
-        return new Design(email, firstName, lastName, DesignStatus.PROCESSING, fileName, filePath, DateTime.now(DateTimeZone.forID("America/Bogota")), projectId);
+        return new Design(email, firstName, lastName, DesignStatus.PROCESSING, fileName, filePath, DateTime.now(DateTimeZone.forID("America/Bogota")), price, projectId);
     }
 }

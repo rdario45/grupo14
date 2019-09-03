@@ -2,6 +2,8 @@ package domain;
 
 import org.joda.time.DateTime;
 
+import java.math.BigDecimal;
+
 public class Design {
 
     private int id;
@@ -13,9 +15,22 @@ public class Design {
     private String originalPath;
     private String resizedPath;
     private DateTime uploadDate;
+    private BigDecimal price;
     private int projectId;
 
-    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String fileName, String originalPath, String resizedPath, DateTime uploadDate, int projectId) {
+    public Design(String email, String firstName, String lastName, DesignStatus designStatus, String fileName, String originalPath, DateTime uploadDate, BigDecimal price, int projectId) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.designStatus = designStatus;
+        this.fileName = fileName;
+        this.originalPath = originalPath;
+        this.uploadDate = uploadDate;
+        this.price = price;
+        this.projectId = projectId;
+    }
+
+    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String fileName, String originalPath, String resizedPath, DateTime uploadDate, BigDecimal price, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -25,22 +40,8 @@ public class Design {
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
         this.uploadDate = uploadDate;
+        this.price = price;
         this.projectId = projectId;
-    }
-
-    public Design(String email, String firstName, String lastName, DesignStatus designStatus, String fileName, String originalPath, DateTime uploadDate, int projectId) {
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.designStatus = designStatus;
-        this.fileName = fileName;
-        this.originalPath = originalPath;
-        this.uploadDate = uploadDate;
-        this.projectId = projectId;
-    }
-
-    public Design() {
-
     }
 
     public int getId() {
@@ -113,6 +114,14 @@ public class Design {
 
     public void setUploadDate(DateTime uploadDate) {
         this.uploadDate = uploadDate;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public int getProjectId() {
