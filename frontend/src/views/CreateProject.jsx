@@ -12,14 +12,20 @@ import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
+import { ProjectService } from 'services/Project'
+const service = new ProjectService();
+
 class CreateProject extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            companyId: localStorage.getItem('enterpriseId'),
             name: "",
             description: "",
             cost: "",
         };
+        if (!this.state.companyId)
+            this.props.history.push('/admin/user/logout');
     }
     validateForm() {
         return this.state.name.length > 0
@@ -31,12 +37,17 @@ class CreateProject extends Component {
         newState[event.target.id] = event.target.value;
         this.setState(newState);
     }
-
     handleSubmit = event => {
         event.preventDefault();
-        const { name, description, cost } = this.state;
-        this.props.handleClick("Se ha creado el proyecto.", 'success');
-        this.props.history.push('/admin/project/list');
+        service.create(this.state)
+            .then(response => {
+                if (response.ok) {
+                    this.props.handleClick("Se ha creado el proyecto.", 'success');
+                    this.props.history.push('/admin/project/list');
+                }
+                else
+                    this.props.handleClick("Se ha generado un error creando el proyecto.", 'error');
+            });
     }
     render() {
         return (
@@ -74,7 +85,7 @@ class CreateProject extends Component {
                                     />
                                     <Row>
                                         <Col md={12}>
-                                            <FormGroup controlId="textAreaDescripcion">
+                                            <FormGroup>
                                                 <ControlLabel>Descripción</ControlLabel>
                                                 <FormControl
                                                     id="description"

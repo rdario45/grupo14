@@ -129,7 +129,7 @@ class UserProfile extends Component {
 
                     <Row>
                       <Col md={12}>
-                        <FormGroup controlId="formControlsTextarea">
+                        <FormGroup>
                           <ControlLabel>About Me</ControlLabel>
                           <FormControl
                             rows="5"

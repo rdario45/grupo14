@@ -12,26 +12,43 @@ import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
+import { ProjectService } from 'services/Project'
+const service = new ProjectService();
+
 class DetailsProject extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            companyId: localStorage.getItem('enterpriseId'),
             projectId: props.match.params.projectId,
             name: "",
             description: "",
             cost: "",
             isReadonly: props.match.params.isReadonly === "1"
         };
+        if (!this.state.companyId)
+            this.props.history.push('/admin/user/logout');
     }
     componentDidMount() {
         this.getProject();
     }
     getProject() {
-        const newState = this.state;
-        newState.name = "adsad";
-        newState.description = "tetertr";
-        newState.cost = 10000.55;
-        this.setState(newState);
+        service.get(this.state.projectId)
+            .then(response => {
+                if (response.ok)
+                    return response.json();
+                else
+                    this.props.handleClick("Se ha generado un error consultando el proyecto.", 'error');
+            })
+            .then(project => {
+                if (project) {
+                    const newState = this.state;
+                    newState.name = project.name;
+                    newState.description = project.description;
+                    newState.cost = project.cost;
+                    this.setState(newState);
+                }
+            });
     }
     validateForm() {
         return this.state.name.length > 0
@@ -43,12 +60,23 @@ class DetailsProject extends Component {
         newState[event.target.id] = event.target.value;
         this.setState(newState);
     }
-
     handleSubmit = event => {
         event.preventDefault();
-        const { name, description, cost } = this.state;
-        this.props.handleClick("Se ha actualizado el proyecto.", 'success');
-        this.props.history.push('/admin/project/list');
+        const { name, description, cost, companyId } = this.state;
+        service.update(this.state.projectId, {
+            name,
+            description,
+            cost,
+            companyId
+        })
+            .then(response => {
+                if (response.ok) {
+                    this.props.handleClick("Se ha actualizado el proyecto.", 'success');
+                    this.props.history.push('/admin/project/list');
+                }
+                else
+                    this.props.handleClick("Se ha generado un error actualizando el proyecto.", 'error');
+            });
     }
     render() {
         const { isReadonly } = this.state;
@@ -89,7 +117,7 @@ class DetailsProject extends Component {
                                     />
                                     <Row>
                                         <Col md={12}>
-                                            <FormGroup controlId="textAreaDescripcion">
+                                            <FormGroup>
                                                 <ControlLabel>Descripción</ControlLabel>
                                                 <FormControl
                                                     id="description"
@@ -105,8 +133,8 @@ class DetailsProject extends Component {
                                         </Col>
                                     </Row>
                                     <Button bsStyle="default"
-                                                fill
-                                                onClick={this.props.history.goBack}>Atrás</Button>
+                                        fill
+                                        onClick={this.props.history.goBack}>Atrás</Button>
                                     {!isReadonly && (
                                         <Button
                                             bsStyle="success"

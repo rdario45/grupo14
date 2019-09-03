@@ -9,6 +9,9 @@ import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
+import { AccountService } from 'services/Account'
+const service = new AccountService();
+
 class LoginEnterprise extends Component {
     constructor(props) {
         super(props);
@@ -31,12 +34,18 @@ class LoginEnterprise extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const { email, password } = this.state;
-
-        //localStorage.setItem('token', token.token);
-        this.props.history.push('/admin/project/create');
-
-        //ToastsStore.error("Credenciales incorrectas.");
+        service.login(this.state)
+            .then(response => {
+                if (response.ok) {
+                    //localStorage.setItem('token', token.token);
+                    localStorage.setItem('enterpriseId', 1);
+                    this.props.history.push('/admin/project/create');
+                }
+                else if (response.status === 400)
+                    this.props.handleClick("Credenciales incorrectas.", 'error');
+                else
+                    this.props.handleClick("Ha ocurrido un error iniciando sesión.", 'error');
+            });
     }
     render() {
         return (

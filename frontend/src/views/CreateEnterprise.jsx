@@ -11,7 +11,6 @@ import Button from "components/CustomButton/CustomButton.jsx";
 import { SuccessCard } from "components/CardSuccess/CardSuccess.jsx";
 
 import { EnterpriseService } from 'services/Enterprise'
-
 const service = new EnterpriseService();
 
 class CreateEnterprise extends Component {
@@ -56,7 +55,7 @@ class CreateEnterprise extends Component {
                     this.props.handleClick("El correo ya está en uso.", 'error');
                 else
                     this.props.handleClick("Ha ocurrido un error creando la cuenta de la empresa.", 'error');
-            })
+            });
     }
     createEnterprise(name, email, password) {
         service.create({ name, email, password })
