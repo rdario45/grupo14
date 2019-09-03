@@ -22,23 +22,27 @@ public interface DesignDAO {
     DesignRecord find(@Bind("id") int id);
 
     @SqlUpdate("INSERT INTO designs ( " +
-      " id, " +
       " email, " +
-      " firstName," +
+      " firstName, " +
       " lastName," +
-      " designStatus," +
+      " designStatus, " +
       " fileName, " +
       " originalPath, " +
       " resizedPath, " +
-      " price " +
+      " price, " +
+      " project_id " +
       " ) VALUES ( " +
-      " :r.id," +
-      " :r.mail," +
-      " :r.stretched," +
-      " :r.originalPath " +
-      " :r.price " +
+      " :r.email, " +
+      " :r.firstName, " +
+      " :r.lastName, " +
+      " :r.designStatus, " +
+      " :r.fileName, " +
+      " :r.originalPath, " +
+      " :r.resizedPath, " +
+      " :r.price," +
+      " :r.projectId " +
       " ) ")
-    int insert(@BindBean("r") DesignRecord record);
+    int create(@BindBean("r") DesignRecord record);
 
     @SqlUpdate("UPDATE designs SET " +
       " email = :r.email, " +
@@ -54,7 +58,4 @@ public interface DesignDAO {
 
     @SqlUpdate("DELETE FROM Design WHERE id = :id ")
     int delete(@Bind("id") int id);
-
-
-
 }

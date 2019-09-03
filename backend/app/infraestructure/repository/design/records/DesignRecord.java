@@ -35,8 +35,9 @@ public class DesignRecord {
         return id;
     }
 
-    public void setId(int id) {
+    public DesignRecord setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getEmail() {

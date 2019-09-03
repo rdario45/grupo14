@@ -7,7 +7,9 @@ import domain.Design;
 import infraestructure.acl.design.DesignMapper;
 import infraestructure.acl.design.DesignValidator;
 import infraestructure.repository.design.DesignRepository;
+import infraestructure.services.DesignService;
 import io.vavr.collection.List;
+import io.vavr.concurrent.Future;
 import io.vavr.control.Either;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
@@ -28,10 +30,12 @@ import static play.mvc.Results.*;
 public class DesignController {
 
     private DesignRepository repository;
+    private DesignService designService;
 
     @Inject
-    public DesignController(DesignRepository repository) {
+    public DesignController(DesignRepository repository, DesignService designService) {
         this.repository = repository;
+        this.designService = designService;
     }
 
     public Result findDesign(int id) {
@@ -51,7 +55,6 @@ public class DesignController {
         Http.MultipartFormData<Files.TemporaryFile> body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart<Files.TemporaryFile> picture = body.getFile("picture");
         Map<String, String[]> stringMap = body.asFormUrlEncoded();
-
         Files.TemporaryFile file = picture.getRef();
 
         JsonNode json =  Json.newObject()
@@ -63,16 +66,16 @@ public class DesignController {
           .put( "price",  getFirst(stringMap.get("price")))
           .put( "projectId",  getFirst(stringMap.get("projectId")));
 
-        Either<Result, Design> design = getDesign(json);
-
-        return design.fold(
-            error -> error,
-            d -> ok( Json.toJson(d))
+        Either<Result, Result> either = getDesign(json)
+          .map(d -> designService.createDesign(d))
+          .flatMap(future -> future
+          .onFailure(throwable -> Logger.error("Error creando el diseño.", throwable))
+          .toEither(getInternalServerError("Error guardando proyecto!"))
+          .map(DesignMapper::toJsonDTO)
+          .map(Results::ok)
         );
-    }
+        return either.isRight() ? either.get() : either.getLeft();
 
-    private JsonNode safeAppend(ObjectNode object, String name, String value) {
-        return StringUtils.isNotEmpty(value) ?  object.put(name, value) : object;
     }
 
     private String getFirst(String[] nombres) {
@@ -86,7 +89,6 @@ public class DesignController {
           .flatMap(DesignValidator::validate)
           .mapLeft(this::getBadRequest);
     }
-
 
     private Result getBadRequest(List<String> errors) {
         return badRequest(Json.newObject()
