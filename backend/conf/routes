@@ -21,5 +21,6 @@ DELETE        /projects/:id                         controllers.ProjectControlle
 GET           /designs/project/:id/status/:s        controllers.DesignController.findDesignsByPojectAndStatusPaginated(id: Int, s: String, page: Int ?= 1)
 GET           /designs/project/:id                  controllers.DesignController.findDesignsByPojectPaginated(id: Int, page: Int ?= 1)
 GET           /designs/:id/download                 controllers.DesignController.download(id: Int)
+GET           /designs/:id/download-resized         controllers.DesignController.downloadResized(id: Int)
 GET           /designs/:id                          controllers.DesignController.findDesign(id: Integer)
 POST          /designs                              controllers.DesignController.createDesign

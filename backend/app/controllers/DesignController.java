@@ -42,6 +42,17 @@ public class DesignController {
     public Result download(int projectId) {
         Either<Result, Result> either = repository.find(projectId)
           .toEither(getNotFound("Not Found"))
+          .map(design -> design.getOriginalPath() != null ?
+            ok(new File(design.getOriginalPath())) :
+            notFound()
+          );
+
+        return either.isRight() ? either.get() : either.getLeft();
+    }
+
+    public Result downloadResized(int projectId) {
+        Either<Result, Result> either = repository.find(projectId)
+          .toEither(getNotFound("Not Found"))
           .map(design -> design.getResizedPath() != null ?
             ok(new File(design.getResizedPath())) :
             badRequest()
