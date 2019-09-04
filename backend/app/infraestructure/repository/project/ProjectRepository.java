@@ -19,21 +19,22 @@ public class ProjectRepository {
         this.db = new DBI(db.dataSource());
     }
 
-    public List<Project> findByCompany(int id) {
-        return List.ofAll(db.onDemand(ProjectoDAO.class).findByCompany(id))
-                .map(ProjectMapper::fromRecordToProject);
-    }
-
     public Option<Project> find(int id) {
         return Option.of(db.onDemand(ProjectoDAO.class).find(id))
-                .map(ProjectMapper::fromRecordToProject);
+          .map(ProjectMapper::fromRecordToProject);
+    }
+
+    public List<Project> findByCompanyPaginated(int id, int offset, int limit) {
+        return List.ofAll(db.onDemand(ProjectoDAO.class).findByCompany(id, offset, limit))
+          .map(ProjectMapper::fromRecordToProject);
     }
 
     public Future<Project> save(Project project) {
         ProjectRecord record = ProjectMapper.fromProjectToRecord(project);
         return Future.of(() -> {
             db.onDemand(ProjectoDAO.class).insert(record);
-            return record;
+            int lastInsertedId = db.onDemand(ProjectoDAO.class).getLastInsertedId();
+            return record.setId(lastInsertedId);
         }).map(ProjectMapper::fromRecordToProject);
     }
 

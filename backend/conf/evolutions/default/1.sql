@@ -32,6 +32,7 @@ CREATE TABLE projects (
 	name varchar(100) NOT NULL,
 	description varchar(200) NOT NULL,
 	cost numeric(12,2) NOT NULL,
+	timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	company_id int(11) NOT NULL,
 	CONSTRAINT projects_pkey PRIMARY KEY(id),
 	CONSTRAINT projects_company_fkey FOREIGN KEY (company_id) REFERENCES companies(id)

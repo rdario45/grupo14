@@ -9,8 +9,9 @@ public class DesignDTO {
     private String firstName;
     private String lastName;
     private String designStatus;
+    private String fileName;
     private String originalPath;
-    private String stretchedPath;
+    private String resizedPath;
     private String uploadDate;
     private BigDecimal price;
     private int  projectId;
@@ -19,14 +20,15 @@ public class DesignDTO {
         // json
     }
 
-    public DesignDTO(int id, String email, String firstName, String lastName, String designStatus, String originalPath, String stretchedPath, String uploadDate, BigDecimal price, int projectId) {
+    public DesignDTO(int id, String email, String firstName, String lastName, String designStatus, String fileName, String originalPath, String resizedPath, String uploadDate, BigDecimal price, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.designStatus = designStatus;
+        this.fileName = fileName;
         this.originalPath = originalPath;
-        this.stretchedPath = stretchedPath;
+        this.resizedPath = resizedPath;
         this.uploadDate = uploadDate;
         this.price = price;
         this.projectId = projectId;
@@ -68,6 +70,14 @@ public class DesignDTO {
         return designStatus;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     public void setDesignStatus(String designStatus) {
         this.designStatus = designStatus;
     }
@@ -80,12 +90,12 @@ public class DesignDTO {
         this.originalPath = originalPath;
     }
 
-    public String getStretchedPath() {
-        return stretchedPath;
+    public String getResizedPath() {
+        return resizedPath;
     }
 
-    public void setStretchedPath(String stretchedPath) {
-        this.stretchedPath = stretchedPath;
+    public void setResizedPath(String resizedPath) {
+        this.resizedPath = resizedPath;
     }
 
     public String getUploadDate() {

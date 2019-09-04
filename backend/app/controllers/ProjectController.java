@@ -21,6 +21,7 @@ import static play.mvc.Results.*;
 
 public class ProjectController {
 
+    private static final int PAGE_SIZE = 10;
     private ProjectRepository repository;
 
     @Inject
@@ -37,8 +38,9 @@ public class ProjectController {
         return either.isRight() ? either.get() : either.getLeft();
     }
 
-    public Result findProjectsByCompany(int id) {
-        return ok(Json.toJson(repository.findByCompany(id).map(ProjectMapper::fromAccountToDTO)));
+    public Result findProjectsByCompanyPaginated(int id, int page) {
+        int offset = (page - 1) * PAGE_SIZE;
+        return ok(Json.toJson(repository.findByCompanyPaginated(id, offset, PAGE_SIZE).map(ProjectMapper::fromAccountToDTO)));
     }
 
     public Result createProject() {

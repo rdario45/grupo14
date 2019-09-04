@@ -5,6 +5,9 @@ import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
+import { DesignService } from 'services/Design'
+const service = new DesignService();
+
 Modal.setAppElement('#root');
 class ListDesignEnterprise extends Component {
     constructor(props) {
@@ -15,7 +18,8 @@ class ListDesignEnterprise extends Component {
             modals: {
                 isOpen: false,
                 urlImage: null
-            }
+            },
+            projectId: props.match.params.projectId
         };
         this.handleToggleImage = this.handleToggleImage.bind(this);
     }
@@ -29,42 +33,53 @@ class ListDesignEnterprise extends Component {
         this.setState({ modals: currentModals });
     }
     getDesigns() {
-        const designs = [
-            {
-                designId: 3,
-                creationDate: "2019-08-27 23:11",
-                email: '2222@dasdsa.dadas',
-                firstName: 'dasd',
-                lastName: 'dasd',
-                price: 100000000,
-                state: 'En Proceso',
-                picture: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-                pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-            },
-            {
-                designId: 2,
-                creationDate: "2019-08-27 15:55",
-                email: '1111@dasdsa.dadas',
-                firstName: 'dasd',
-                lastName: 'dasd',
-                price: 100000000,
-                state: 'En Proceso',
-                picture: "https://public-media.interaction-design.org/images/ux-daily/5628f8c6cdb9d.jpg",
-                pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-            },
-            {
-                designId: 1,
-                creationDate: "2019-08-27 07:15",
-                email: '2222@dasdsa.dadas',
-                firstName: 'dasd',
-                lastName: 'dasd',
-                price: 100000000,
-                state: 'En Proceso',
-                picture: "https://blog.intercomassets.com/blog/wp-content/uploads/2018/05/Design-leadership-as-a-subversive-activity-.png",
-                pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-            },
-        ];
-        this.setState({ designs: designs });
+        service.getAll(this.state.projectId)
+            .then(response => {
+                if (response.ok)
+                    return response.json();
+                else
+                    this.props.handleClick("Se ha generado un error listando los diseños.", 'error');
+            })
+            .then(designs => {
+                if (designs && designs.length > 0)
+                    this.setState({ designs: designs });
+            });
+        // const designs = [
+        //     {
+        //         designId: 3,
+        //         creationDate: "2019-08-27 23:11",
+        //         email: '2222@dasdsa.dadas',
+        //         firstName: 'dasd',
+        //         lastName: 'dasd',
+        //         price: 100000000,
+        //         state: 'En Proceso',
+        //         picture: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
+        //         pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
+        //     },
+        //     {
+        //         designId: 2,
+        //         creationDate: "2019-08-27 15:55",
+        //         email: '1111@dasdsa.dadas',
+        //         firstName: 'dasd',
+        //         lastName: 'dasd',
+        //         price: 100000000,
+        //         state: 'En Proceso',
+        //         picture: "https://public-media.interaction-design.org/images/ux-daily/5628f8c6cdb9d.jpg",
+        //         pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
+        //     },
+        //     {
+        //         designId: 1,
+        //         creationDate: "2019-08-27 07:15",
+        //         email: '2222@dasdsa.dadas',
+        //         firstName: 'dasd',
+        //         lastName: 'dasd',
+        //         price: 100000000,
+        //         state: 'En Proceso',
+        //         picture: "https://blog.intercomassets.com/blog/wp-content/uploads/2018/05/Design-leadership-as-a-subversive-activity-.png",
+        //         pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
+        //     },
+        // ];
+        // this.setState({ designs: designs });
     }
     render() {
         const { labels, designs } = this.state;
@@ -96,25 +111,25 @@ class ListDesignEnterprise extends Component {
                                         <tbody>
                                             {designs.map((design, index) => {
                                                 const {
-                                                    designId,
+                                                    id,
                                                     creationDate,
                                                     email,
                                                     firstName,
                                                     lastName,
                                                     price,
-                                                    state,
+                                                    designStatus,
                                                     picture,
                                                     pictureProcessed
                                                 } = design
                                                 return (
-                                                    <tr key={designId}>
-                                                        <td>{designId}</td>
+                                                    <tr key={id}>
+                                                        <td>{id}</td>
                                                         <td>{creationDate}</td>
                                                         <td>{email}</td>
                                                         <td>{firstName}</td>
                                                         <td>{lastName}</td>
                                                         <td>{price}</td>
-                                                        <td>{state}</td>
+                                                        <td>{designStatus}</td>
                                                         <td>
                                                             <span style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
                                                                 onClick={() => { this.handleToggleImage(picture); }}>
@@ -153,13 +168,14 @@ class ListDesignEnterprise extends Component {
                     <Row>
                         <Col md={2}></Col>
                         <Col md={10}>
-                            <img src={this.state.modals.urlImage} 
-                                style={{width: '100%', height: '100%'}} />
+                            <img src={this.state.modals.urlImage}
+                                alt="imageModal"
+                                style={{ width: '100%', height: '100%' }} />
                         </Col>
                     </Row>
                     <Row>
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                     </Row>
                     <Row>
                         <Col md={5}></Col>

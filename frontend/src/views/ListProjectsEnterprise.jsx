@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 
 import Card from "components/Card/Card.jsx";
 
+import { ProjectService } from 'services/Project'
+const service = new ProjectService();
+
 class ListProjectsEnterprise extends Component {
     constructor(props) {
         super(props);
@@ -17,30 +20,23 @@ class ListProjectsEnterprise extends Component {
         this.getProjects();
     }
     getProjects() {
-        const projects = [
-            {
-                projectId: 1,
-                name: "1",
-                description: "1",
-                cost: "111111",
-            },
-            {
-                projectId: 2,
-                name: "2",
-                description: "2",
-                cost: "22222",
-            },
-        ];
-        this.setState({ projects: projects });
+        service.getAll(this.state.idEnterprise)
+            .then(response => {
+                if (response.ok)
+                    return response.json();
+                else
+                    this.props.handleClick("Se ha generado un error listando los proyectos.", 'error');
+            })
+            .then(projects => {
+                if (projects && projects.length > 0)
+                    this.setState({ projects: projects });
+            });
     }
     render() {
         const { labels, projects } = this.state;
-        debugger
         if (!projects || projects.length === 0) {
             return (
-                <Card style={{ marginLeft: '10%', marginRight: '10%', marginTop: '5%' }}>
-
-                </Card>
+                <p>No hay proyectos asociados a la empresa.</p>
             );
         }
         return (
@@ -65,17 +61,17 @@ class ListProjectsEnterprise extends Component {
                                       <tbody>
                                         {projects.map((project, index) => {
                                             const {
-                                                projectId,
+                                                id,
                                                 name,
                                                 description,
                                                 cost } = project
                                             return (
-                                                <tr key={projectId}>
+                                                <tr key={id}>
                                                     <td>{name}</td>
                                                     <td>{description}</td>
                                                     <td>{cost}</td>
                                                     <td>
-                                                        <Link to={`/design/enterprise/${this.props.match.params.urlEnterprise}/design/list/${projectId}`}><i className="pe-7s-search text-info"></i></Link>
+                                                        <Link to={`/design/enterprise/${this.props.match.params.urlEnterprise}/design/list/${id}`}><i className="pe-7s-search text-info"></i></Link>
                                                     </td>
                                                 </tr>
                                             )

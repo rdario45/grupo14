@@ -33,8 +33,13 @@ public class AccountRepository {
             CreateCompanyAccountDAO dao = handle.attach(CreateCompanyAccountDAO.class);
             Account savedAccount = createAccount(account, dao);
             Company savedCompany = createCompany(company, dao);
-            return Tuple.of(savedAccount, savedCompany);
+            int companyId = getlastInsertedId(dao);
+            return Tuple.of(savedAccount, savedCompany.setId(companyId));
         });
+    }
+
+    private int getlastInsertedId(CreateCompanyAccountDAO dao) {
+        return dao.getLastInsertedId();
     }
 
     private Company createCompany(Company company, CreateCompanyAccountDAO dao) {
