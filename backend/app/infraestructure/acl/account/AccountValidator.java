@@ -1,6 +1,7 @@
 package infraestructure.acl.account;
 
 import controllers.dto.CreateAccountDTO;
+import controllers.dto.LoginDTO;
 import io.vavr.collection.List;
 import io.vavr.control.Either;
 import io.vavr.control.Validation;
@@ -8,8 +9,16 @@ import org.apache.commons.lang3.StringUtils;
 
 public class AccountValidator {
 
-    public static Either<List<String>, CreateAccountDTO> validateCreateAccount(CreateAccountDTO dto) {
+    public static Either<List<String>, LoginDTO> validateLogin(LoginDTO dto) {
+        return Validation.combine(
+          validateEmail(dto.getUsername()),
+          validatePassword(dto.getPassword())
+        ).ap(LoginDTO::new)
+          .toEither()
+          .mapLeft(List::ofAll);
+    }
 
+    public static Either<List<String>, CreateAccountDTO> validateCreateAccount(CreateAccountDTO dto) {
         return Validation.combine(
           validateName(dto.getName()),
           validateEmail(dto.getEmail()),
