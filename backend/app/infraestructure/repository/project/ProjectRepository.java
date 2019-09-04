@@ -21,7 +21,7 @@ public class ProjectRepository {
 
     public Option<Project> find(int id) {
         return Option.of(db.onDemand(ProjectoDAO.class).find(id))
-                .map(ProjectMapper::fromRecordToProject);
+          .map(ProjectMapper::fromRecordToProject);
     }
 
     public List<Project> findByCompanyPaginated(int id, int offset, int limit) {
@@ -33,7 +33,8 @@ public class ProjectRepository {
         ProjectRecord record = ProjectMapper.fromProjectToRecord(project);
         return Future.of(() -> {
             db.onDemand(ProjectoDAO.class).insert(record);
-            return record;
+            int lastInsertedId = db.onDemand(ProjectoDAO.class).getLastInsertedId();
+            return record.setId(lastInsertedId);
         }).map(ProjectMapper::fromRecordToProject);
     }
 

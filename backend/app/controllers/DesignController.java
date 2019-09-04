@@ -21,6 +21,7 @@ import play.mvc.Result;
 import play.mvc.Results;
 
 import javax.inject.Inject;
+import java.io.File;
 import java.util.Map;
 
 import static play.mvc.Http.Context.Implicit.request;
@@ -38,11 +39,22 @@ public class DesignController {
         this.designService = designService;
     }
 
+    public Result download(int projectId) {
+        Either<Result, Result> either = repository.find(projectId)
+          .toEither(getNotFound("Not Found")).map(design -> new File(design.getOriginalPath())).map(Results::ok);
+
+        return either.isRight() ? either.get() : either.getLeft();
+    }
+
+    public Result thumbnail(int projectId) {
+        return ok();
+    }
+
     public Result findDesign(int id) {
         Either<Result, Result> either = repository.find(id)
-                .toEither(getNotFound("Not Found"))
-                .map(DesignMapper::toJsonDTO)
-                .map(Results::ok);
+          .toEither(getNotFound("Not Found"))
+          .map(DesignMapper::toJsonDTO)
+          .map(Results::ok);
 
         return either.isRight() ? either.get() : either.getLeft();
     }
@@ -63,23 +75,23 @@ public class DesignController {
         Map<String, String[]> stringMap = body.asFormUrlEncoded();
         Files.TemporaryFile file = picture.getRef();
 
-        JsonNode json =  Json.newObject()
-          .put( "fileName",  picture.getFilename() )
-          .put( "filePath",  file.path().toAbsolutePath().toString())
-          .put( "email",  getFirst(stringMap.get("email")))
-          .put( "firstName",  getFirst(stringMap.get("firstName")))
-          .put( "lastName",  getFirst(stringMap.get("lastName")))
-          .put( "price",  getFirst(stringMap.get("price")))
-          .put( "projectId",  getFirst(stringMap.get("projectId")));
+        JsonNode json = Json.newObject()
+          .put("fileName", picture.getFilename())
+          .put("filePath", file.path().toAbsolutePath().toString())
+          .put("email", getFirst(stringMap.get("email")))
+          .put("firstName", getFirst(stringMap.get("firstName")))
+          .put("lastName", getFirst(stringMap.get("lastName")))
+          .put("price", getFirst(stringMap.get("price")))
+          .put("projectId", getFirst(stringMap.get("projectId")));
 
         Either<Result, Result> either = getDesign(json)
           .map(d -> designService.createDesign(d))
           .flatMap(future -> future
-          .onFailure(throwable -> Logger.error("Error creando el diseño.", throwable))
-          .toEither(getInternalServerError("Error guardando proyecto!"))
-          .map(DesignMapper::toJsonDTO)
-          .map(Results::ok)
-        );
+            .onFailure(throwable -> Logger.error("Error creando el diseño.", throwable))
+            .toEither(getInternalServerError("Error guardando proyecto!"))
+            .map(DesignMapper::toJsonDTO)
+            .map(Results::ok)
+          );
         return either.isRight() ? either.get() : either.getLeft();
 
     }
@@ -98,8 +110,8 @@ public class DesignController {
 
     private Result getBadRequest(List<String> errors) {
         return badRequest(Json.newObject()
-                .put("message", "Validation errors!")
-                .put("fields", String.join(", ", errors)));
+          .put("message", "Validation errors!")
+          .put("fields", String.join(", ", errors)));
     }
 
     private Result getNotFound(String message) {

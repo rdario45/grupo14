@@ -29,7 +29,10 @@ public interface ProjectoDAO {
       " :r.cost," +
       " :r.companyId " +
       " ) ")
-    int insert(@BindBean("r") ProjectRecord record);
+    void insert(@BindBean("r") ProjectRecord record);
+
+    @SqlQuery("SELECT LAST_INSERT_ID()")
+    int getLastInsertedId();
 
     @SqlUpdate("UPDATE projects SET" +
       " name = :r.name," +

@@ -22,8 +22,9 @@ public class ProjectRecord {
         return id;
     }
 
-    public void setId(int id) {
+    public ProjectRecord setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {

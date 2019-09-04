@@ -19,6 +19,8 @@ PUT           /projects/:id                         controllers.ProjectControlle
 DELETE        /projects/:id                         controllers.ProjectController.deleteProject(id: Int)
 # Design
 GET           /designs/:id                          controllers.DesignController.findDesign(id: Integer)
+GET           /designs/:id/download                 controllers.DesignController.download(id: Int)
+GET           /designs/:id/thumbnail                controllers.DesignController.thumbnail(id: Int)
 GET           /designs/project/:id                  controllers.DesignController.findDesignsByPojectPaginated(id: Int, page: Int ?= 1)
 GET           /designs/project/:id/status/:s        controllers.DesignController.findDesignsByPojectAndStatusPaginated(id: Int, s: String, page: Int ?= 1)
 POST          /designs                              controllers.DesignController.createDesign

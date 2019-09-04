@@ -47,8 +47,9 @@ public class DesignRepository {
     public Future<Design> create(Design design) {
         return Future.of(() -> {
             DesignRecord record = DesignMapper.fromDesignToRecord(design);
-            int id = db.onDemand(DesignDAO.class).create(record);
-            return record.setId(id);
+            db.onDemand(DesignDAO.class).create(record);
+            int lastInsertedId = db.onDemand(DesignDAO.class).getLastInsertedId();
+            return record.setId(lastInsertedId);
         }).map(DesignMapper::fromRecordToDesign);
     }
 

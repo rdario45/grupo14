@@ -46,7 +46,10 @@ public interface DesignDAO {
       " :r.price," +
       " :r.projectId " +
       " ) ")
-    int create(@BindBean("r") DesignRecord record);
+    void create(@BindBean("r") DesignRecord record);
+
+    @SqlQuery("SELECT LAST_INSERT_ID()")
+    int getLastInsertedId();
 
     @SqlUpdate("UPDATE designs SET " +
       " email = :r.email, " +
