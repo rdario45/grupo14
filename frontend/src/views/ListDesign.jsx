@@ -33,27 +33,17 @@ class ListDesign extends Component {
         this.setState({ modals: currentModals });
     }
     getDesigns() {
-        const designs = [
-            {
-                designId: 3,
-                creationDate: "2019-08-27 23:11",
-                picture: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-                pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-            },
-            {
-                designId: 2,
-                creationDate: "2019-08-27 15:55",
-                picture: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-                pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-            },
-            {
-                designId: 1,
-                creationDate: "2019-08-27 07:15",
-                picture: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-                pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-            },
-        ];
-        this.setState({ designs: designs });
+        service.getAllProcessed(this.state.projectId)
+            .then(response => {
+                if (response.ok)
+                    return response.json();
+                else
+                    this.props.handleClick("Se ha generado un error listando los diseños.", 'error');
+            })
+            .then(designs => {
+                if (designs && designs.length > 0)
+                    this.setState({ designs: designs });
+            });
     }
     render() {
         const { labels, designs } = this.state;
@@ -101,15 +91,15 @@ class ListDesign extends Component {
                                         <tbody>
                                             {designs.map((design, index) => {
                                                 const {
-                                                    designId,
-                                                    creationDate,
+                                                    id,
+                                                    uploadDate,
                                                     picture,
                                                     pictureProcessed
                                                 } = design
                                                 return (
-                                                    <tr key={designId}>
-                                                        <td>{designId}</td>
-                                                        <td>{creationDate}</td>
+                                                    <tr key={id}>
+                                                        <td>{id}</td>
+                                                        <td>{uploadDate}</td>
                                                         <td>
                                                             <span style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
                                                                 onClick={() => { this.handleToggleImage(picture); }}>
@@ -149,6 +139,7 @@ class ListDesign extends Component {
                         <Col md={2}></Col>
                         <Col md={10}>
                             <img src={this.state.modals.urlImage}
+                                alt="imageModal"
                                 style={{ width: '100%', height: '100%' }} />
                         </Col>
                     </Row>

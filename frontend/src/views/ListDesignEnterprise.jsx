@@ -44,42 +44,6 @@ class ListDesignEnterprise extends Component {
                 if (designs && designs.length > 0)
                     this.setState({ designs: designs });
             });
-        // const designs = [
-        //     {
-        //         designId: 3,
-        //         creationDate: "2019-08-27 23:11",
-        //         email: '2222@dasdsa.dadas',
-        //         firstName: 'dasd',
-        //         lastName: 'dasd',
-        //         price: 100000000,
-        //         state: 'En Proceso',
-        //         picture: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-        //         pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-        //     },
-        //     {
-        //         designId: 2,
-        //         creationDate: "2019-08-27 15:55",
-        //         email: '1111@dasdsa.dadas',
-        //         firstName: 'dasd',
-        //         lastName: 'dasd',
-        //         price: 100000000,
-        //         state: 'En Proceso',
-        //         picture: "https://public-media.interaction-design.org/images/ux-daily/5628f8c6cdb9d.jpg",
-        //         pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-        //     },
-        //     {
-        //         designId: 1,
-        //         creationDate: "2019-08-27 07:15",
-        //         email: '2222@dasdsa.dadas',
-        //         firstName: 'dasd',
-        //         lastName: 'dasd',
-        //         price: 100000000,
-        //         state: 'En Proceso',
-        //         picture: "https://blog.intercomassets.com/blog/wp-content/uploads/2018/05/Design-leadership-as-a-subversive-activity-.png",
-        //         pictureProcessed: "https://hbr.org/resources/images/article_assets/2018/08/R1805D_CHIN.jpg",
-        //     },
-        // ];
-        // this.setState({ designs: designs });
     }
     render() {
         const { labels, designs } = this.state;
@@ -112,7 +76,7 @@ class ListDesignEnterprise extends Component {
                                             {designs.map((design, index) => {
                                                 const {
                                                     id,
-                                                    creationDate,
+                                                    uploadDate,
                                                     email,
                                                     firstName,
                                                     lastName,
@@ -124,12 +88,12 @@ class ListDesignEnterprise extends Component {
                                                 return (
                                                     <tr key={id}>
                                                         <td>{id}</td>
-                                                        <td>{creationDate}</td>
+                                                        <td>{uploadDate}</td>
                                                         <td>{email}</td>
                                                         <td>{firstName}</td>
                                                         <td>{lastName}</td>
                                                         <td>{price}</td>
-                                                        <td>{designStatus}</td>
+                                                        <td>{designStatus === 'AVAILABLE' ? 'Disponible' : 'En proceso'}</td>
                                                         <td>
                                                             <span style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
                                                                 onClick={() => { this.handleToggleImage(picture); }}>

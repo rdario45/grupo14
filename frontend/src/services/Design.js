@@ -12,6 +12,15 @@ export class DesignService {
         };
         return fetch(`${process.env.REACT_APP_BASE_API}/designs/project/${projectId}`, requestOptions)
     }
+    getAllProcessed(projectId) {
+        const requestOptions = {
+            method: 'GET',
+            headers: header.getWithoutAuthorization(),
+            //headers: header.getAuthorization(),
+            cache: 'default',
+        };
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs/project/${projectId}/status/AVAILABLE`, requestOptions)
+    }
     get(designId) {
         const requestOptions = {
             method: 'GET',
