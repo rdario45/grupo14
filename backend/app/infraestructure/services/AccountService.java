@@ -25,6 +25,9 @@ public class AccountService {
           dto.getEmail(),
           dto.getPassword()
         );
-        return Future.of(() -> accountRepository.createCompanyAccount(tuple._1, tuple._2));
+        return Future.of(() ->
+          accountRepository.createCompanyAccount(tuple._1, tuple._2)
+            .map2(Company::cleanName)
+        );
     }
 }

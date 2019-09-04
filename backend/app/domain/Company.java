@@ -41,4 +41,10 @@ public class Company {
     public void setAdmin(String admin) {
         this.admin = admin;
     }
+
+    public Company cleanName() {
+        // alpha and digits
+        this.name = this.name.toLowerCase().replaceAll("[^a-zA-Z0-9]+","");
+        return this;
+    }
 }
