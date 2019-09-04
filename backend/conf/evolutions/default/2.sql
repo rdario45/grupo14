@@ -16,11 +16,11 @@ VALUES('Naturaeza', 'lorem ipsum.', 50000, 1);
 
 
 INSERT INTO designs
- (email, firstName, lastName, originalPath, project_id, price)
+ (email, firstName, lastName, fileName, originalPath, project_id, price)
  VALUES
- ( 'da.torres58@uniandes.edu.co', 'Admin', 'Nutresa', '/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-39-35.png', 1, 5000),
- ( 'jc.colemenares@uniandes.edu.co', 'Admin', 'Nutresa', '/home/diego/Imágenes/Captura de pantalla de 2019-08-28 21-06-55.png', 1, 5000),
- ( 'rd.fernandez@@uniandes.edu.co', 'Admin', 'Nutresa', '/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-49-34.png', 1, 5000);
+ ( 'da.torres58@uniandes.edu.co', 'Admin', 'Nutresa', 'imagen1.jpeg', '/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-39-35.png', 1, 5000),
+ ( 'jc.colemenares@uniandes.edu.co', 'Admin', 'Nutresa', 'imagen1.jpeg', '/home/diego/Imágenes/Captura de pantalla de 2019-08-28 21-06-55.png', 1, 5000),
+ ( 'rd.fernandez@@uniandes.edu.co', 'Admin', 'Nutresa', 'imagen1.jpeg', '/home/diego/Imágenes/Captura de pantalla de 2019-08-27 21-49-34.png', 1, 5000);
 
 
 
