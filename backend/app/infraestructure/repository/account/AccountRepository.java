@@ -53,4 +53,11 @@ public class AccountRepository {
         dao.createAccount(record);
         return account;
     }
+
+    public Option<Tuple2<Account, Company>> login(Account account) {
+        AccountRecord record = AccountMapper.fromAccountToRecord(account);
+        return Option.of(db.onDemand(AccountDAO.class).login(record))
+          .map(AccountMapper::fromAccountCompanyRecordToTuple);
+    }
+
 }
