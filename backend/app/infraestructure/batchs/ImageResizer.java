@@ -70,7 +70,7 @@ public class ImageResizer {
             }
             
             Graphics g = tempPNG.getGraphics();
-            g.setFont(g.getFont().deriveFont(30f));
+            g.setFont(g.getFont().deriveFont(22f));
             g.drawString(text, 10, tempPNG.getHeight()-30);
             g.dispose();
             newFilePNG = new File(targetPath+"_New.png");

@@ -9,6 +9,7 @@ import play.Logger;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class JobProcesarArchivos {
         Logger.info(">>> CORRIENDO TAREA PROGRAMADA >>>");
         Logger.debug(DateTime.now().toString());
         List<Design> designs =  designService.getPendingDesigns();
+
         Logger.info(">>> Se enconntraron " +  designs.size() +" diseños >>>");
         ImageResizer resizeImg = new ImageResizer();
         SendEmailSSL sendEmailSSL = new SendEmailSSL();
@@ -29,17 +31,16 @@ public class JobProcesarArchivos {
         for (Design design: designs ){
 
             String targetFile = design.getOriginalPath().substring(0,design.getOriginalPath().lastIndexOf("/")+1) + "resized/";
-            Logger.info(">>> targetDirectory " +  targetFile +" >>>");
+
             File f =new File (targetFile);
-            boolean created = f.mkdir();
-            Logger.info(">>> created " +  created +" >>>");
+            f.mkdir();
+
             targetFile += design.getOriginalPath().substring(design.getOriginalPath().lastIndexOf("/")+1,
                                                                 design.getOriginalPath().lastIndexOf("."));
-            Logger.info(">>> targetFile " +  targetFile +" >>>");
 
-            //"/home/diego/Imágenes/resized/res"+ i++ + ".png";
+            SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
             resizeImg.processImage(design.getOriginalPath(), targetFile,
-                    800,600,true,design.getEmail() + design.getUploadDate());
+                    800,600,true,design.getEmail() + " \n\r "+  formatter.format(design.getUploadDate().toDate()));
             design.setResizedPath(targetFile);
             design.setDesignStatus(DesignStatus.AVAILABLE);
             sendEmailSSL.send(design.getEmail(),
@@ -48,7 +49,7 @@ public class JobProcesarArchivos {
             designService.updateDesign(design);
         }
 
-        //Actualizar los diseños*/
+
 
 
     }
