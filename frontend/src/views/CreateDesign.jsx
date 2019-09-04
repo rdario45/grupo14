@@ -10,6 +10,9 @@ import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 import DragAndDrop from "components/DragAndDrop/DragAndDrop.jsx";
 
+import { DesignService } from 'services/Design'
+const service = new DesignService();
+
 class CreateDesign extends Component {
     extensionsAllowed = ["jpg", "jpeg", "bmp", "png"];
     constructor(props) {
@@ -20,10 +23,12 @@ class CreateDesign extends Component {
             email: "",
             price: "",
             file: null,
+            idEnterprise: props.match.params.urlEnterprise.split('-')[1],
+            projectId: props.match.params.projectId
         };
     }
     assignFile(file) {
-       this.state.file = file;
+        this.state.file = file;
     }
     validateForm() {
         return this.state.firstName.length > 0
@@ -38,8 +43,7 @@ class CreateDesign extends Component {
     }
     handleSubmit = event => {
         event.preventDefault();
-        const { file } = this.state;
-        debugger
+        const { file, firstName, lastName, email, price, projectId } = this.state;
         if (!file) {
             this.props.handleClick("Debes adjuntar un archivo.", 'error');
             return;
@@ -49,14 +53,22 @@ class CreateDesign extends Component {
             this.props.handleClick("El archivo no tiene una extensión válida.", 'error');
             return;
         }
-        this.props.handleClick("Hemos recibido tu diseño y lo estamos procesado para que sea publicado. Tan pronto esto ocurra, te notificaremos por email.", 'success');
-        this.setState({
-            firstName: "",
-            lastName: "",
-            email: "",
-            price: 0,
-            file: null,
-        });
+        var data = new FormData();
+        data.append('picture', file);
+        data.append('firstName', firstName);
+        data.append('lastName', lastName);
+        data.append('email', email);
+        data.append('price', price);
+        data.append('projectId', projectId);
+        service.create(data)
+            .then(response => {
+                if (response.ok) {
+                    this.props.handleClick("Hemos recibido tu diseño y lo estamos procesado para que sea publicado. Tan pronto esto ocurra, te notificaremos por email.", 'success');
+                    this.props.history.push(`/design/enterprise/${this.props.match.params.urlEnterprise}/design/list/`);
+                }
+                else
+                    this.props.handleClick("Ha ocurrido un error creando el diseño.", 'error');
+            });
     }
     render() {
         return (

@@ -56,7 +56,7 @@ class CreateEnterprise extends Component {
     createEnterprise(name, email, password) {
         service.create({ name, email, password })
             .then(response => {
-                if (response.ok) {
+                if (response.ok) { 
                     this.props.handleClick("Se ha creado la cuenta de la empresa.", 'success');
                     return response.json();
                 }

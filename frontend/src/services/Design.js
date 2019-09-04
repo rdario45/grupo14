@@ -3,7 +3,7 @@ import { CustomHeader } from 'helper/set-headers'
 const header = new CustomHeader();
 
 export class DesignService {
-    getAll(projectId){
+    getAll(projectId) {
         const requestOptions = {
             method: 'GET',
             headers: header.getWithoutAuthorization(),
@@ -12,7 +12,7 @@ export class DesignService {
         };
         return fetch(`${process.env.REACT_APP_BASE_API}/designs/project/${projectId}`, requestOptions)
     }
-    get(designId){
+    get(designId) {
         const requestOptions = {
             method: 'GET',
             headers: header.getWithoutAuthorization(),
@@ -21,13 +21,13 @@ export class DesignService {
         };
         return fetch(`${process.env.REACT_APP_BASE_API}/designs/${designId}`, requestOptions)
     }
-    create(designs){
+    create(designs) {
         const requestOptions = {
             method: 'POST',
-            headers: header.getWithoutAuthorization(),
+            headers: new Headers(),
             //headers: header.getAuthorization(),
             cache: 'default',
-            body: JSON.stringify(designs)
+            body: designs
         };
         return fetch(`${process.env.REACT_APP_BASE_API}/designs`, requestOptions)
     }
