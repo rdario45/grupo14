@@ -17,29 +17,6 @@ import javax.imageio.ImageIO;
  */
 public class ImageResizer {
 
-        /**
-         * Prueba la clase especificando una carpeta, procesa todos los archivos de la carpeta.
-         * @param path
-         * @throws IOException 
-         */
-	public  void procesar (String path) throws IOException {
-		File folder = new File(path);
-                 File[] listOfFiles = folder.listFiles();
-		System.out.println("Total No of Files:"+listOfFiles.length);
-		ImageResizer jir = new ImageResizer();
-		for (int i = 0; i < listOfFiles.length; i++) {
-		      if (listOfFiles[i].   isFile()) {
-		        System.out.println("File " + listOfFiles[i].getName());
-                        if ( jir.processImage(path+listOfFiles[i].getName(),
-                                        path  + "resize/"+listOfFiles[i].getName(),800,600, false,
-                                      "Hello world")
-                            ){
-                                //Actualizar estado en base de datos.                          
-                            } 
-		      }
-		}
-		System.out.println("DONE");
-	}
 
     
     /**
@@ -68,11 +45,12 @@ public class ImageResizer {
             }else{
                 tempPNG = resizeImage(img, width, height);            
             }
-            
-            Graphics g = tempPNG.getGraphics();
-            g.setFont(g.getFont().deriveFont(22f));
-            g.drawString(text, 10, tempPNG.getHeight()-30);
-            g.dispose();
+            if (text != null) {
+                Graphics g = tempPNG.getGraphics();
+                g.setFont(g.getFont().deriveFont(22f));
+                g.drawString(text, 10, tempPNG.getHeight() - 30);
+                g.dispose();
+            }
             newFilePNG = new File(targetPath+"_New.png");
             ImageIO.write(tempPNG, "png", newFilePNG);            
         }catch(IOException ex){
