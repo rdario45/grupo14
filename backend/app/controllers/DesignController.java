@@ -41,13 +41,13 @@ public class DesignController {
 
     public Result download(int projectId) {
         Either<Result, Result> either = repository.find(projectId)
-          .toEither(getNotFound("Not Found")).map(design -> new File(design.getOriginalPath())).map(Results::ok);
+          .toEither(getNotFound("Not Found"))
+          .map(design -> design.getResizedPath() != null ?
+            ok(new File(design.getResizedPath())) :
+            badRequest()
+          );
 
         return either.isRight() ? either.get() : either.getLeft();
-    }
-
-    public Result thumbnail(int projectId) {
-        return ok();
     }
 
     public Result findDesign(int id) {

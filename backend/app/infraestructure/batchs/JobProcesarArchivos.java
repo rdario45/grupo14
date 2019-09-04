@@ -3,14 +3,11 @@ package infraestructure.batchs;
 import domain.Design;
 import domain.DesignStatus;
 import infraestructure.services.DesignService;
-
 import org.joda.time.DateTime;
 import play.Logger;
 
-import javax.inject.Inject;
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 
