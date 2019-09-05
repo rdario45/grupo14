@@ -3,23 +3,23 @@ import { CustomHeader } from 'helper/set-headers'
 const header = new CustomHeader();
 
 export class DesignService {
-    getAll(projectId) {
+    getAll(projectId, page) {
         const requestOptions = {
             method: 'GET',
             headers: header.getWithoutAuthorization(),
             //headers: header.getAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/designs/project/${projectId}`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs/project/${projectId}?page=${page}`, requestOptions)
     }
-    getAllProcessed(projectId) {
+    getAllProcessed(projectId, page) {
         const requestOptions = {
             method: 'GET',
             headers: header.getWithoutAuthorization(),
             //headers: header.getAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/designs/project/${projectId}/status/AVAILABLE`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs/project/${projectId}/status/AVAILABLE?page=${page}`, requestOptions)
     }
     get(designId) {
         const requestOptions = {

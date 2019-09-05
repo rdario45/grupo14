@@ -3,14 +3,14 @@ import { CustomHeader } from 'helper/set-headers'
 const header = new CustomHeader();
 
 export class ProjectService {
-    getAll(enterpriseId){
+    getAll(enterpriseId, page){
         const requestOptions = {
             method: 'GET',
             headers: header.getWithoutAuthorization(),
             //headers: header.getAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/projects/company/${enterpriseId}`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/projects/company/${enterpriseId}?page=${page}`, requestOptions)
     }
     get(projectId){
         const requestOptions = {
