@@ -36,15 +36,19 @@ class LoginEnterprise extends Component {
         event.preventDefault();
         service.login(this.state)
             .then(response => {
-                if (response.ok) {
-                    //localStorage.setItem('token', token.token);
-                    localStorage.setItem('enterpriseId', 1);
-                    this.props.history.push('/admin/project/create');
-                }
-                else if (response.status === 400)
+                if (response.ok)
+                    return response.json();
+                else if (response.status === 404)
                     this.props.handleClick("Credenciales incorrectas.", 'error');
                 else
                     this.props.handleClick("Ha ocurrido un error iniciando sesión.", 'error');
+            })
+            .then(user => {
+                if (user.company) {
+                    //localStorage.setItem('token', token.token);
+                    localStorage.setItem('enterpriseId', user.company.id);
+                    this.props.history.push('/admin/project/create');
+                }
             });
     }
     render() {
