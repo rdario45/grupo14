@@ -30,6 +30,24 @@ export class DesignService {
         };
         return fetch(`${process.env.REACT_APP_BASE_API}/designs/${designId}`, requestOptions)
     }
+    downloadOriginal(designId) {
+        const requestOptions = {
+            method: 'GET',
+            headers: header.getWithoutAuthorization(),
+            //headers: header.getAuthorization(),
+            cache: 'default',
+        };
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs/${designId}/download`, requestOptions)
+    }
+    downloadProcessed(designId) {
+        const requestOptions = {
+            method: 'GET',
+            headers: header.getWithoutAuthorization(),
+            //headers: header.getAuthorization(),
+            cache: 'default',
+        };
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs/${designId}/download-resized`, requestOptions)
+    }
     create(designs) {
         const requestOptions = {
             method: 'POST',

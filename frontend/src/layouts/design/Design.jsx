@@ -72,7 +72,6 @@ class Design extends Component {
         this.setState({ hasImage: hasImage });
     };
     handleFixedClick = () => {
-        debugger
         if (this.state.fixedClasses === "dropdown") {
             this.setState({ fixedClasses: "dropdown show-dropdown open" });
         } else {

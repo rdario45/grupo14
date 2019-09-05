@@ -16,21 +16,17 @@ class ListDesign extends Component {
             designs: [],
             modals: {
                 isOpen: false,
-                urlImage: null
+                urlImage: null,
+                alt: null
             },
             enterpriseId: props.match.params.urlEnterprise.split('-')[1],
             projectId: props.match.params.projectId
         };
-        this.handleToggleImage = this.handleToggleImage.bind(this);
+        this.openModalImage = this.openModalImage.bind(this);
+        this.closeModalImage = this.closeModalImage.bind(this);
     }
     componentDidMount() {
         this.getDesigns();
-    }
-    handleToggleImage(urlImage) {
-        let currentModals = this.state.modals;
-        currentModals.isOpen = !currentModals.isOpen;
-        currentModals.urlImage = urlImage;
-        this.setState({ modals: currentModals });
     }
     getDesigns() {
         service.getAllProcessed(this.state.projectId)
@@ -43,6 +39,33 @@ class ListDesign extends Component {
             .then(designs => {
                 this.setState({ designs: designs });
             });
+    }
+    openModalImage(designId, fileName) {
+        service.downloadProcessed(designId)
+            .then(response => {
+                if (response.ok)
+                    return response.blob();
+                else
+                    this.props.handleClick("Se ha generado un error descargando la imagen.", 'error');
+            })
+            .then(blob => {
+                if (!blob) {
+                    this.props.handleClick("No se ha encontrado la imagen.", 'error');
+                    return
+                }
+                let currentModals = this.state.modals;
+                currentModals.isOpen = true;
+                currentModals.urlImage = URL.createObjectURL(blob);
+                currentModals.alt = fileName;
+                this.setState({ modals: currentModals });
+            });
+    }
+    closeModalImage() {
+        let currentModals = this.state.modals;
+        currentModals.isOpen = false;
+        currentModals.urlImage = null;
+        currentModals.alt = null;
+        this.setState({ modals: currentModals });
     }
     render() {
         const { labels, designs } = this.state;
@@ -130,8 +153,7 @@ class ListDesign extends Component {
                                                 const {
                                                     id,
                                                     uploadDate,
-                                                    picture,
-                                                    pictureProcessed
+                                                    fileName
                                                 } = design
                                                 return (
                                                     <tr key={id}>
@@ -139,13 +161,13 @@ class ListDesign extends Component {
                                                         <td>{uploadDate}</td>
                                                         <td>
                                                             <span style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
-                                                                onClick={() => { this.handleToggleImage(picture); }}>
+                                                                onClick={() => { this.openModalImage(id, fileName); }}>
                                                                 <i className="pe-7s-search text-info"></i>
                                                             </span>
                                                         </td>
                                                         <td>
                                                             <span style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
-                                                                onClick={() => { this.handleToggleImage(pictureProcessed); }}>
+                                                                onClick={() => { this.openModalImage(id, fileName); }}>
                                                                 <i className="pe-7s-search text-info"></i>
                                                             </span>
                                                         </td>
@@ -171,12 +193,12 @@ class ListDesign extends Component {
                 <Modal
                     style={{ textAlign: 'center' }}
                     isOpen={this.state.modals.isOpen}
-                    contentLabel="Imagen Original">
+                    contentLabel={this.state.modals.alt}>
                     <Row>
                         <Col md={2}></Col>
                         <Col md={10}>
                             <img src={this.state.modals.urlImage}
-                                alt="imageModal"
+                                alt={this.state.modals.alt}
                                 style={{ width: '100%', height: '100%' }} />
                         </Col>
                     </Row>
@@ -190,7 +212,7 @@ class ListDesign extends Component {
                         <Col md={1}>
                             <Button bsStyle="success"
                                 fill
-                                onClick={this.handleToggleImage}>Cerrar</Button>
+                                onClick={this.closeModalImage}>Cerrar</Button>
                         </Col>
                     </Row>
                 </Modal>
