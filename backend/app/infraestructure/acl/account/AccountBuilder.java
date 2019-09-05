@@ -16,6 +16,6 @@ public class AccountBuilder {
     }
 
     public static Account build(LoginDTO dto) {
-        return new Account(dto.getUsername(), dto.getPassword(), Status.ACTIVE);
+        return new Account(dto.getEmail(), dto.getPassword(), Status.ACTIVE);
     }
 }

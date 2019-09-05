@@ -11,7 +11,7 @@ public class AccountValidator {
 
     public static Either<List<String>, LoginDTO> validateLogin(LoginDTO dto) {
         return Validation.combine(
-          validateEmail(dto.getUsername()),
+          validateEmail(dto.getEmail()),
           validatePassword(dto.getPassword())
         ).ap(LoginDTO::new)
           .toEither()
