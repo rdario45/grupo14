@@ -41,17 +41,38 @@ class ListDesignEnterprise extends Component {
                     this.props.handleClick("Se ha generado un error listando los diseños.", 'error');
             })
             .then(designs => {
-                if (designs && designs.length > 0)
-                    this.setState({ designs: designs });
+                this.setState({ designs: designs });
             });
     }
     render() {
         const { labels, designs } = this.state;
         if (!designs || designs.length === 0) {
             return (
-                <Card style={{ marginLeft: '10%', marginRight: '10%', marginTop: '5%' }}>
-
-                </Card>
+                <div className="content">
+                    <Grid fluid>
+                        <Row>
+                            <Col md={12}>
+                                <Card
+                                    title="Listado de diseños"
+                                    ctTableFullWidth
+                                    ctTableResponsive
+                                    content={
+                                        <p>No hay diseños asociados al proyecto de la empresa.</p>
+                                    }
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={1}>
+                                <Button bsStyle="default"
+                                    fill
+                                    onClick={this.props.history.goBack}>Atrás</Button>
+                            </Col>
+                            <Col md={5}></Col>
+                            <Col md={6}></Col>
+                        </Row>
+                    </Grid>
+                </div>
             );
         }
         return (
