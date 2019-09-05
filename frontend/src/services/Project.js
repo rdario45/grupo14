@@ -10,7 +10,7 @@ export class ProjectService {
             //headers: header.getAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/projects/company/${enterpriseId}?page=${page}`, requestOptions)
+        return fetch(`/api/projects/company/${enterpriseId}?page=${page}`, requestOptions)
     }
     get(projectId){
         const requestOptions = {
@@ -19,7 +19,7 @@ export class ProjectService {
             //headers: header.getAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/projects/${projectId}`, requestOptions)
+        return fetch(`/api/projects/${projectId}`, requestOptions)
     }
     create(project){
         const requestOptions = {
@@ -29,7 +29,7 @@ export class ProjectService {
             cache: 'default',
             body: JSON.stringify(project)
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/projects`, requestOptions)
+        return fetch(`$/api/projects`, requestOptions)
     }
     update(projectId, project){
         const requestOptions = {
@@ -39,7 +39,7 @@ export class ProjectService {
             cache: 'default',
             body: JSON.stringify(project)
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/projects/${projectId}`, requestOptions)
+        return fetch(`/api/projects/${projectId}`, requestOptions)
     }
     delete(projectId){
         const requestOptions = {
@@ -48,7 +48,7 @@ export class ProjectService {
             //headers: header.getAuthorization(),
             cache: 'default'
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/projects/${projectId}`, requestOptions)
+        return fetch(`/api/projects/${projectId}`, requestOptions)
     }
 }
 
