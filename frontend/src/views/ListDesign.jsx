@@ -114,8 +114,8 @@ class ListDesign extends Component {
                     this.props.handleClick("Se ha generado un error listando los diseños.", 'error');
             })
             .then(designs => {
-                this.setState({ designs: designs });
-                this.setState({ totalItems: 36 });
+                this.setState({ designs: designs.designs });
+                this.setState({ totalItems: designs.count });
             });
     }
     openModalImage(designId, fileName) {

@@ -105,8 +105,8 @@ class ListProjectsEnterprise extends Component {
                     this.props.handleClick("Se ha generado un error listando los proyectos.", 'error');
             })
             .then(projects => {
-                this.setState({ projects: projects });
-                this.setState({ totalItems: 36 });
+                this.setState({ projects: projects.projects });
+                this.setState({ totalItems: projects.count });
             });
     }
     handleChangePage(event, newPage) {
