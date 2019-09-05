@@ -29,7 +29,7 @@ export class ProjectService {
             cache: 'default',
             body: JSON.stringify(project)
         };
-        return fetch(`$/api/projects`, requestOptions)
+        return fetch(`/api/projects`, requestOptions)
     }
     update(projectId, project){
         const requestOptions = {
