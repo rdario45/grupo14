@@ -34,7 +34,6 @@ import static play.mvc.Results.*;
 
 public class DesignController {
 
-    private static final int PAGE_SIZE = 10;
     private DesignRepository repository;
     private DesignService designService;
     private final Config config;
@@ -79,16 +78,18 @@ public class DesignController {
     }
 
     public Result findDesignsByPojectPaginated(int projectId, int page) {
-        int offset = (page - 1) * PAGE_SIZE;
-        DesignsPaginatedDTO result = repository.findByProjectPaginated(projectId, offset, PAGE_SIZE)
+        int pageSize = config.getInt("pagination.size");
+        int offset = (page - 1) * pageSize;
+        DesignsPaginatedDTO result = repository.findByProjectPaginated(projectId, offset, pageSize)
           .map1(list -> list.map(DesignMapper::fromDesignToDTO))
           .apply(DesignsPaginatedDTO::new);
         return ok(Json.toJson(result));
     }
 
     public Result findDesignsByPojectAndStatusPaginated(int projectId, String status, int page) {
-        int offset = (page - 1) * PAGE_SIZE;
-        DesignsPaginatedDTO result = repository.findByProjectAndStatus(projectId, DesignStatus.of(status), offset, PAGE_SIZE)
+        int pageSize = config.getInt("pagination.size");
+        int offset = (page - 1) * pageSize;
+        DesignsPaginatedDTO result = repository.findByProjectAndStatus(projectId, DesignStatus.of(status), offset, pageSize)
           .map1(list -> list.map(DesignMapper::fromDesignToDTO))
           .apply(DesignsPaginatedDTO::new);
         return ok(Json.toJson(result));

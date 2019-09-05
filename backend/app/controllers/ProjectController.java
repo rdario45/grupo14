@@ -3,13 +3,13 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
+import com.typesafe.config.Config;
 import controllers.dto.ProjectDTO;
 import controllers.dto.ProjectsPaginatedDTO;
 import domain.Project;
 import infraestructure.acl.project.ProjectMapper;
 import infraestructure.acl.project.ProjectValidator;
 import infraestructure.repository.project.ProjectRepository;
-import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
@@ -23,12 +23,13 @@ import static play.mvc.Results.*;
 
 public class ProjectController {
 
-    private static final int PAGE_SIZE = 10;
     private ProjectRepository repository;
+    private final Config config;
 
     @Inject
-    public ProjectController(ProjectRepository repository) {
+    public ProjectController(ProjectRepository repository, Config config) {
         this.repository = repository;
+        this.config = config;
     }
 
     public Result findProject(int id) {
@@ -41,9 +42,10 @@ public class ProjectController {
     }
 
     public Result findProjectsByCompanyPaginated(int id, int page) {
-        int offset = (page - 1) * PAGE_SIZE;
+        int pageSize = config.getInt("pagination.size");
+        int offset = (page - 1) * pageSize;
 
-        ProjectsPaginatedDTO result = repository.findByCompanyPaginated(id, offset, PAGE_SIZE)
+        ProjectsPaginatedDTO result = repository.findByCompanyPaginated(id, offset, pageSize)
           .map1(list -> list.map(ProjectMapper::toDTO))
           .apply(ProjectsPaginatedDTO::new);
 
