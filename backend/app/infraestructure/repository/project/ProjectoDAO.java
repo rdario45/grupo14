@@ -18,7 +18,7 @@ public interface ProjectoDAO {
     @SqlQuery("SELECT * FROM projects WHERE company_id = :companyId ORDER BY timestamp DESC LIMIT :offset, :limit ")
     List<ProjectRecord> findByCompany(@Bind("companyId") int companyId, @Bind("offset") int offset, @Bind("limit") int limit);
 
-    @SqlQuery("SELECT * FROM projects WHERE company_id = :companyId ")
+    @SqlQuery("SELECT count(*) FROM projects WHERE company_id = :companyId ")
     int count(@Bind("companyId") int companyId);
 
     @SqlUpdate("INSERT INTO projects ( " +
