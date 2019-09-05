@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
 import controllers.dto.ProjectDTO;
+import controllers.dto.ProjectsPaginatedDTO;
 import domain.Project;
 import infraestructure.acl.project.ProjectMapper;
 import infraestructure.acl.project.ProjectValidator;
 import infraestructure.repository.project.ProjectRepository;
+import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
@@ -40,7 +42,12 @@ public class ProjectController {
 
     public Result findProjectsByCompanyPaginated(int id, int page) {
         int offset = (page - 1) * PAGE_SIZE;
-        return ok(Json.toJson(repository.findByCompanyPaginated(id, offset, PAGE_SIZE).map(ProjectMapper::fromAccountToDTO)));
+
+        ProjectsPaginatedDTO result = repository.findByCompanyPaginated(id, offset, PAGE_SIZE)
+          .map1(list -> list.map(ProjectMapper::toDTO))
+          .apply(ProjectsPaginatedDTO::new);
+
+        return ok(Json.toJson(result));
     }
 
     public Result createProject() {

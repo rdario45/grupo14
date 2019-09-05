@@ -12,6 +12,9 @@ import java.util.List;
 @RegisterMapper(ProjectoMapperDAO.class)
 public interface ProjectoDAO {
 
+    @SqlQuery("SELECT count(*) FROM projects")
+    int count();
+
     @SqlQuery("SELECT * FROM projects WHERE id = :id")
     ProjectRecord find(@Bind("id") int id);
 

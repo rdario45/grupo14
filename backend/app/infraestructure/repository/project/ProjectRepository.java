@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import domain.Project;
 import infraestructure.acl.project.ProjectMapper;
 import infraestructure.repository.project.records.ProjectRecord;
+import io.vavr.Tuple;
+import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import io.vavr.concurrent.Future;
 import io.vavr.control.Option;
@@ -24,9 +26,10 @@ public class ProjectRepository {
           .map(ProjectMapper::fromRecordToProject);
     }
 
-    public List<Project> findByCompanyPaginated(int id, int offset, int limit) {
-        return List.ofAll(db.onDemand(ProjectoDAO.class).findByCompany(id, offset, limit))
-          .map(ProjectMapper::fromRecordToProject);
+    public Tuple2<List<Project>, Integer> findByCompanyPaginated(int id, int offset, int limit) {
+        java.util.List<ProjectRecord> projects = db.onDemand(ProjectoDAO.class).findByCompany(id, offset, limit);
+        int count = db.onDemand(ProjectoDAO.class).count();
+        return Tuple.of(List.ofAll(projects).map(ProjectMapper::fromRecordToProject), count);
     }
 
     public Future<Project> save(Project project) {

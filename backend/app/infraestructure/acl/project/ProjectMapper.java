@@ -9,10 +9,10 @@ import play.libs.Json;
 public class ProjectMapper {
 
     public static JsonNode toJsonDTO(Project project) {
-        return Json.toJson(ProjectMapper.fromAccountToDTO(project));
+        return Json.toJson(ProjectMapper.toDTO(project));
     }
 
-    public static ProjectDTO fromAccountToDTO(Project project) {
+    public static ProjectDTO toDTO(Project project) {
         return new ProjectDTO(
           project.getId(),
           project.getName(),
