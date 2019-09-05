@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import controllers.dto.CreateDesignDTO;
+import controllers.dto.DesignsPaginatedDTO;
 import domain.Design;
 import domain.DesignStatus;
 import infraestructure.acl.design.DesignMapper;
@@ -72,12 +73,18 @@ public class DesignController {
 
     public Result findDesignsByPojectPaginated(int projectId, int page) {
         int offset = (page - 1) * PAGE_SIZE;
-        return ok(Json.toJson(repository.findByProjectPaginated(projectId, offset, PAGE_SIZE).map(DesignMapper::fromDesignToDTO)));
+        DesignsPaginatedDTO result = repository.findByProjectPaginated(projectId, offset, PAGE_SIZE)
+          .map1(list -> list.map(DesignMapper::fromDesignToDTO))
+          .apply(DesignsPaginatedDTO::new);
+        return ok(Json.toJson(result));
     }
 
     public Result findDesignsByPojectAndStatusPaginated(int projectId, String status, int page) {
         int offset = (page - 1) * PAGE_SIZE;
-        return ok(Json.toJson(repository.findByProjectAndStatus(projectId, DesignStatus.of(status), offset, PAGE_SIZE).map(DesignMapper::fromDesignToDTO)));
+        DesignsPaginatedDTO result = repository.findByProjectAndStatus(projectId, DesignStatus.of(status), offset, PAGE_SIZE)
+          .map1(list -> list.map(DesignMapper::fromDesignToDTO))
+          .apply(DesignsPaginatedDTO::new);
+        return ok(Json.toJson(result));
     }
 
     public Result createDesign() {

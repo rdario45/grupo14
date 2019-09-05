@@ -5,6 +5,8 @@ import domain.Design;
 import domain.DesignStatus;
 import infraestructure.acl.design.DesignMapper;
 import infraestructure.repository.design.records.DesignRecord;
+import io.vavr.Tuple;
+import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import io.vavr.concurrent.Future;
 import io.vavr.control.Option;
@@ -29,14 +31,16 @@ public class DesignRepository {
           .map(DesignMapper::fromRecordToDesign);
     }
 
-    public List<Design> findByProjectPaginated(int projectId, int offset, int limit) {
-        return List.ofAll(db.onDemand(DesignDAO.class).findByProject(projectId, offset, limit))
-          .map(DesignMapper::fromRecordToDesign);
+    public Tuple2<List<Design>, Integer> findByProjectPaginated(int projectId, int offset, int limit) {
+        List<Design> designs = List.ofAll(db.onDemand(DesignDAO.class).findByProject(projectId, offset, limit)).map(DesignMapper::fromRecordToDesign);
+        int count = db.onDemand(DesignDAO.class).count(projectId);
+        return Tuple.of(designs, count);
     }
 
-    public List<Design> findByProjectAndStatus(int projectId, DesignStatus status, int offset, int limit) {
-        return List.ofAll(db.onDemand(DesignDAO.class).findByProjectAndStatus(projectId, status, offset, limit))
-          .map(DesignMapper::fromRecordToDesign);
+    public Tuple2<List<Design>, Integer> findByProjectAndStatus(int projectId, DesignStatus status, int offset, int limit) {
+        List<Design> designs = List.ofAll(db.onDemand(DesignDAO.class).findByProjectAndStatus(projectId, status, offset, limit)).map(DesignMapper::fromRecordToDesign);
+        int count = db.onDemand(DesignDAO.class).countStatus(projectId, status);
+        return Tuple.of(designs, count);
     }
 
     public void update(Design design) {

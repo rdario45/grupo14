@@ -28,7 +28,7 @@ public class ProjectRepository {
 
     public Tuple2<List<Project>, Integer> findByCompanyPaginated(int id, int offset, int limit) {
         java.util.List<ProjectRecord> projects = db.onDemand(ProjectoDAO.class).findByCompany(id, offset, limit);
-        int count = db.onDemand(ProjectoDAO.class).count();
+        int count = db.onDemand(ProjectoDAO.class).count(id);
         return Tuple.of(List.ofAll(projects).map(ProjectMapper::fromRecordToProject), count);
     }
 

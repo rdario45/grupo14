@@ -19,8 +19,14 @@ public interface DesignDAO {
     @SqlQuery("SELECT * FROM designs WHERE project_id = :projectId ORDER BY timestamp DESC LIMIT :offset, :limit")
     List<DesignRecord> findByProject(@Bind("projectId") int projectId, @Bind("offset") int offset, @Bind("limit") int limit);
 
+    @SqlQuery("SELECT count(*) FROM designs WHERE project_id = :projectId")
+    int count(@Bind("projectId") int projectId);
+
     @SqlQuery("SELECT * FROM designs WHERE project_id = :projectId AND designStatus = :status ORDER BY timestamp DESC LIMIT :offset, :limit")
     List<DesignRecord> findByProjectAndStatus(@Bind("projectId") int projectId, @Bind("status")  DesignStatus status, @Bind("offset") int offset, @Bind("limit") int limit);
+
+    @SqlQuery("SELECT count(*) FROM designs WHERE project_id = :projectId AND designStatus = :status ")
+    int countStatus(@Bind("projectId") int projectId, @Bind("status") DesignStatus status );
 
     @SqlQuery("SELECT * FROM designs WHERE id = :id")
     DesignRecord find(@Bind("id") int id);

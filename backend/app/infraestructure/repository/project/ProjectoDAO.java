@@ -12,14 +12,14 @@ import java.util.List;
 @RegisterMapper(ProjectoMapperDAO.class)
 public interface ProjectoDAO {
 
-    @SqlQuery("SELECT count(*) FROM projects")
-    int count();
-
     @SqlQuery("SELECT * FROM projects WHERE id = :id")
     ProjectRecord find(@Bind("id") int id);
 
     @SqlQuery("SELECT * FROM projects WHERE company_id = :companyId ORDER BY timestamp DESC LIMIT :offset, :limit ")
     List<ProjectRecord> findByCompany(@Bind("companyId") int companyId, @Bind("offset") int offset, @Bind("limit") int limit);
+
+    @SqlQuery("SELECT * FROM projects WHERE company_id = :companyId ")
+    int count(@Bind("companyId") int companyId);
 
     @SqlUpdate("INSERT INTO projects ( " +
       " name, " +
