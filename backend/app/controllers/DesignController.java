@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.typesafe.config.Config;
 import controllers.dto.CreateDesignDTO;
 import controllers.dto.DesignsPaginatedDTO;
 import domain.Design;
@@ -23,7 +24,10 @@ import play.mvc.Results;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
+import java.util.UUID;
 
 import static play.mvc.Http.Context.Implicit.request;
 import static play.mvc.Results.*;
@@ -33,11 +37,14 @@ public class DesignController {
     private static final int PAGE_SIZE = 10;
     private DesignRepository repository;
     private DesignService designService;
+    private final Config config;
+
 
     @Inject
-    public DesignController(DesignRepository repository, DesignService designService) {
+    public DesignController(DesignRepository repository, DesignService designService, Config config) {
         this.repository = repository;
         this.designService = designService;
+        this.config = config;
     }
 
     public Result download(int projectId) {
@@ -93,9 +100,16 @@ public class DesignController {
         Map<String, String[]> stringMap = body.asFormUrlEncoded();
         Files.TemporaryFile file = picture.getRef();
 
+        String workdir = config.getString("files.workdir");
+        File originalPath = new File(workdir + UUID.randomUUID().toString());
+        originalPath.mkdir();
+        String originalFullPath = originalPath.getAbsolutePath() + "/" + picture.getFilename();
+        Path path = file.copyTo(Paths.get(originalFullPath), true);
+        Logger.debug("*** new file: " + originalFullPath);
+
         JsonNode json = Json.newObject()
           .put("fileName", picture.getFilename())
-          .put("filePath", file.path().toAbsolutePath().toString())
+          .put("filePath", path.toString())
           .put("email", getFirst(stringMap.get("email")))
           .put("firstName", getFirst(stringMap.get("firstName")))
           .put("lastName", getFirst(stringMap.get("lastName")))
