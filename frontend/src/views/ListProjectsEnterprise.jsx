@@ -126,7 +126,7 @@ class ListProjectsEnterprise extends Component {
                         <Row>
                             <Col md={12}>
                                 <Card
-                                    title="Listado de diseños"
+                                    title="Listado de proyectos"
                                     ctTableFullWidth
                                     ctTableResponsive
                                     content={
