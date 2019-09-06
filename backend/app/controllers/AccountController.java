@@ -45,7 +45,7 @@ public class AccountController {
 
         Either<Result, Result> either = getCreateAccountDTO(json)
           .flatMap(dto -> accountService.createAccount(dto)
-            .onFailure(throwable -> Logger.error("Error creando cuenta para: " + dto.getEmail(), throwable))
+            .onFailure(throwable -> Logger.error("Error creando cuenta para: " + dto.getEmail()))
             .toEither(getInternalServerError("Error creando cuenta para: " + dto.getEmail()))
             .map(AccountMapper::toJsonDTO)
             .map(Results::ok)

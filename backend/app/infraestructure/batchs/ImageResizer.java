@@ -51,7 +51,7 @@ public class ImageResizer {
                 g.drawString(text, 10, tempPNG.getHeight() - 30);
                 g.dispose();
             }
-            newFilePNG = new File(targetPath+"_New.png");
+            newFilePNG = new File(targetPath+".png");
             ImageIO.write(tempPNG, "png", newFilePNG);            
         }catch(IOException ex){
             System.out.println ("No se pudo convertir");

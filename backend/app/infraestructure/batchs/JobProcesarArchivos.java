@@ -42,7 +42,10 @@ public class JobProcesarArchivos {
             SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
             resizeImg.processImage(design.getOriginalPath(), targetFile,
               800, 600, true, design.getEmail() + " \n\r " + formatter.format(design.getUploadDate().toDate()));
-            design.setResizedPath(targetFile);
+
+
+
+            design.setResizedPath(targetFile+".png");
             design.setDesignStatus(DesignStatus.AVAILABLE);
             sendEmailSSL.send(design.getEmail(),
               "Su diseño ha sido aprobado",
