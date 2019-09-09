@@ -118,8 +118,13 @@ class ListDesign extends Component {
                 this.setState({ totalItems: designs.count });
             });
     }
-    openModalImage(designId, fileName) {
-        service.downloadProcessed(designId)
+    openModalImage(designId, fileName, isProcessed) {
+      let serviceDownload;
+      if (isProcessed)
+        serviceDownload = service.downloadProcessed(designId);
+      else
+        serviceDownload = service.downloadOriginal(designId);
+        serviceDownload
             .then(response => {
                 if (response.ok)
                     return response.blob();
