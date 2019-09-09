@@ -9,7 +9,7 @@ export class EnterpriseService {
             headers: header.getWithoutAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/exists-account/${email}`, requestOptions);
+        return fetch(`/api/exists-account/${email}`, requestOptions);
     }
     create(enterprise) {
         const requestOptions = {
@@ -18,7 +18,7 @@ export class EnterpriseService {
             cache: 'default',
             body: JSON.stringify(enterprise)
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/create-account`, requestOptions)
+        return fetch(`/api/create-account`, requestOptions)
     }
 }
 
