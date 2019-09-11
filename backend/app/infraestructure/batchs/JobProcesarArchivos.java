@@ -48,7 +48,7 @@ public class JobProcesarArchivos {
             sendEmailSSL.send(design.getEmail(),
               "Su diseño ha sido aprobado",
               "<html><b>Su diseño se encuentra aprobado y ya puede ser visualizado en la plataforma.</b><br><br>" +
-			  "Puede visualizar los diseñoas en la siguiente URL: <a href=''/> " + 
+			  "Puede visualizar los diseños en la siguiente URL: <a href=''/> " + 
 			  "<html/>");
             designService.updateDesign(design);
         }
