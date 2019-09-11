@@ -54,7 +54,5 @@ public class JobProcesarArchivos {
         }
 
 
-        designs.forEach(design -> {
-
     }
 }
