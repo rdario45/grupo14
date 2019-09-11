@@ -34,10 +34,10 @@ public class SendEmailSSL {
             MimeMessage message = new MimeMessage(session);
             message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
             message.setSubject(sub);
-            message.setText(msg);
+            message.setText(msg,"ISO-8859-1","html");
             //send message
             Transport.send(message);
-            return "Message sent successfully";
+            return "Mensaje enviado con éxito";
         } catch (MessagingException e) {return "Error al enviar el mensaje";}
     }
 
