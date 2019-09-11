@@ -25,9 +25,7 @@ public class JobProcesarArchivos {
         SendEmailSSL sendEmailSSL = new SendEmailSSL();
         sendEmailSSL.connect("designMatch14@gmail.com", "rvfkzapfyonjrvbz");
 
-        designs.forEach(design -> {
-            Logger.debug(">>>>> ID:[" + design.getId() + "] START:[" + DateTime.now(DateTimeZone.forID("America/Bogota")) + "]");
-        });
+       
 
         for (Design design : designs) {
 
@@ -51,13 +49,12 @@ public class JobProcesarArchivos {
 			  "Puede visualizar los diseños en la siguiente URL: <a href=''/> " + 
 			  "<html/>");
             designService.updateDesign(design);
+			Logger.debug(">>>>> ID:[" + design.getId() + "] START: [" + formatter.format(design.getUploadDate().toDate()) +
+							"] FINISH:[" + DateTime.now(DateTimeZone.forID("America/Bogota")) + "]");
         }
 
 
         designs.forEach(design -> {
-            Logger.debug(">>>>> ID:[" + design.getId() + "] FINISH:[" + DateTime.now(DateTimeZone.forID("America/Bogota")) + "]");
-        });
-
 
     }
 }
