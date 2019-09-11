@@ -30,7 +30,8 @@ public class JobProcesarArchivos {
         for (Design design : designs) {
 
             String targetFile = design.getOriginalPath().substring(0, design.getOriginalPath().lastIndexOf("/") + 1) + "resized/";
-
+			Logger.info(">>> " + design.getOriginalPath() + ">>>");
+			Logger.info(">>> " + targetFile + ">>>");
             File f = new File(targetFile);
             f.mkdir();
 
@@ -38,16 +39,17 @@ public class JobProcesarArchivos {
               design.getOriginalPath().lastIndexOf("."));
 
             SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-            resizeImg.processImage(design.getOriginalPath(), targetFile,
+            boolean sendMail = resizeImg.processImage(design.getOriginalPath(), targetFile,
               800, 600, true, design.getEmail() + " \n\r " + formatter.format(design.getUploadDate().toDate()));
 
             design.setResizedPath(targetFile+".png");
             design.setDesignStatus(DesignStatus.AVAILABLE);
-            sendEmailSSL.send(design.getEmail(),
-              "Su diseño ha sido aprobado",
-              "<html><b>Su diseño se encuentra aprobado y ya puede ser visualizado en la plataforma.</b><br><br>" +
-			  "Puede visualizar los diseños en la siguiente URL: <a href=''/> " + 
-			  "<html/>");
+            if (sendMail)
+				sendEmailSSL.send(design.getEmail(),
+				  "Su diseño ha sido aprobado",
+				  "<html><b>Su diseño se encuentra aprobado y ya puede ser visualizado en la plataforma.</b><br><br>" +
+				  "Puede visualizar los diseños en la siguiente URL: <a href=''/> " + 
+				  "<html/>");
             designService.updateDesign(design);
 			Logger.debug(">>>>> ID:[" + design.getId() + "] START: [" + formatter.format(design.getUploadDate().toDate()) +
 							"] FINISH:[" + DateTime.now(DateTimeZone.forID("America/Bogota")) + "]");

@@ -38,13 +38,18 @@ public class ImageResizer {
         File newFilePNG = null;
         try{
             img = ImageIO.read(new File(sourcePath));
-            double aspectRatio = 1;
-            if (keepAspectRatio){
+            double aspectRatio = 1;          
+			
+			if (keepAspectRatio){
                 aspectRatio = (double) img.getWidth(null)/(double) img.getHeight(null);
-                tempPNG = resizeImage(img, width, (int) (width/aspectRatio));            
+                if (aspectRatio <1)
+                    tempPNG = resizeImage(img, (int) (height*aspectRatio), height);            
+                else
+                    tempPNG = resizeImage(img, width, (int) (width/aspectRatio));            
             }else{
                 tempPNG = resizeImage(img, width, height);            
             }
+			
             if (text != null) {
                 Graphics g = tempPNG.getGraphics();
                 g.setFont(g.getFont().deriveFont(22f));
@@ -53,8 +58,7 @@ public class ImageResizer {
             }
             newFilePNG = new File(targetPath+".png");
             ImageIO.write(tempPNG, "png", newFilePNG);            
-        }catch(IOException ex){
-            System.out.println ("No se pudo convertir");
+        }catch(IOException ex){			            
             return false;
         }
         return true;
