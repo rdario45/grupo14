@@ -1,6 +1,7 @@
 package infraestructure.repository.design;
 
 import domain.DesignStatus;
+import infraestructure.repository.design.records.DesignCompanyRecord;
 import infraestructure.repository.design.records.DesignRecord;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
@@ -13,8 +14,6 @@ import java.util.List;
 @RegisterMapper(DesignMapperDAO.class)
 public interface DesignDAO {
 
-    @SqlQuery("SELECT * FROM designs where designStatus = 'PROCESSING'")
-    List<DesignRecord> findPendingDesigns();
 
     @SqlQuery("SELECT * FROM designs WHERE project_id = :projectId ORDER BY timestamp DESC LIMIT :offset, :limit")
     List<DesignRecord> findByProject(@Bind("projectId") int projectId, @Bind("offset") int offset, @Bind("limit") int limit);

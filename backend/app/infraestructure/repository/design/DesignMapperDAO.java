@@ -1,5 +1,6 @@
 package infraestructure.repository.design;
 
+import infraestructure.repository.design.records.DesignCompanyRecord;
 import infraestructure.repository.design.records.DesignRecord;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;

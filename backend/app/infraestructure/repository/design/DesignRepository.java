@@ -3,7 +3,9 @@ package infraestructure.repository.design;
 import com.google.inject.Inject;
 import domain.Design;
 import domain.DesignStatus;
+import infraestructure.acl.design.DesignCompanyMapper;
 import infraestructure.acl.design.DesignMapper;
+import infraestructure.repository.design.records.DesignCompanyRecord;
 import infraestructure.repository.design.records.DesignRecord;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
@@ -22,8 +24,8 @@ public class DesignRepository {
     }
 
     public List<Design> findPendingAll() {
-        return List.ofAll(db.onDemand(DesignDAO.class).findPendingDesigns())
-          .map(DesignMapper::fromRecordToDesign);
+        return List.ofAll(db.onDemand(DesignCompanyDAO.class).findPendingDesigns())
+          .map(DesignCompanyMapper::fromRecordToDesign);
     }
 
     public Option<Design> find(int id) {
