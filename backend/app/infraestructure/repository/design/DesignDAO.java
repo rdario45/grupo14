@@ -36,6 +36,7 @@ public interface DesignDAO {
       " firstName, " +
       " lastName," +
       " designStatus, " +
+      " folder, " +
       " fileName, " +
       " originalPath, " +
       " resizedPath, " +
@@ -46,6 +47,7 @@ public interface DesignDAO {
       " :r.firstName, " +
       " :r.lastName, " +
       " :r.designStatus, " +
+      " :r.folder, " +
       " :r.fileName, " +
       " :r.originalPath, " +
       " :r.resizedPath, " +
@@ -62,6 +64,7 @@ public interface DesignDAO {
       " firstName = :r.firstName, " +
       " lastName = :r.lastName, " +
       " designStatus = :r.designStatus," +
+      " folder = :r.folder,  " +
       " fileName = :r.fileName,  " +
       " originalPath = :r.originalPath, " +
       " resizedPath = :r.resizedPath, " +

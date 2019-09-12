@@ -2,6 +2,7 @@ package controllers.dto;
 
 public class CreateDesignDTO {
 
+    private String folder;
     private String fileName;
     private String filePath;
     private String email;
@@ -14,7 +15,8 @@ public class CreateDesignDTO {
         // json
     }
 
-    public CreateDesignDTO(String fileName, String filePath, String email, String firstName, String lastName, String price, int projectId) {
+    public CreateDesignDTO(String folder, String fileName, String filePath, String email, String firstName, String lastName, String price, int projectId) {
+        this.folder = folder;
         this.fileName = fileName;
         this.filePath = filePath;
         this.email = email;
@@ -22,6 +24,14 @@ public class CreateDesignDTO {
         this.lastName = lastName;
         this.price = price;
         this.projectId = projectId;
+    }
+
+    public String getFolder() {
+        return folder;
+    }
+
+    public void setFolder(String folder) {
+        this.folder = folder;
     }
 
     public String getFileName() {

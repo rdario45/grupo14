@@ -102,13 +102,17 @@ public class DesignController {
         Files.TemporaryFile file = picture.getRef();
 
         String workdir = config.getString("files.workdir");
-        File originalPath = new File(workdir + UUID.randomUUID().toString());
-        originalPath.mkdir();
+        UUID uuid = UUID.randomUUID();
+        File originalPath = createFilePath(workdir, uuid);
         String originalFullPath = originalPath.getAbsolutePath() + "/" + picture.getFilename();
+
         Path path = file.copyTo(Paths.get(originalFullPath), true);
-        Logger.debug("*** new file: " + originalFullPath);
+
+        // TODO: eliminar el file temporal.
+        Logger.info("NEW_FILE: " + originalFullPath);
 
         JsonNode json = Json.newObject()
+          .put("folder", uuid.toString())
           .put("fileName", picture.getFilename())
           .put("filePath", path.toString())
           .put("email", getFirst(stringMap.get("email")))
@@ -127,6 +131,12 @@ public class DesignController {
           );
         return either.isRight() ? either.get() : either.getLeft();
 
+    }
+
+    private File createFilePath(String workdir, UUID uuid) {
+        File originalPath = new File(workdir +  "original/"  + uuid.toString());
+        originalPath.mkdirs();
+        return originalPath;
     }
 
     private String getFirst(String[] nombres) {

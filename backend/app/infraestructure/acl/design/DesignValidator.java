@@ -14,6 +14,7 @@ public class DesignValidator {
 
     public static Either<List<String>, Design> validate(CreateDesignDTO dto) {
         return Validation.combine(
+          Validation.valid(dto.getFolder()),
           validateFileName(dto.getFileName()),
           Validation.valid(dto.getFilePath()),
           validateEmail(dto.getEmail()),

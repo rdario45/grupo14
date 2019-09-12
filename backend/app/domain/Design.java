@@ -3,6 +3,7 @@ package domain;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class Design {
 
@@ -11,6 +12,7 @@ public class Design {
     private String firstName;
     private String lastName;
     private DesignStatus designStatus;
+    private String folder;
     private String fileName;
     private String originalPath;
     private String resizedPath;
@@ -18,11 +20,12 @@ public class Design {
     private BigDecimal price;
     private int projectId;
 
-    public Design(String email, String firstName, String lastName, DesignStatus designStatus, String fileName, String originalPath, DateTime uploadDate, BigDecimal price, int projectId) {
+    public Design(String email, String firstName, String lastName, DesignStatus designStatus, String folder, String fileName, String originalPath, DateTime uploadDate, BigDecimal price, int projectId) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.designStatus = designStatus;
+        this.folder = folder;
         this.fileName = fileName;
         this.originalPath = originalPath;
         this.uploadDate = uploadDate;
@@ -30,12 +33,13 @@ public class Design {
         this.projectId = projectId;
     }
 
-    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String fileName, String originalPath, String resizedPath, DateTime uploadDate, BigDecimal price, int projectId) {
+    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String folder, String fileName, String originalPath, String resizedPath, DateTime uploadDate, BigDecimal price, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.designStatus = designStatus;
+        this.folder = folder;
         this.fileName = fileName;
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
@@ -82,6 +86,14 @@ public class Design {
 
     public void setDesignStatus(DesignStatus designStatus) {
         this.designStatus = designStatus;
+    }
+
+    public String getFolder() {
+        return folder;
+    }
+
+    public void setFolder(String folder) {
+        this.folder = folder;
     }
 
     public String getFileName() {

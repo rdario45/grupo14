@@ -43,12 +43,10 @@ public class ProjectRepository {
 
     public Future<Option<Project>> update(Project project, int id) {
         ProjectRecord record = ProjectMapper.fromProjectToRecord(project, id);
-
         return Future.of(() -> {
             int rows = db.onDemand(ProjectoDAO.class).update(record, id);
             return rows > 0 ? Option.some(record).map(ProjectMapper::fromRecordToProject) : Option.none();
         });
-
     }
 
     public Future<Option<Integer>> delete(int id) {

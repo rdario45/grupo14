@@ -10,7 +10,7 @@ export class DesignService {
             //headers: header.getAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/api/designs/project/${projectId}?page=${page}`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs/project/${projectId}?page=${page}`, requestOptions)
     }
     getAllProcessed(projectId, page) {
         const requestOptions = {
@@ -19,7 +19,7 @@ export class DesignService {
             //headers: header.getAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/api/designs/project/${projectId}/status/AVAILABLE?page=${page}`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs/project/${projectId}/status/AVAILABLE?page=${page}`, requestOptions)
     }
     get(designId) {
         const requestOptions = {
@@ -28,7 +28,7 @@ export class DesignService {
             //headers: header.getAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/api/designs/${designId}`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs/${designId}`, requestOptions)
     }
     downloadOriginal(designId) {
         const requestOptions = {
@@ -37,7 +37,7 @@ export class DesignService {
             //headers: header.getAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/api/designs/${designId}/download`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs/${designId}/download`, requestOptions)
     }
     downloadProcessed(designId) {
         const requestOptions = {
@@ -46,7 +46,7 @@ export class DesignService {
             //headers: header.getAuthorization(),
             cache: 'default',
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/api/designs/${designId}/download-resized`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs/${designId}/download-resized`, requestOptions)
     }
     create(designs) {
         const requestOptions = {
@@ -56,7 +56,7 @@ export class DesignService {
             cache: 'default',
             body: designs
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/api/designs`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/designs`, requestOptions)
     }
 }
 

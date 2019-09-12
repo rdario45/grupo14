@@ -2,7 +2,6 @@
 
 # --- !Ups
 
-
 CREATE TABLE accounts (
 	email varchar(100) NOT NULL,
 	password varchar(200) NOT NULL,
@@ -44,7 +43,8 @@ CREATE TABLE designs (
   firstName varchar(100) DEFAULT NULL,
   lastName varchar(100) DEFAULT NULL,
   price numeric(12,2) NOT NULL,
-  designStatus varchar(10) DEFAULT 'PROCESSING',
+  designStatus varchar(10) NOT NULL,
+  folder varchar(50) NOT NULL,
   fileName varchar(50) NOT NULL,
   originalPath varchar(250) NOT NULL,
   resizedPath varchar(250) DEFAULT NULL,

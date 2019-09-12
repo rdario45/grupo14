@@ -9,6 +9,7 @@ public class DesignDTO {
     private String firstName;
     private String lastName;
     private String designStatus;
+    private String folder;
     private String fileName;
     private String originalPath;
     private String resizedPath;
@@ -20,12 +21,13 @@ public class DesignDTO {
         // json
     }
 
-    public DesignDTO(int id, String email, String firstName, String lastName, String designStatus, String fileName, String originalPath, String resizedPath, String uploadDate, BigDecimal price, int projectId) {
+    public DesignDTO(int id, String email, String firstName, String lastName, String designStatus, String folder, String fileName, String originalPath, String resizedPath, String uploadDate, BigDecimal price, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.designStatus = designStatus;
+        this.folder = folder;
         this.fileName = fileName;
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
@@ -68,6 +70,14 @@ public class DesignDTO {
 
     public String getDesignStatus() {
         return designStatus;
+    }
+
+    public String getFolder() {
+        return folder;
+    }
+
+    public void setFolder(String folder) {
+        this.folder = folder;
     }
 
     public String getFileName() {

@@ -10,7 +10,7 @@ export class AccountService {
             cache: 'default',
             body: JSON.stringify(account)
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/api/login`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/login`, requestOptions)
     }
     logout() {
         const requestOptions = {
@@ -20,7 +20,7 @@ export class AccountService {
             cache: 'default',
             body: JSON.stringify({})
         };
-        return fetch(`${process.env.REACT_APP_BASE_API}/api/logout`, requestOptions)
+        return fetch(`${process.env.REACT_APP_BASE_API}/logout`, requestOptions)
     }
 }
 

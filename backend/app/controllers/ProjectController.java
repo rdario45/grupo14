@@ -33,12 +33,13 @@ public class ProjectController {
     }
 
     public Result findProject(int id) {
-        Either<Result, Result> either = repository.find(id)
+        return repository.find(id)
           .toEither(getNotFound("Not Found"))
           .map(ProjectMapper::toJsonDTO)
-          .map(Results::ok);
-
-        return either.isRight() ? either.get() : either.getLeft();
+          .fold(
+            result -> result,
+            Results::ok
+          );
     }
 
     public Result findProjectsByCompanyPaginated(int id, int page) {
