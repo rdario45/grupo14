@@ -8,7 +8,7 @@ import scala.concurrent.duration.Duration;
 import javax.inject.Inject;
 import java.util.concurrent.TimeUnit;
 
-public class ChronProcesarArchivos {
+public class    ChronProcesarArchivos {
 
     private final ActorSystem actorSystem;
     private final ExecutionContext executionContext;

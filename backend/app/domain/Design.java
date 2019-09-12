@@ -17,6 +17,7 @@ public class Design {
     private DateTime uploadDate;
     private BigDecimal price;
     private int projectId;
+    private Company company;
 
     public Design(String email, String firstName, String lastName, DesignStatus designStatus, String fileName, String originalPath, DateTime uploadDate, BigDecimal price, int projectId) {
         this.email = email;
@@ -28,6 +29,20 @@ public class Design {
         this.uploadDate = uploadDate;
         this.price = price;
         this.projectId = projectId;
+    }
+
+    public Design(String email, String firstName, String lastName, DesignStatus designStatus, String fileName,
+                  String originalPath, DateTime uploadDate, BigDecimal price, int projectId, int companyId, String companyName) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.designStatus = designStatus;
+        this.fileName = fileName;
+        this.originalPath = originalPath;
+        this.uploadDate = uploadDate;
+        this.price = price;
+        this.projectId = projectId;
+        this.company = new Company(companyId,companyName,null);
     }
 
     public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String fileName, String originalPath, String resizedPath, DateTime uploadDate, BigDecimal price, int projectId) {
@@ -43,6 +58,24 @@ public class Design {
         this.price = price;
         this.projectId = projectId;
     }
+
+    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String fileName,
+                  String originalPath, String resizedPath, DateTime uploadDate, BigDecimal price, int projectId, int companyId, String companyName) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.designStatus = designStatus;
+        this.fileName = fileName;
+        this.originalPath = originalPath;
+        this.resizedPath = resizedPath;
+        this.uploadDate = uploadDate;
+        this.price = price;
+        this.projectId = projectId;
+        this.company = new Company(companyId,companyName,null);
+    }
+
+
 
     public int getId() {
         return id;
@@ -130,5 +163,9 @@ public class Design {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+
+    public Company getCompany() {
+        return company;
     }
 }

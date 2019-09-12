@@ -44,11 +44,13 @@ public class JobProcesarArchivos {
 
             design.setResizedPath(targetFile+".png");
             design.setDesignStatus(DesignStatus.AVAILABLE);
+            String url = design.getCompany().getName().toLowerCase().replaceAll("[^a-zA-Z0-9]+","") + "-"
+                    + design.getCompany().getId();
             if (sendMail)
 				sendEmailSSL.send(design.getEmail(),
 				  "Su diseño ha sido aprobado",
 				  "<html><b>Su diseño se encuentra aprobado y ya puede ser visualizado en la plataforma.</b><br><br>" +
-				  "Puede visualizar los diseños en la siguiente URL: <a href=''/> " + 
+				  "Puede visualizar los diseños en la siguiente URL: <a href='" + url + "'/> " + url + "</a> " +
 				  "<html/>");
             designService.updateDesign(design);
 			Logger.debug(">>>>> ID:[" + design.getId() + "] START: [" + formatter.format(design.getUploadDate().toDate()) +

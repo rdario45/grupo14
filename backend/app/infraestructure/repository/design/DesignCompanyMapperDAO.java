@@ -8,12 +8,11 @@ import org.skife.jdbi.v2.tweak.ResultSetMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DesignMapperDAO implements ResultSetMapper<DesignRecord> {
+public class DesignCompanyMapperDAO implements ResultSetMapper<DesignCompanyRecord> {
 
     @Override
-    public DesignRecord map(int index, ResultSet r, StatementContext ctx) throws SQLException {
-            return new DesignRecord(
-
+    public DesignCompanyRecord map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+            return new DesignCompanyRecord(
                     r.getInt("id"),
                     r.getString("email"),
                     r.getString("firstName"),
@@ -24,10 +23,12 @@ public class DesignMapperDAO implements ResultSetMapper<DesignRecord> {
                     r.getString("resizedPath"),
                     r.getTimestamp("timestamp"),
                     r.getBigDecimal("price"),
-                    r.getInt("project_id")
+                    r.getInt("project_id"),
+                    r.getInt("company_id"),
+                    r.getString("name")
             );
+        }
 
-    }
 
 
 
