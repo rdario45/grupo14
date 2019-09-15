@@ -26,7 +26,7 @@
     El diagrama Entidad Relacion de la aplicacion es el siguiente.
     
     <!-- ![diagrama ER](images/diagrama-ER.png) -->
-    <img src="images/diagrama-er.png" alt="diagrama ER" width="800"/>
+    <img src="images/diagrama-ER.png" alt="diagrama ER" width="800"/>
 
     Como entidades principales, se ilustran la compañías, proyectos y diseños que se pueden gestionar en el sitio web. Sin embargo, es necesario tener en cuenta el uso de entidades de soporte como el manejo de sesiones, de cuentas y de status en los diseños. 
 
