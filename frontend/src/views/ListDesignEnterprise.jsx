@@ -141,6 +141,7 @@ class ListDesignEnterprise extends Component {
             });
     }
     downloadProcessed(designId, fileName) {
+        fileName = fileName.substr(0, fileName.lastIndexOf(".")) + ".png";
         service.downloadProcessed(designId)
             .then(response => {
                 if (response.ok)

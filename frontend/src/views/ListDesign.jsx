@@ -85,7 +85,7 @@ class ListDesign extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            labels: ["Id", "Fechan de publicación", "Ver diseño original", "Ver diseño procesado"],
+            labels: ["Id", "Fechan de publicación", "Ver diseño procesado"],
             designs: [],
             modals: {
                 isOpen: false,
@@ -256,12 +256,6 @@ class ListDesign extends Component {
                                                                 <i className="pe-7s-search text-info"></i>
                                                             </span>
                                                         </td>
-                                                        <td>
-                                                            <span style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
-                                                                onClick={() => { this.openModalImage(id, fileName); }}>
-                                                                <i className="pe-7s-search text-info"></i>
-                                                            </span>
-                                                        </td>
                                                     </tr>
                                                 )
                                             })}
@@ -270,7 +264,7 @@ class ListDesign extends Component {
                                             <tr>
                                                 <TablePagination
                                                     rowsPerPageOptions={[10]}
-                                                    colSpan={4}
+                                                    colSpan={3}
                                                     count={totalItems}
                                                     rowsPerPage={10}
                                                     page={currentPage}
