@@ -44,15 +44,18 @@
 
 #### Servicios utilizados de AWS
 
-| VPC   | Route 53  | EBS   | RDS   |
-|-------|-----------|-------|-------|
-|![trello](images/aws/vpc-logo.jpeg) |![trello](images/aws/Route53-logo.png) |![EBS](images/aws/ebs-logo.png) |![RDS](images/aws/rds-logo.png) |
+| VPC   | Route 53  | EC2   | EBS   | RDS   | SES   |
+|-------|-----------|-------|-------|-------|-------|
+|![trello](images/aws/vpc-logo.jpeg) |![trello](images/aws/Route53-logo.png) |![EC2](images/aws/ec2-logo.png) |![EBS](images/aws/ebs-logo.png) |![RDS](images/aws/rds-logo.png) |![SES](images/aws/ses-logo.png) |
 
 
 - Amazon Virtual Private Cloud (VPC)
 - Amazon Route 53
+- Amazon EC2
 - Amazon Elastic Block Store (EBS)
 - Amazon Relational Database Service (RDS)
+- Amazon Simple Email Service (SES)
+
 
 posiblemente
 - Amazon Elastic Compute Cloud / 
