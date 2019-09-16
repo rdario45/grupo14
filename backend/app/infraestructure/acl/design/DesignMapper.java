@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import controllers.dto.DesignDTO;
 import domain.Design;
 import domain.DesignStatus;
-import infraestructure.repository.design.records.DesignCompanyRecord;
 import infraestructure.repository.design.records.DesignRecord;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -24,7 +23,7 @@ public class DesignMapper {
           design.getEmail(),
           design.getFirstName(),
           design.getLastName(),
-          design.getDesignStatus().name(),
+          design.getStatus().name(),
           design.getFolder(),
           design.getFileName(),
           design.getOriginalPath(),
@@ -41,7 +40,7 @@ public class DesignMapper {
           record.getEmail(),
           record.getFirstName(),
           record.getLastName(),
-          DesignStatus.of(record.getDesignStatus()),
+          DesignStatus.of(record.getStatus()),
           record.getFolder(),
           record.getFileName(),
           record.getOriginalPath(),
@@ -57,7 +56,7 @@ public class DesignMapper {
           design.getEmail(),
           design.getFirstName(),
           design.getLastName(),
-          design.getDesignStatus().name(),
+          design.getStatus().name(),
           design.getFolder(),
           design.getFileName(),
           design.getOriginalPath(),

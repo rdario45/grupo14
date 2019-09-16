@@ -58,7 +58,7 @@ public class JobProcesarArchivos {
           true,
           textToAdd);
         design.setResizedPath(targetFile+".png");
-        design.setDesignStatus(DesignStatus.AVAILABLE);
+        design.setStatus(DesignStatus.AVAILABLE);
         if (sendMail) {
             sendEmailSSL.send(design.getEmail(),
               "Su diseño ha sido aprobado",

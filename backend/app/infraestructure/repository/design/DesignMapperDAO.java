@@ -1,6 +1,5 @@
 package infraestructure.repository.design;
 
-import infraestructure.repository.design.records.DesignCompanyRecord;
 import infraestructure.repository.design.records.DesignRecord;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
@@ -17,7 +16,7 @@ public class DesignMapperDAO implements ResultSetMapper<DesignRecord> {
           r.getString("email"),
           r.getString("firstName"),
           r.getString("lastName"),
-          r.getString("designStatus"),
+          r.getString("status"),
           r.getString("folder"),
           r.getString("fileName"),
           r.getString("originalPath"),

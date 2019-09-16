@@ -1,7 +1,6 @@
 package infraestructure.repository.design;
 
 import domain.DesignStatus;
-import infraestructure.repository.design.records.DesignCompanyRecord;
 import infraestructure.repository.design.records.DesignRecord;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
@@ -14,6 +13,8 @@ import java.util.List;
 @RegisterMapper(DesignMapperDAO.class)
 public interface DesignDAO {
 
+    @SqlQuery("SELECT * FROM designs WHERE status = 'PROCESSING'")
+    List<DesignRecord> findPendingDesigns();
 
     @SqlQuery("SELECT * FROM designs WHERE project_id = :projectId ORDER BY timestamp DESC LIMIT :offset, :limit")
     List<DesignRecord> findByProject(@Bind("projectId") int projectId, @Bind("offset") int offset, @Bind("limit") int limit);
@@ -21,10 +22,10 @@ public interface DesignDAO {
     @SqlQuery("SELECT count(*) FROM designs WHERE project_id = :projectId")
     int count(@Bind("projectId") int projectId);
 
-    @SqlQuery("SELECT * FROM designs WHERE project_id = :projectId AND designStatus = :status ORDER BY timestamp DESC LIMIT :offset, :limit")
+    @SqlQuery("SELECT * FROM designs WHERE project_id = :projectId AND status = :status ORDER BY timestamp DESC LIMIT :offset, :limit")
     List<DesignRecord> findByProjectAndStatus(@Bind("projectId") int projectId, @Bind("status")  DesignStatus status, @Bind("offset") int offset, @Bind("limit") int limit);
 
-    @SqlQuery("SELECT count(*) FROM designs WHERE project_id = :projectId AND designStatus = :status ")
+    @SqlQuery("SELECT count(*) FROM designs WHERE project_id = :projectId AND status = :status ")
     int countStatus(@Bind("projectId") int projectId, @Bind("status") DesignStatus status );
 
     @SqlQuery("SELECT * FROM designs WHERE id = :id")
@@ -34,7 +35,7 @@ public interface DesignDAO {
       " email, " +
       " firstName, " +
       " lastName," +
-      " designStatus, " +
+      " status, " +
       " folder, " +
       " fileName, " +
       " originalPath, " +
@@ -45,7 +46,7 @@ public interface DesignDAO {
       " :r.email, " +
       " :r.firstName, " +
       " :r.lastName, " +
-      " :r.designStatus, " +
+      " :r.status, " +
       " :r.folder, " +
       " :r.fileName, " +
       " :r.originalPath, " +
@@ -62,7 +63,7 @@ public interface DesignDAO {
       " email = :r.email, " +
       " firstName = :r.firstName, " +
       " lastName = :r.lastName, " +
-      " designStatus = :r.designStatus," +
+      " status = :r.status," +
       " folder = :r.folder,  " +
       " fileName = :r.fileName,  " +
       " originalPath = :r.originalPath, " +

@@ -9,7 +9,7 @@ public class DesignRecord {
     private String email;
     private String firstName;
     private String lastName;
-    private String designStatus;
+    private String status;
     private String folder;
     private String fileName;
     private String originalPath;
@@ -18,12 +18,12 @@ public class DesignRecord {
     private BigDecimal price;
     private int projectId;
 
-    public DesignRecord(int id, String email, String firstName, String lastName, String designStatus, String folder, String fileName, String originalPath, String resizedPath, Timestamp uploadDate, BigDecimal price, int projectId) {
+    public DesignRecord(int id, String email, String firstName, String lastName, String status, String folder, String fileName, String originalPath, String resizedPath, Timestamp uploadDate, BigDecimal price, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.designStatus = designStatus;
+        this.status = status;
         this.folder = folder;
         this.fileName = fileName;
         this.originalPath = originalPath;
@@ -66,12 +66,12 @@ public class DesignRecord {
         this.lastName = lastName;
     }
 
-    public String getDesignStatus() {
-        return designStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDesignStatus(String designStatus) {
-        this.designStatus = designStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getFolder() {

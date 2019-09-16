@@ -14,13 +14,6 @@ public class CompanyMapper {
         );
     }
 
-    public static Company fromRecordToCompany(CompanyRecord record) {
-        return new Company(
-          record.getId(),
-          record.getName(),
-          record.getAdmin());
-    }
-
     public static CompanyDTO fromCompanyToDTO(Company company) {
         return new CompanyDTO(
           company.getId(),

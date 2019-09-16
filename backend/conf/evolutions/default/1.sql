@@ -43,7 +43,7 @@ CREATE TABLE designs (
   firstName varchar(100) DEFAULT NULL,
   lastName varchar(100) DEFAULT NULL,
   price numeric(12,2) NOT NULL,
-  designStatus varchar(10) NOT NULL,
+  status varchar(10) NOT NULL,
   folder varchar(50) NOT NULL,
   fileName varchar(50) NOT NULL,
   originalPath varchar(250) NOT NULL,

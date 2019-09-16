@@ -10,7 +10,7 @@ public class Design {
     private String email;
     private String firstName;
     private String lastName;
-    private DesignStatus designStatus;
+    private DesignStatus status;
     private String folder;
     private String fileName;
     private String originalPath;
@@ -20,11 +20,11 @@ public class Design {
     private int projectId;
     private Company company;
 
-    public Design(String email, String firstName, String lastName, DesignStatus designStatus, String folder, String fileName, String originalPath, DateTime uploadDate, BigDecimal price, int projectId) {
+    public Design(String email, String firstName, String lastName, DesignStatus status, String folder, String fileName, String originalPath, DateTime uploadDate, BigDecimal price, int projectId) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.designStatus = designStatus;
+        this.status = status;
         this.folder = folder;
         this.fileName = fileName;
         this.originalPath = originalPath;
@@ -33,12 +33,12 @@ public class Design {
         this.projectId = projectId;
     }
 
-    public Design(String email, String firstName, String lastName, DesignStatus designStatus, String fileName,
+    public Design(String email, String firstName, String lastName, DesignStatus status, String fileName,
                   String originalPath, DateTime uploadDate, BigDecimal price, int projectId, int companyId, String companyName) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.designStatus = designStatus;
+        this.status = status;
         this.fileName = fileName;
         this.originalPath = originalPath;
         this.uploadDate = uploadDate;
@@ -47,12 +47,12 @@ public class Design {
         this.company = new Company(companyId,companyName,null);
     }
 
-    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String folder, String fileName, String originalPath, String resizedPath, DateTime uploadDate, BigDecimal price, int projectId) {
+    public Design(int id, String email, String firstName, String lastName, DesignStatus status, String folder, String fileName, String originalPath, String resizedPath, DateTime uploadDate, BigDecimal price, int projectId) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.designStatus = designStatus;
+        this.status = status;
         this.folder = folder;
         this.fileName = fileName;
         this.originalPath = originalPath;
@@ -62,13 +62,13 @@ public class Design {
         this.projectId = projectId;
     }
 
-    public Design(int id, String email, String firstName, String lastName, DesignStatus designStatus, String fileName,
+    public Design(int id, String email, String firstName, String lastName, DesignStatus status, String fileName,
                   String originalPath, String resizedPath, DateTime uploadDate, BigDecimal price, int projectId, int companyId, String companyName) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.designStatus = designStatus;
+        this.status = status;
         this.fileName = fileName;
         this.originalPath = originalPath;
         this.resizedPath = resizedPath;
@@ -112,12 +112,12 @@ public class Design {
         this.lastName = lastName;
     }
 
-    public DesignStatus getDesignStatus() {
-        return designStatus;
+    public DesignStatus getStatus() {
+        return status;
     }
 
-    public void setDesignStatus(DesignStatus designStatus) {
-        this.designStatus = designStatus;
+    public void setStatus(DesignStatus status) {
+        this.status = status;
     }
 
     public String getFolder() {
