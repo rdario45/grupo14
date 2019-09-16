@@ -69,18 +69,50 @@ posiblemente
 
 ### Despliegue en AWS
 
-1. Teniendo `$HOME = /home/ubuntu` crear las carpetas app, infra y www.
+1. Teniendo `$HOME = /home/ubuntu` debe existir el siguiente grupo de carpetas:
+---
+    ~
+    ├── infra           # infraestructure resources.
+    |    └── README.md  # this file.
+    ├── app             # binaries application folder.
+    ├── web             # web application folder.
+    └── data            # data folder.
+---
 
-#### Despliegue de base de datos en docker (simplificado)
-docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=dev  -p 3306:3306 -d mysql
+2. Ejecute el servicio de base de datos de alguna de las siguientes maneras:
+
+- Despliegue de base de datos en docker (simplificado):
+
+    ejecutar:
+
+> `docker run --name mysql-db --restart always -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=dev  -p 3306:3306 -d mysql`
+
+
+
+---
+
+
+3. Despliegue de servidor web.
+
+> `docker run --name webserver --restart always -v /home/ubuntu/infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -v /home/ubuntu/web/:/usr/share/nginx/html/:ro -d --network host  nginx`
 
 #### ejecucion de la aplicacion backend en el server
-```
+
+
 unzip target/universal/designmatch-1.0.0.zip \  
 bash designmatch-1.0.0/bin/designmatch
 bash designmatch-1.0.0/bin/designmatch -Dhttp.port=1234 -Ddb.default.password=moresecret -Dpidfile.path=other/RUNNING_PID
 
 ```
+9. Otros:
+
+- configurar un firewall local:
+sudo ufw status verbose
+sudo ufw allow ssh
+sudo ufw enable
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow 3306
 
 
 \<\< [volver](../README.md)
