@@ -5,9 +5,10 @@
 - Modelo de datos y diagrama E-R.
 - Tecnologias de desarrollo.
 - Frameworks, librerias y herramientas.
+- Despliegue en Amazon Web Services.
+- troubleshooting
 
-
-#### Generalidades de Arquitectura e Infraestructura.
+### Generalidades de Arquitectura e Infraestructura.
 
 - Diagrama de despliegue:
     
@@ -19,7 +20,7 @@
     <img src="images/diagrama-despliegue.png" alt="diagrama despliegue" width="800"/>
 
 
-#### Modelo de datos y Diagrama E-R.
+### Modelo de datos y Diagrama E-R.
 
 - Diagrama E-R:
     
@@ -30,17 +31,19 @@
 
     Como entidades principales, se ilustran la compañías, proyectos y diseños que se pueden gestionar en el sitio web. Sin embargo, es necesario tener en cuenta el uso de entidades de soporte como el manejo de sesiones, de cuentas y de status en los diseños. 
 
-#### Tecnologias base.
+### Tecnologias base.
 
 | Backend   | Frontend  | Database   |
 |-----------|-----------|------------|
 |![java](images/java-logo.png) |![web](images/css-html-js.jpeg) |![database](images/mysql-logo.png) |
 
-#### Frameworks, librerias y herramientas.
+### Frameworks, librerias y herramientas.
 
 | Docker    | PlayJava  | ReactJs   | Trello    | Slack |
 |-----------|-----------|-----------|-----------|-------|
 |![Docker](images/docker-logo.jpg) |![play](images/play-logo.png) |![react](images/react-logo.png) |![trello](images/trello-logo.png) |![slack](images/slack-logo.png) |
+
+### Despliegue en Amazon Web Services
 
 #### Servicios utilizados de AWS
 
@@ -64,55 +67,54 @@ posiblemente
 |---------------|
 |![elascticsearch](images/aws/elasticsearch-logo.png) |
 
+#### Proceso de despliegue
 
-## En construccion:
-
-### Despliegue en AWS
-
-1. Teniendo `$HOME = /home/ubuntu` debe existir el siguiente grupo de carpetas:
+Teniendo `$HOME = /home/ubuntu` y los siguientes directorios:
 ---
     ~
-    ├── infra           # infraestructure resources.
-    |    └── README.md  # this file.
-    ├── app             # binaries application folder.
-    ├── web             # web application folder.
-    └── data            # data folder.
+    ├── infra                   # infra resources.
+    |     ├── README.md         # this file.
+    |     ├── nginx              
+    |     |     └── nginx.conf  # production nginx config file
+    |     └── config              
+    |           └── prod.conf   # production app config file
+    ├── app                     # app folder.
+    ├── web                     # web application.
+    └── data                    # data folder.
 ---
 
-2. Ejecute el servicio de base de datos de alguna de las siguientes maneras:
+1. Copie el contenido de la carpeta build (frontend) en `/home/ubuntu/web`
 
-- Despliegue de base de datos en docker (simplificado):
+2. Copie el archivo zip generado por play framework en `/home/ubuntu/app`
 
-    ejecutar:
+3. Debe existir un servicio de base de datos (RDS), configure las credenciales de acceso en el archivo `prod.conf`
 
-> `docker run --name mysql-db --restart always -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=dev  -p 3306:3306 -d mysql`
+4. Despliegue de servidor web nginx con la configuracion de produccion.
+    
+    ```bash
+    docker run --name webserver --restart always  \
+        -v /home/ubuntu/infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro \
+        -v /home/ubuntu/web/:/usr/share/nginx/html/:ro -d --network host  nginx
+    ```
 
+5. Descomprima el archivo zip, ubiquece en el directorio `bin/` y ejecute la aplicacion de backend:
 
+    ```bash
+    nohup bash designmatch -Dconfig.file=/home/ubuntu/infra/config/prod.conf
+    ```
 
----
+### troubleshooting
 
+* Si se encuentra que la maquina no tiene expuestos los puertos necesarios para conectarse por http etc, configure el firewall:
 
-3. Despliegue de servidor web.
-
-> `docker run --name webserver --restart always -v /home/ubuntu/infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -v /home/ubuntu/web/:/usr/share/nginx/html/:ro -d --network host  nginx`
-
-#### ejecucion de la aplicacion backend en el server
-
-
-unzip target/universal/designmatch-1.0.0.zip \  
-bash designmatch-1.0.0/bin/designmatch
-bash designmatch-1.0.0/bin/designmatch -Dhttp.port=1234 -Ddb.default.password=moresecret -Dpidfile.path=other/RUNNING_PID
-
-```
-9. Otros:
-
-- configurar un firewall local:
+```bash
 sudo ufw status verbose
 sudo ufw allow ssh
 sudo ufw enable
 sudo ufw allow http
 sudo ufw allow https
 sudo ufw allow 3306
+````
 
 
 \<\< [volver](../README.md)

@@ -4,4 +4,4 @@ logs/application.log
 project/target/
 project/project/
 target/
-designmatch-1.0.0/
+designmatch-*/
