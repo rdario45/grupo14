@@ -5,8 +5,9 @@
 - Modelo de datos y diagrama E-R.
 - Tecnologias de desarrollo.
 - Frameworks, librerias y herramientas.
+- Despliegue en ambiente local.
 - Despliegue en Amazon Web Services.
-- troubleshooting
+- Troubleshooting
 
 ### Generalidades de Arquitectura e Infraestructura.
 
@@ -42,6 +43,23 @@
 | Docker    | PlayJava  | ReactJs   | Trello    | Slack |
 |-----------|-----------|-----------|-----------|-------|
 |![Docker](images/docker-logo.jpg) |![play](images/play-logo.png) |![react](images/react-logo.png) |![trello](images/trello-logo.png) |![slack](images/slack-logo.png) |
+
+
+### Despliegue en ambiente local. (En construccion)
+
+- Base de datos mysql usando docker:
+```
+docker run --name mysql-db --restart always -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=dev  -p 3306:3306 -d mysql
+```
+- Ejecucion servidor web local.
+```
+frontend/ npm run start
+```
+- Ejecucion servicio backend.
+```
+backend/ sbt run
+```
+
 
 ### Despliegue en Amazon Web Services
 

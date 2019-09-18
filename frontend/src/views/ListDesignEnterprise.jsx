@@ -256,10 +256,10 @@ class ListDesignEnterprise extends Component {
                                                     firstName,
                                                     lastName,
                                                     price,
-                                                    designStatus,
+                                                    status,
                                                     fileName
                                                 } = design
-                                                const isAvailable = designStatus === 'AVAILABLE'
+                                                const isAvailable = status === 'AVAILABLE'
                                                 return (
                                                     <tr key={id}>
                                                         <td>{id}</td>
