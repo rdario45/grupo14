@@ -100,7 +100,7 @@ Teniendo `$HOME = /home/ubuntu` y los siguientes directorios:
 5. Descomprima el archivo zip, ubiquece en el directorio `bin/` y ejecute la aplicacion de backend:
 
     ```bash
-    nohup bash designmatch -Dconfig.file=/home/ubuntu/infra/config/prod.conf
+    nohup bash designmatch -Dconfig.file=/home/ubuntu/infra/config/prod.conf &
     ```
 
 ### troubleshooting

@@ -1,3 +1,6 @@
+# --- Creation of events table
+
+# --- !Ups
 
 CREATE TABLE accounts (
 	email varchar(100) NOT NULL,
@@ -40,7 +43,7 @@ CREATE TABLE designs (
   firstName varchar(100) DEFAULT NULL,
   lastName varchar(100) DEFAULT NULL,
   price numeric(12,2) NOT NULL,
-  designStatus varchar(10) NOT NULL,
+  status varchar(10) NOT NULL,
   folder varchar(50) NOT NULL,
   fileName varchar(50) NOT NULL,
   originalPath varchar(250) NOT NULL,
@@ -50,3 +53,10 @@ CREATE TABLE designs (
   CONSTRAINT designs_pkey PRIMARY KEY(id),
   CONSTRAINT designs_project_fkey FOREIGN KEY (project_id) REFERENCES projects(id)
 );
+
+# --- !Downs
+DROP TABLE designs;
+DROP TABLE projects;
+DROP TABLE companies;
+DROP TABLE sessions;
+DROP TABLE accounts;
