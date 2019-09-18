@@ -3,11 +3,15 @@ package infraestructure.batchs;
 import com.typesafe.config.Config;
 import domain.Design;
 import domain.DesignStatus;
+import infraestructure.services.AmazonEmailClient;
 import infraestructure.services.DesignService;
+import infraestructure.services.ImageResizer;
+import infraestructure.services.SendEmailSSL;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import play.Logger;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,7 +21,20 @@ import java.util.List;
 
 public class JobProcesarArchivos {
 
-    public static void execute(DesignService designService, Config config) {
+    private final AmazonEmailClient clientSES;
+    private final DesignService designService;
+    private final Config config;
+
+    @Inject
+    public JobProcesarArchivos(AmazonEmailClient clientSES, DesignService designService, Config config) {
+        this.clientSES = clientSES;
+        this.designService = designService;
+        this.config = config;
+    }
+
+    public void execute() {
+        // this.clientSES.send("rdario45@gmail.com", "url");
+
         String startBatchDateTime = DateTime.now(DateTimeZone.forID("America/Bogota")).toString();
         Logger.info(">>> CORRIENDO TAREA PROGRAMADA at:["+startBatchDateTime+"]" );
         List<Design> designs = designService.getPendingDesigns();
