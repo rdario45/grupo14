@@ -106,21 +106,21 @@ posiblemente
 
 2. Copie el archivo zip generado por la aplicacion de backend en `/home/ubuntu/app` y descomprima el archivo zip.
 
-4. Ejecute el servidor web nginx con la configuracion de produccion ubicada en `/home/ubuntu/nginx.conf`.
+3. Ejecute el servidor web nginx con la configuracion de produccion ubicada en `/home/ubuntu/nginx.conf`.
     
-```bash
-docker run --name webserver --restart always  \
-    -v /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf:ro \
-    -v /home/ubuntu/web/:/usr/share/nginx/html/:ro -d --network host  nginx
-```
+    ```bash
+    docker run --name webserver --restart always  \
+        -v /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf:ro \
+        -v /home/ubuntu/web/:/usr/share/nginx/html/:ro -d --network host  nginx
+    ```
 
-5. Ubíquese en el directorio `bin/` de la aplicacion de backend y ejecute el comando:
+4. Ubíquese en el directorio `bin/` de la aplicacion de backend y ejecute el comando:
 
-```bash
-nohup bash designmatch -Dconfig.resource=prod.conf &
-```
+    ```bash
+    nohup bash designmatch -Dconfig.resource=prod.conf &
+    ```
 
-Ésto corre una instancia de la aplicacion en el puerto `9001` o lo que se tenga configurado en el archivo `backend/conf/prod.conf` pero no estará disponible si se reinicia la maquina.
+    Ésto corre una instancia de la aplicacion en el puerto `9001` o lo que se tenga configurado en el archivo `backend/conf/prod.conf` pero no estará disponible si se reinicia la maquina.
 
 ### Otras guias y herramientas.
 
@@ -139,6 +139,3 @@ sudo ufw allow http
 sudo ufw allow https
 sudo ufw allow 3306
 ````
-
-
-\<\< [volver](../README.md)
