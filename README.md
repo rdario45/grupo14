@@ -68,25 +68,22 @@
 
 #### Servicios utilizados de AWS
 
-| VPC   | Route 53  | EC2   | EBS   | RDS   | SES   |
-|-------|-----------|-------|-------|-------|-------|
-|![trello](assets/images/aws/vpc-logo.jpeg) |![trello](assets/images/aws/Route53-logo.png) |![EC2](assets/images/aws/ec2-logo.png) |![EBS](assets/images/aws/ebs-logo.png) |![RDS](assets/images/aws/rds-logo.png) |![SES](assets/images/aws/ses-logo.png) |
+| EC2   | EBS   | RDS   | SES   |
+|-------|-------|-------|-------|
+![EC2](assets/images/aws/ec2-logo.png) |![EBS](assets/images/aws/ebs-logo.png) |![RDS](assets/images/aws/rds-logo.png) |![SES](assets/images/aws/ses-logo.png) |
 
+| VPC   |  Elastic IP  | Route 53    |
+|-------|--------------|-------------|
+|![vpc](assets/images/aws/vpc-logo.jpeg) |![elascticsearch](assets/images/aws/elasticsearch-logo.png) |![trello](assets/images/aws/Route53-logo.png) |
 
-- Amazon Virtual Private Cloud (VPC)
-- Amazon Route 53
 - Amazon EC2
 - Amazon Elastic Block Store (EBS)
 - Amazon Relational Database Service (RDS)
 - Amazon Simple Email Service (SES)
+- Amazon Virtual Private Cloud (VPC)
+- Amazon Elastic IP
+- Amazon Route 53
 
-
-posiblemente
-- Amazon Elastic Compute Cloud / 
-
-| Elastic IP    |
-|---------------|
-|![elascticsearch](assets/images/aws/elasticsearch-logo.png) |
 
 #### Consideraciones previas.
 
