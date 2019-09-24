@@ -17,7 +17,7 @@ class Main extends Component {
         super(props);
         this.state = {
             image: image,
-            color: "black",
+            color: "blue",
             hasImage: true,
             fixedClasses: "dropdown"
         };
