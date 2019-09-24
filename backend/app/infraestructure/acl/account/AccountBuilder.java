@@ -13,7 +13,7 @@ public class AccountBuilder {
                                                                String adminEmail,
                                                                String adminPassword,
                                                                String url) {
-        String newUrl = url.replace("{0}",companyName.toLowerCase().replaceAll("[^a-zA-Z0-9]+",""));
+        String newUrl = url.replace("{0}",companyName.toLowerCase().replaceAll("[^a-zA-Z0-9]+","")+"{0}");
         return Tuple.of(new Company(companyName, adminEmail, newUrl),
                 new Account(adminEmail, adminPassword, Status.ACTIVE));
     }
