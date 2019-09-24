@@ -29,8 +29,10 @@ public class AccountRepository {
     }
 
     public Tuple2<Account, Company> createCompanyAccount(Company company, Account account) {
+
         return db.withHandle(handle -> {
             CreateCompanyAccountDAO dao = handle.attach(CreateCompanyAccountDAO.class);
+
             Account savedAccount = createAccount(account, dao);
             Company savedCompany = createCompany(company, dao);
             int companyId = getlastInsertedId(dao);

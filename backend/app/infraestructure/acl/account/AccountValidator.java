@@ -23,7 +23,7 @@ public class AccountValidator {
           validateName(dto.getName()),
           validateEmail(dto.getEmail()),
           validatePassword(dto.getPassword()),
-          validatePassword(dto.getPassword())
+          validateUrl(dto.getUrl())
         ).ap(CreateAccountDTO::new)
           .toEither()
           .mapLeft(List::ofAll);

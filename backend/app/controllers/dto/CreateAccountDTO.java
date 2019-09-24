@@ -12,17 +12,10 @@ public class CreateAccountDTO {
     }
 
     public CreateAccountDTO(String name, String email, String password, String url) {
-
-        System.out.println("name = " + name);
-        System.out.println("email = " + email);
-        System.out.println("password = " + password);
-        System.out.println("url = " + url);
-
         this.name = name;
         this.email = email;
         this.password = password;
         this.url = url;
-
     }
 
     public String getName() {

@@ -55,8 +55,7 @@ public class AccountController {
     }
 
     private Either<Result, CreateAccountDTO> getCreateAccountDTO(JsonNode json) {
-        System.out.println(json);
-            return Try.of(() -> Json.fromJson(json, CreateAccountDTO.class))
+          return Try.of(() -> Json.fromJson(json, CreateAccountDTO.class))
           .onFailure(throwable -> Logger.error("Error en el JSON.", throwable))
           .toEither(List.of("Invalid json"))
           .flatMap(AccountValidator::validateCreateAccount)

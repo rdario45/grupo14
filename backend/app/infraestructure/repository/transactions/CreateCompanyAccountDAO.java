@@ -24,10 +24,12 @@ public interface CreateCompanyAccountDAO {
 
     @SqlUpdate("INSERT INTO companies (" +
       "name," +
-      "admin " +
+      "admin," +
+      "url " +
       ") VALUES ( " +
       ":r.name," +
-      ":r.admin )")
+      ":r.admin, " +
+      ":r.url)")
     @RegisterMapper(CompanyMapperDAO.class)
     int createCompany(@BindBean("r") CompanyRecord record);
 

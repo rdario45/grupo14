@@ -13,9 +13,9 @@ public class AccountBuilder {
                                                                String adminEmail,
                                                                String adminPassword,
                                                                String url) {
-        String shortCompanyName = companyName.toLowerCase().replaceAll("[^a-zA-Z0-9]+","");
-        return Tuple.of(new Company(companyName, adminEmail, url.replace("{0}",shortCompanyName)),
-                new Account(adminEmail, adminPassword, Status.ACTIVE)); 
+        String newUrl = url.replace("{0}",companyName.toLowerCase().replaceAll("[^a-zA-Z0-9]+",""));
+        return Tuple.of(new Company(companyName, adminEmail, newUrl),
+                new Account(adminEmail, adminPassword, Status.ACTIVE));
     }
 
     public static Account build(LoginDTO dto) {
