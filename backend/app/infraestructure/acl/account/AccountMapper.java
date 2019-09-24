@@ -65,7 +65,8 @@ public class AccountMapper {
           new Company(
             record.getCompanyId(),
             record.getCompanyName(),
-            record.getAdminEmail()
+            record.getAdminEmail(),
+            record.getUrl()
           )
         );
     }

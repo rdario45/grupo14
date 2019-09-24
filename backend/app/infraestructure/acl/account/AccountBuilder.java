@@ -11,8 +11,11 @@ public class AccountBuilder {
 
     public static Tuple2<Company, Account> buildEmpresaAccount(String companyName,
                                                                String adminEmail,
-                                                               String adminPassword) {
-        return Tuple.of(new Company(companyName, adminEmail), new Account(adminEmail, adminPassword, Status.ACTIVE));
+                                                               String adminPassword,
+                                                               String url) {
+        String newUrl = url.replace("{0}",companyName.toLowerCase().replaceAll("[^a-zA-Z0-9]+",""));
+        return Tuple.of(new Company(companyName, adminEmail, newUrl),
+                new Account(adminEmail, adminPassword, Status.ACTIVE));
     }
 
     public static Account build(LoginDTO dto) {

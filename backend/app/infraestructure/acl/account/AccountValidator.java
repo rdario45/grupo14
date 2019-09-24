@@ -22,7 +22,8 @@ public class AccountValidator {
         return Validation.combine(
           validateName(dto.getName()),
           validateEmail(dto.getEmail()),
-          validatePassword(dto.getPassword())
+          validatePassword(dto.getPassword()),
+          validateUrl(dto.getUrl())
         ).ap(CreateAccountDTO::new)
           .toEither()
           .mapLeft(List::ofAll);
@@ -44,5 +45,11 @@ public class AccountValidator {
         return StringUtils.isNotEmpty(password) && password.length() >= 4 && password.length() <= 50 ?
           Validation.valid(password) :
           Validation.invalid("password");
+    }
+
+    private static Validation<String, String> validateUrl(String url) {
+        return StringUtils.isNotEmpty(url) && url.length() >= 4 && url.length() <= 60 ?
+                Validation.valid(url) :
+                Validation.invalid("url");
     }
 }
