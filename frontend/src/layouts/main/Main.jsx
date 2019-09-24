@@ -10,7 +10,7 @@ import { ToastsContainer, ToastsStore } from 'react-toasts';
 
 import routes from "routes/main/routes.js";
 
-import image from "assets/img/sidebar-4.jpg";
+import image from "assets/img/sidebar-2.jpg";
 
 class Main extends Component {
     constructor(props) {
