@@ -44,7 +44,7 @@ public class Design {
         this.uploadDate = uploadDate;
         this.price = price;
         this.projectId = projectId;
-        this.company = new Company(companyId,companyName,null);
+        this.company = new Company(companyId,companyName,null,null);
     }
 
     public Design(int id, String email, String firstName, String lastName, DesignStatus status, String folder, String fileName, String originalPath, String resizedPath, DateTime uploadDate, BigDecimal price, int projectId) {
@@ -75,7 +75,7 @@ public class Design {
         this.uploadDate = uploadDate;
         this.price = price;
         this.projectId = projectId;
-        this.company = new Company(companyId,companyName,null);
+        this.company = new Company(companyId,companyName,null,null  );
     }
 
 

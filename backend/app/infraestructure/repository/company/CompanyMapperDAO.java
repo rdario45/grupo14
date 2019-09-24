@@ -14,7 +14,8 @@ public class CompanyMapperDAO implements ResultSetMapper<CompanyRecord> {
         return new CompanyRecord(
           r.getInt("id"),
           r.getString("name"),
-          r.getString("admin")
+          r.getString("admin"),
+          r.getString("url")
         );
     }
 }

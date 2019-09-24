@@ -22,6 +22,7 @@ CREATE TABLE companies (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	name varchar(100) NOT NULL,
 	admin varchar(100) NOT NULL,
+	url varchar(180) NOT NULL,
 	CONSTRAINT companies_pkey PRIMARY KEY (id),
 	CONSTRAINT companies_account_fkey FOREIGN KEY (admin) REFERENCES accounts(email)
 );

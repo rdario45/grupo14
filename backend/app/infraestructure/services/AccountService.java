@@ -25,7 +25,8 @@ public class AccountService {
         Tuple2<Company, Account> tuple = AccountBuilder.buildEmpresaAccount(
           dto.getName(),
           dto.getEmail(),
-          dto.getPassword()
+          dto.getPassword(),
+          dto.getUrl()
         );
         return Future.of(() ->
           accountRepository.createCompanyAccount(tuple._1, tuple._2)

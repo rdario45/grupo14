@@ -14,7 +14,8 @@ public class AccountCompanyMapperDAO implements ResultSetMapper<AccountCompanyRe
           r.getInt("companyId"),
           r.getString("companyName"),
           r.getString("adminEmail"),
-          r.getString("adminStatus")
+          r.getString("adminStatus"),
+          r.getString("url")
         );
     }
 }
