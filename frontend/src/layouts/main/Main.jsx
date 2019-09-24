@@ -10,14 +10,14 @@ import { ToastsContainer, ToastsStore } from 'react-toasts';
 
 import routes from "routes/main/routes.js";
 
-import image from "assets/img/sidebar-4.jpg";
+import image from "assets/img/sidebar-2.jpg";
 
 class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
             image: image,
-            color: "black",
+            color: "blue",
             hasImage: true,
             fixedClasses: "dropdown"
         };
