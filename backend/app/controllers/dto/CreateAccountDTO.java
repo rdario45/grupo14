@@ -5,15 +5,24 @@ public class CreateAccountDTO {
     private String name;
     private String email;
     private String password;
+    private String url;
 
     public CreateAccountDTO() {
         // Json
     }
 
-    public CreateAccountDTO(String name, String email, String password) {
+    public CreateAccountDTO(String name, String email, String password, String url) {
+
+        System.out.println("name = " + name);
+        System.out.println("email = " + email);
+        System.out.println("password = " + password);
+        System.out.println("url = " + url);
+
         this.name = name;
         this.email = email;
         this.password = password;
+        this.url = url;
+
     }
 
     public String getName() {
@@ -38,5 +47,13 @@ public class CreateAccountDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -18,7 +18,8 @@ public class CompanyMapper {
         return new CompanyDTO(
           company.getId(),
           company.getName(),
-          company.getAdmin()
+          company.getAdmin(),
+          company.getUrl()
         );
     }
 }
