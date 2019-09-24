@@ -16,6 +16,7 @@ public interface AccountDAO {
     @SqlQuery("SELECT " +
       "c.id as companyId, " +
       "c.name as companyName, " +
+      "c.url as companyUrl, " +
       "a.email as adminEmail, " +
       "a.status as adminStatus " +
       "FROM accounts a " +

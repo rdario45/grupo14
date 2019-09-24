@@ -49,7 +49,7 @@ class LoginEnterprise extends Component {
                     localStorage.setItem('enterpriseId', user.company.id);
                     this.props.history.push('/admin/project/create');
                 }
-            });
+            }).catch( e => console.log(e))
     }
     render() {
         return (

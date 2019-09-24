@@ -33,6 +33,7 @@ public class AuthController {
 
         Either<Result, Result> either = getLoginDTO(json)
           .flatMap(dto -> accountService.login(dto)
+            .onFailure(throwable -> Logger.error("Error login", throwable))
             .toEither(getInternalServerError("Error login " + dto.getEmail()))
             .flatMap(option -> option.toEither(getNotFound("Not Found")))
             .map(AccountMapper::toJsonDTO)
