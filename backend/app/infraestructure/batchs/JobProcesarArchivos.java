@@ -45,7 +45,7 @@ public class JobProcesarArchivos {
         List<Design> designs = designService.getPendingDesigns();
         if (designs.size() > 0) {
             Logger.info("> DISEÑOS A PROCESAR [" + designs.size() + "]: {");
-            String workdir = config.getString("files.workdir");
+            String workdir = config.getString("filesystem.workdir");
             designs.forEach(design -> {
                 String targetDir = workdir + "resized/" + design.getFolder();
                 Path fileDir = createFileDir(targetDir);

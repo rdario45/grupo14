@@ -101,7 +101,7 @@ public class DesignController {
         Map<String, String[]> stringMap = body.asFormUrlEncoded();
         Files.TemporaryFile file = picture.getRef();
 
-        String workdir = config.getString("files.workdir");
+        String workdir = config.getString("filesystem.workdir");
         UUID uuid = UUID.randomUUID();
         File originalPath = createFilePath(workdir, uuid);
         String originalFullPath = originalPath.getAbsolutePath() + "/" + picture.getFilename();
