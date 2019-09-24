@@ -194,18 +194,18 @@ class ListProjects extends Component {
                                                         <td>{description}</td>
                                                         <td>{cost}</td>
                                                         <td>
-                                                            <Link to={`/admin/project/design/list/${id}`}><i className="pe-7s-photo text-success"></i></Link>
+                                                            <Link to={`/admin/project/design/list/${id}`}><i style={{fontSize: 28}} className="pe-7s-photo text-success"></i></Link>
                                                         </td>
                                                         <td>
-                                                            <Link to={`/admin/project/details/${id}/1`}><i className="pe-7s-search text-info"></i></Link>
+                                                            <Link to={`/admin/project/details/${id}/1`}><i style={{fontSize: 28}} className="pe-7s-search text-info"></i></Link>
                                                         </td>
                                                         <td>
-                                                            <Link to={`/admin/project/details/${id}/0`}><i className="pe-7s-pen text-warning"></i></Link>
+                                                            <Link to={`/admin/project/details/${id}/0`}><i style={{fontSize: 28}} className="pe-7s-pen text-warning"></i></Link>
                                                         </td>
                                                         <td>
                                                             <span style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
                                                                 onClick={() => { this.deleteProject(id); }}>
-                                                                <i className="pe-7s-close-circle text-danger"></i>
+                                                                <i style={{fontSize: 28}} className="pe-7s-close-circle text-danger"></i>
                                                             </span>
                                                         </td>
                                                     </tr>

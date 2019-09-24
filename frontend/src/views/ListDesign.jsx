@@ -253,7 +253,7 @@ class ListDesign extends Component {
                                                         <td>
                                                             <span style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
                                                                 onClick={() => { this.openModalImage(id, fileName); }}>
-                                                                <i className="pe-7s-search text-info"></i>
+                                                                <i style={{fontSize: 28}} className="pe-7s-search text-info"></i>
                                                             </span>
                                                         </td>
                                                     </tr>

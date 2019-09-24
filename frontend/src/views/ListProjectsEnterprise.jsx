@@ -180,7 +180,7 @@ class ListProjectsEnterprise extends Component {
                                                         <td>{description}</td>
                                                         <td>{cost}</td>
                                                         <td>
-                                                            <Link to={`/design/enterprise/${this.props.match.params.urlEnterprise}/design/list/${id}`}><i className="pe-7s-search text-info"></i></Link>
+                                                            <Link to={`/design/enterprise/${this.props.match.params.urlEnterprise}/design/list/${id}`}><i style={{fontSize: 28}} className="pe-7s-search text-info"></i></Link>
                                                         </td>
                                                     </tr>
                                                 )
