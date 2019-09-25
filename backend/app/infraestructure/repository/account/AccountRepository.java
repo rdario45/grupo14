@@ -54,7 +54,6 @@ public class AccountRepository {
 
     private Company updateCompany(Company company, CreateCompanyAccountDAO dao) {
         CompanyRecord companyRecord = CompanyMapper.fromCompanyToRecord(company);
-        System.out.println("Muestre  a ver " + companyRecord.getUrl() + " - " + companyRecord.getId());
             dao.updateCompany(companyRecord);
         return company;
     }
