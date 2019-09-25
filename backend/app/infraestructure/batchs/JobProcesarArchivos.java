@@ -1,11 +1,16 @@
 package infraestructure.batchs;
 
 import com.typesafe.config.Config;
+import domain.Company;
 import domain.Design;
 import domain.DesignStatus;
+import infraestructure.repository.company.CompanyMapper;
+import infraestructure.repository.company.CompanyRepository;
+import infraestructure.repository.company.records.CompanyRecord;
 import infraestructure.services.EmailClientService;
 import infraestructure.services.DesignService;
 import infraestructure.services.ImageResizer;
+import io.vavr.control.Option;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import play.Logger;
@@ -28,14 +33,16 @@ public class JobProcesarArchivos {
       "<p>Puede visualizar los diseños en la siguiente URL: <a href='{{url}}'/>{{url}}</a></p>");
 
     private final Config config;
+    private final CompanyRepository companyRepository;
     private final EmailClientService clientSES;
     private final DesignService designService;
 
     @Inject
-    public JobProcesarArchivos(Config config, EmailClientService clientSES, DesignService designService) {
+    public JobProcesarArchivos(Config config, EmailClientService clientSES, DesignService designService, CompanyRepository companyRepository) {
         this.clientSES = clientSES;
         this.designService = designService;
         this.config = config;
+        this.companyRepository = companyRepository;
     }
 
     public void execute() {
@@ -47,6 +54,10 @@ public class JobProcesarArchivos {
             Logger.info("> DISEÑOS A PROCESAR [" + designs.size() + "]: {");
             String workdir = config.getString("files.workdir");
             designs.forEach(design -> {
+
+                Option<CompanyRecord> company = companyRepository.getCompanyByDesignId(design.getId());
+                Company company_ =  CompanyMapper.fromRecordToCompany(company.get());
+                design.setCompany(company_);
                 String targetDir = workdir + "resized/" + design.getFolder();
                 Path fileDir = createFileDir(targetDir);
                 String targetFile = fileDir.toString() + "/" + design.getFileName();

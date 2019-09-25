@@ -179,4 +179,8 @@ public class Design {
     public Company getCompany() {
         return company;
     }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 }
