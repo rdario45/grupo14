@@ -48,7 +48,7 @@ public class AccountValidator {
     }
 
     private static Validation<String, String> validateUrl(String url) {
-        return StringUtils.isNotEmpty(url) && url.length() >= 4 && url.length() <= 60 ?
+        return StringUtils.isNotEmpty(url) && url.length() >= 4 && url.length() <= 120 ?
                 Validation.valid(url) :
                 Validation.invalid("url");
     }
