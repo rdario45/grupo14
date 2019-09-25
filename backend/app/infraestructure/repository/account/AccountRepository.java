@@ -32,11 +32,13 @@ public class AccountRepository {
 
         return db.withHandle(handle -> {
             CreateCompanyAccountDAO dao = handle.attach(CreateCompanyAccountDAO.class);
-
             Account savedAccount = createAccount(account, dao);
             Company savedCompany = createCompany(company, dao);
             int companyId = getlastInsertedId(dao);
-            return Tuple.of(savedAccount, savedCompany.setId(companyId));
+            savedCompany.setUrl(savedCompany.getUrl().replace("{0}",""+companyId));
+            savedCompany = updateCompany(savedCompany.setId(companyId),dao);
+
+            return Tuple.of(savedAccount, savedCompany);
         });
     }
 
@@ -50,7 +52,16 @@ public class AccountRepository {
         return company;
     }
 
-    private Account createAccount(Account account, CreateCompanyAccountDAO dao) {
+    private Company updateCompany(Company company, CreateCompanyAccountDAO dao) {
+        CompanyRecord companyRecord = CompanyMapper.fromCompanyToRecord(company);
+        System.out.println("Muestre  a ver " + companyRecord.getUrl() + " - " + companyRecord.getId());
+            dao.updateCompany(companyRecord);
+        return company;
+    }
+
+
+
+    private Account     createAccount(Account account, CreateCompanyAccountDAO dao) {
         AccountRecord record = AccountMapper.fromAccountToRecord(account);
         dao.createAccount(record);
         return account;
