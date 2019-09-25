@@ -95,7 +95,6 @@ public class JobProcesarArchivos {
 
     private void sendEmail(Design design) {
         if (this.config.getBoolean("email.default.enable")) {
-            System.out.println(MESSAGE.replace("{{url}}",design.getCompany().getUrl()));
             clientSES.send(design.getEmail(), SUBJECT, MESSAGE);
         } else {
             Logger.debug("Envio de email desabilitado.");
