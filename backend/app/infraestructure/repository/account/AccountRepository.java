@@ -35,7 +35,7 @@ public class AccountRepository {
             Account savedAccount = createAccount(account, dao);
             Company savedCompany = createCompany(company, dao);
             int companyId = getlastInsertedId(dao);
-            savedCompany.setUrl(savedCompany.getUrl().replace("{0}",""+companyId));
+            savedCompany.setUrl(savedCompany.getUrl().replace("{0}","-"+companyId));
             savedCompany = updateCompany(savedCompany.setId(companyId),dao);
 
             return Tuple.of(savedAccount, savedCompany);
