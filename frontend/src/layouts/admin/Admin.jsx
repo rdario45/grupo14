@@ -109,7 +109,7 @@ class Main extends Component {
                     />
                     <Switch history={this.props.history}>{this.getRoutes(routes)}</Switch>
                     <Footer />
-                    <FixedPlugin
+                    {/* <FixedPlugin
                         handleImageClick={this.handleImageClick}
                         handleColorClick={this.handleColorClick}
                         handleHasImage={this.handleHasImage}
@@ -118,7 +118,7 @@ class Main extends Component {
                         mini={this.state["mini"]}
                         handleFixedClick={this.handleFixedClick}
                         fixedClasses={this.state.fixedClasses}
-                    />
+                    /> */}
                 </div>
             </div>
 

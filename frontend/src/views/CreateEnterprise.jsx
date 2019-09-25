@@ -54,7 +54,7 @@ class CreateEnterprise extends Component {
             });
     }
     createEnterprise(name, email, password) {
-        service.create({ name, email, password })
+        service.create({ name, email, password, url: 'http://localhost/{0}'  })
             .then(response => {
                 if (response.ok) { 
                     this.props.handleClick("Se ha creado la cuenta de la empresa.", 'success');
@@ -63,11 +63,11 @@ class CreateEnterprise extends Component {
                 else
                     this.props.handleClick("Ha ocurrido un error creando la cuenta de la empresa.", 'error');
             })
-            .then(register => {
+            .then(register => {            
                 const {id, name } = register.company;
                 const partURLEnterprise = `${name}-${id}`;
                 this.setState({ urlEnterprise: `${window.location.origin.toString()}/#/design/enterprise/${partURLEnterprise}/design/list` });
-            });
+            }).catch(e => console.log(e) ) ;
     }
 
     render() {

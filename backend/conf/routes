@@ -7,15 +7,21 @@
 
 # Account
 GET           /exists-account/:email                controllers.AccountController.existsAccount(email: String)
++ nocsrf
 POST          /create-account                       controllers.AccountController.createAccount
 # Auth
++ nocsrf
 POST          /login                                controllers.AuthController.login
++ nocsrf
 POST          /logout                               controllers.AuthController.logout
 # Project
 GET           /projects/company/:id                 controllers.ProjectController.findProjectsByCompanyPaginated(id: Int, page: Int ?= 1)
 GET           /projects/:id                         controllers.ProjectController.findProject(id: Integer)
++ nocsrf
 POST          /projects                             controllers.ProjectController.createProject
++ nocsrf
 PUT           /projects/:id                         controllers.ProjectController.updateProject(id: Int)
++ nocsrf
 DELETE        /projects/:id                         controllers.ProjectController.deleteProject(id: Int)
 # Design
 GET           /designs/project/:id/status/:s        controllers.DesignController.findDesignsByPojectAndStatusPaginated(id: Int, s: String, page: Int ?= 1)
@@ -23,4 +29,5 @@ GET           /designs/project/:id                  controllers.DesignController
 GET           /designs/:id/download                 controllers.DesignController.download(id: Int)
 GET           /designs/:id/download-resized         controllers.DesignController.downloadResized(id: Int)
 GET           /designs/:id                          controllers.DesignController.findDesign(id: Integer)
++ nocsrf
 POST          /designs                              controllers.DesignController.createDesign

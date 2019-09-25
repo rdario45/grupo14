@@ -44,7 +44,7 @@ instalado para poder compilar y ejecutar la aplicacion. Para generacion del proy
  
     Luego de descomprimir el archivo se puede proceder a ejecutar el binario:
     ```
-    target/universal/designmatch-1.0.0.zip
+    target/universal/designmatch-*.*.*.zip
     ```
     El archivo *.zip* creado utiliza el nombre de la aplicacion y la version, configurable en el archivo `build.sbt` ubicado en la raiz del proyecto.
     
