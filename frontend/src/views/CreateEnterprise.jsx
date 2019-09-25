@@ -54,20 +54,19 @@ class CreateEnterprise extends Component {
             });
     }
     createEnterprise(name, email, password) {
-        service.create({ name, email, password, url: 'http://localhost/{0}'  })
+        service.create({ name, email, password, url: `${window.location.origin.toString()}/#/design/enterprise/{0}/design/list` })
             .then(response => {
-                if (response.ok) { 
+                if (response.ok) {
                     this.props.handleClick("Se ha creado la cuenta de la empresa.", 'success');
                     return response.json();
                 }
                 else
                     this.props.handleClick("Ha ocurrido un error creando la cuenta de la empresa.", 'error');
             })
-            .then(register => {            
-                const {id, name } = register.company;
-                const partURLEnterprise = `${name}-${id}`;
-                this.setState({ urlEnterprise: `${window.location.origin.toString()}/#/design/enterprise/${partURLEnterprise}/design/list` });
-            }).catch(e => console.log(e) ) ;
+            .then(register => {
+                const { url } = register.company;
+                this.setState({ urlEnterprise: url });
+            }).catch(e => console.log(e));
     }
 
     render() {
