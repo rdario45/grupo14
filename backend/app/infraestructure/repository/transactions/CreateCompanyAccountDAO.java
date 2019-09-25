@@ -36,13 +36,5 @@ public interface CreateCompanyAccountDAO {
     @SqlQuery("SELECT LAST_INSERT_ID()")
     int getLastInsertedId();
 
-    @SqlUpdate("UPDATE companies SET " +
-            " name = :r.name, " +
-            " admin = :r.admin, " +
-            " url = :r.url " +
-            " WHERE id = :r.id "
-            )
-    @RegisterMapper(CompanyMapperDAO.class)
-    int updateCompany(@BindBean("r") CompanyRecord record);
-    
+   
 }
