@@ -60,7 +60,7 @@ public class EmailClientService {
         }).onFailure(throwable -> Logger.error("Error al enviar el mensaje", throwable))
           .recover(throwable -> false)
           .andFinally(() -> {
-              try { transport.close(); Logger.debug("transport closed"); } catch(Exception e){}
+              try { transport.close(); } catch(Exception e){}
           });
     }
 
