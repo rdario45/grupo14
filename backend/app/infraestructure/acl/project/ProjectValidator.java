@@ -38,7 +38,6 @@ public class ProjectValidator {
     }
 
     static Validation<String, BigDecimal> validateCost(String cost) {
-        Logger.info(cost);
         return Try.of(() -> new BigDecimal(cost))
           .toEither("cost")
           .toValidation();

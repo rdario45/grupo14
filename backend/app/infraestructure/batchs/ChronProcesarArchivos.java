@@ -13,7 +13,6 @@ public class ChronProcesarArchivos {
 
     private final ActorSystem actorSystem;
     private final ExecutionContext executionContext;
-    private final Config config;
     private final JobProcesarArchivos procesarArchivos;
 
     @Inject
@@ -23,7 +22,6 @@ public class ChronProcesarArchivos {
                                  JobProcesarArchivos procesarArchivos) {
         this.actorSystem = actorSystem;
         this.executionContext = executionContext;
-        this.config = config;
         this.procesarArchivos = procesarArchivos;
 
         if( isScheduledTaskEnabled(config) ) {

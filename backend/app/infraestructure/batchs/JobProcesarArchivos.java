@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class JobProcesarArchivos {
@@ -30,7 +31,7 @@ public class JobProcesarArchivos {
       System.getProperty("line.separator"),
       "<h1>Su diseño ha sido procesado!</h1>" +
       "<p>Su diseño se encuentra aprobado y ya puede ser visualizado en la plataforma.</p>" +
-      "<p>Puede visualizar los diseños en la siguiente URL: <a href='{{url}}'/>{{url}}</a></p>");
+      "<p>Puede visualizar los diseños en la siguiente URL: <a href=\"{{url}}\"/>{{url}}</a></p>");
 
     private final Config config;
     private final CompanyRepository companyRepository;
@@ -47,11 +48,14 @@ public class JobProcesarArchivos {
 
     public void execute() {
         String startBatchDateTime = DateTime.now(DateTimeZone.forID("America/Bogota")).toString();
-        Logger.info(">>> CORRIENDO TAREA PROGRAMADA at:[" + startBatchDateTime + "]");
+        Logger.info("> CORRIENDO TAREA PROGRAMADA at:[" + startBatchDateTime + "]");
 
         List<Design> designs = designService.getPendingDesigns();
         if (designs.size() > 0) {
-            Logger.info("> DISEÑOS A PROCESAR [" + designs.size() + "]: {");
+            AtomicInteger i = new AtomicInteger(1);
+            int l = designs.size();
+
+            Logger.info(">> DISEÑOS A PROCESAR [" + l + "]: {");
             String workdir = config.getString("files.workdir");
             designs.forEach(design -> {
 
@@ -67,11 +71,11 @@ public class JobProcesarArchivos {
                 sendEmail(designProcessed);
                 String finishDesignDateTime = DateTime.now(DateTimeZone.forID("America/Bogota")).toString();
 
-                Logger.info("* ID:[" + design.getId() + "] START:[" + startDesignDateTime + "] FINISH:[" + finishDesignDateTime + "]");
+                Logger.info(">>> N:["+ i.getAndIncrement() +"/"+l+"] ID:["+design.getId()+"] STARTED:["+startDesignDateTime+"] FINISHED:["+finishDesignDateTime+"]");
             });
 
             String finishBatchDateTime = DateTime.now(DateTimeZone.forID("America/Bogota")).toString();
-            Logger.info("} FINALIZACION PROCESAMIENTO BATCH DE [" + designs.size() + "] REGISTROS, INICIADO EN:[" + startBatchDateTime + "] FINALIZADO EN:[" + finishBatchDateTime + "]");
+            Logger.info("} FINALIZACION PROCESAMIENTO BATCH N:["+designs.size()+"], STARTED:["+startBatchDateTime+"] FINISHED:["+finishBatchDateTime+"]");
         }
 
     }
@@ -95,7 +99,6 @@ public class JobProcesarArchivos {
 
     private void sendEmail(Design design) {
         if (this.config.getBoolean("email.default.enable")) {
-
             clientSES.send(design.getEmail(), SUBJECT, MESSAGE.replace("{{url}}",design.getCompany().getUrl()));
         } else {
             Logger.debug("Envio de email desabilitado.");

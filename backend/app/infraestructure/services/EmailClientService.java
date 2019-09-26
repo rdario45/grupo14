@@ -51,7 +51,6 @@ public class EmailClientService {
 
     private Try<Boolean> sendMessage(MimeMessage msg, Transport transport) {
         return Try.of(() -> {
-            Logger.info("Enviando mensaje.");
             transport.connect(this.host, this.smtpUsername, this.smtpPassword);
             transport.sendMessage(msg, msg.getAllRecipients());
             Logger.info("Mensaje enviado con éxito.");

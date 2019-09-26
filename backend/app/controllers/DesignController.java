@@ -109,7 +109,7 @@ public class DesignController {
         Path path = file.copyTo(Paths.get(originalFullPath), true);
 
         // TODO: eliminar el file temporal.
-        Logger.info("NEW_FILE: " + originalFullPath);
+        Logger.info("NEW FILE: " + originalFullPath);
 
         JsonNode json = Json.newObject()
           .put("folder", uuid.toString())

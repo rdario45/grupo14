@@ -48,7 +48,6 @@ public class AuthController {
     }
 
     private Either<Result, LoginDTO> getLoginDTO(JsonNode json) {
-        Logger.info(json.toString());
         return Try.of(() -> Json.fromJson(json, LoginDTO.class))
           .toEither(List.of("Invalid json"))
           .flatMap(AccountValidator::validateLogin)
