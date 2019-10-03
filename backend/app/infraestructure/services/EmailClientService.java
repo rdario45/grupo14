@@ -21,9 +21,10 @@ public class EmailClientService {
     private final String host;
     private final int port;
     private final Properties props;
+    private final Session session;
 
     @Inject
-    public EmailClientService(Config config) {
+    private EmailClientService(Config config) {
         this.from = config.getString("email.default.sender.email");
         this.fromName = config.getString("email.default.sender.name");
         this.smtpUsername = config.getString("email.default.smtp.username");
@@ -31,10 +32,11 @@ public class EmailClientService {
         this.host = config.getString("email.default.host");
         this.port = config.getInt("email.default.port");
         this.props = getProperties();
+        session = Session.getDefaultInstance(this.props);
     }
 
+
     public Try<Boolean> send(String to, String subject, String message) {
-        Session session = Session.getDefaultInstance(this.props);
         Try<MimeMessage> mimeMessage = createMessage(to, subject, message, session);
         Try<Transport> transport = createTransport(session);
 
@@ -69,7 +71,6 @@ public class EmailClientService {
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
             msg.setSubject(subject);
             msg.setText(message,"ISO-8859-1","html");
-            //msg.setContent(message,"text/html");
             return msg;
         });
     }
